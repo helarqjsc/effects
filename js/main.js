@@ -16,8 +16,8 @@ app.directive('videoWebm', function(){
     link: function(scope, el, atts){
       var video = el.get(0);
       scope.$watch('currentPage', function(currentPage){
-        if(currentPage === scope.playOnPage){
-          if(video.pause){
+        if(currentPage === scope.playOnPage || currentPage === 'all'){
+          if(video.paused){
             video.play();
           }
           console.log('start', el.find('source').attr('src'));
@@ -39,8 +39,7 @@ app.controller('MainCtrl', function($scope, data) {
   };
   
   $scope.isPageSelected = function(page){
-    // console.log(page, $scope.page);
-    return (page === $scope.page || page === 'all');
+    return (page === $scope.page || $scope.page === 'all');
   }
 
   $scope.changePage('hovers');
