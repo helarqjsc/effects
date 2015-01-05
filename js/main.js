@@ -17,16 +17,14 @@ app.directive('videoWebm', function(){
       var video = el.get(0);
       scope.$watch('currentPage', function(currentPage){
         if(currentPage === scope.playOnPage){
-          video.play();
-          // console.log(currentPage, scope.playOnPage);
-          console.log('start', el.find('source').attr('src'));
-
-        }else{ 
-          console.log(video.playing);
-          if(video.playing){
-            video.stop();
-            console.log('stop', el.find('source').attr('src'));
+          if(video.pause){
+            video.play();
           }
+          console.log('start', el.find('source').attr('src'));
+        }else{ 
+          video.pause();
+          video.currentTime = 0;
+          console.log('stop', el.find('source').attr('src'));
         }
       });
     }
