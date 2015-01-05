@@ -9,16 +9,24 @@ app.directive('videoWebm', function(){
     restrict: "E",
     scope: { 
       video: '=',
-      page: '=playOnPage'
+      playOnPage: '=',
+      currentPage: '='
     },
     replace: true,
     link: function(scope, el, atts){
       var video = el.get(0);
-      scope.$watch('page', function(page){
-        if(page == scope.page){
+      scope.$watch('currentPage', function(currentPage){
+        if(currentPage === scope.playOnPage){
           video.play();
-        }else if(video.playing){
-          video.stop();
+          // console.log(currentPage, scope.playOnPage);
+          console.log('start', el.find('source').attr('src'));
+
+        }else{ 
+          console.log(video.playing);
+          if(video.playing){
+            video.stop();
+            console.log('stop', el.find('source').attr('src'));
+          }
         }
       });
     }
@@ -27,14 +35,17 @@ app.directive('videoWebm', function(){
 
 app.controller('MainCtrl', function($scope, data) {
   $scope.data = data;
-  $scope.page = 0;
-  $scope.changePage = function(i) {
-    $scope.page = i;
-    // $('.block:eq('+i+') video').each(function() {
-    //   $(this).get(0).play();
-    // });
+  
+  $scope.changePage = function(page) {
+    $scope.page = page;
   };
-  $scope.changePage(1);
+  
+  $scope.isPageSelected = function(page){
+    // console.log(page, $scope.page);
+    return (page === $scope.page || page === 'all');
+  }
+
+  $scope.changePage('hovers');
   $scope.loaded = true;
 });
 
