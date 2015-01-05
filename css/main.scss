@@ -1,0 +1,340 @@
+@import'libs/mixin.scss';
+
+@import'libs/bootstrap/_variables.scss';
+@import'libs/bootstrap/mixins/_grid-framework.scss';
+@import'libs/bootstrap/mixins/_grid.scss';
+@import'libs/bootstrap/mixins/_clearfix.scss';
+@import'libs/bootstrap/mixins/_vendor-prefixes.scss';
+@import'libs/bootstrap/mixins/_tab-focus.scss';
+@import'libs/bootstrap/mixins/_image.scss';
+
+@import'libs/bootstrap/_normalize.scss';
+@import'libs/bootstrap/scaffolding.scss';
+@import'libs/bootstrap/grid.scss';
+
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  max-height: 100%;
+}
+
+.container {
+  width: 100% !important;
+}
+
+@font-face {
+    font-family: "Neo Sans Cyr";
+    src: url('../fonts/neosanscyr-italic_2-webfont.eot');
+    src: url('../fonts/neosanscyr-italic_2-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/neosanscyr-italic_2-webfont.woff') format('woff'),
+         url('../fonts/neosanscyr-italic_2-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+
+}
+
+
+@font-face {
+    font-family: "Calibri";
+    src: url('../fonts/calibri_4-webfont.eot');
+    src: url('../fonts/calibri_4-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/calibri_4-webfont.woff') format('woff'),
+         url('../fonts/calibri_4-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: "Neo Sans Cyr Light";
+    src: url('../fonts/neosanscyr-light_2-webfont.eot');
+    src: url('../fonts/neosanscyr-light_2-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/neosanscyr-light_2-webfont.woff') format('woff'),
+         url('../fonts/neosanscyr-light_2-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: "Neo Sans Cyr Light";
+    src: url('../fonts/neosanscyr-lightitalic_2-webfont.eot');
+    src: url('../fonts/neosanscyr-lightitalic_2-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/neosanscyr-lightitalic_2-webfont.woff') format('woff'),
+         url('../fonts/neosanscyr-lightitalic_2-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+
+}
+
+
+
+@font-face {
+    font-family: "Neo Sans Cyr";
+    src: url('../fonts/neosanscyr-medium_2-webfont.eot');
+    src: url('../fonts/neosanscyr-medium_2-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/neosanscyr-medium_2-webfont.woff') format('woff'),
+         url('../fonts/neosanscyr-medium_2-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: "Neo Sans Cyr Medium";
+    src: url('../fonts/neosanscyr-medium_2-webfont.eot');
+    src: url('../fonts/neosanscyr-medium_2-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/neosanscyr-medium_2-webfont.woff') format('woff'),
+         url('../fonts/neosanscyr-medium_2-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+@font-face {
+    font-family: "Neo Sans Cyr";
+    src: url('../fonts/neosanscyr-regular_2-webfont.eot');
+    src: url('../fonts/neosanscyr-regular_2-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/neosanscyr-regular_2-webfont.woff') format('woff'),
+         url('../fonts/neosanscyr-regular_2-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body {
+  font-family: "Calibri";
+}
+
+
+.bg-src {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.menu {
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(o);
+  position: fixed;
+  display: block;
+  min-height: 100%;
+  opacity: 1;
+  @include transition(0.2s);
+  &:hover {
+    opacity: 1;
+  }
+  background:#282828;
+  z-index: 200;
+  width: 200px;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    padding: 20px 25px 20px 20px;
+    margin: 0;
+    color: white;
+    font-size: 16px;
+    li {
+      color: white;
+      border-bottom: 1px solid;
+      margin-bottom: 20px;
+      text-align: left;
+      cursor: pointer;
+      span {
+        position: absolute;
+        @include inline();
+        width: 0;
+        overflow: hidden;
+        z-index: 20;
+        color: #78afc0;;
+        @include transition(0.2s);
+        border-bottom: 1px solid;
+        &.active {
+          width: 100%;
+        }
+      }
+      &.active {
+        span {
+          width: 155px;
+        }
+      }
+      &:hover, &.active {
+        //color: #78afc0;
+      }
+    }
+  }
+}
+
+.site {
+  width: 100%;
+  min-height: 100%;
+}
+
+.list {
+  min-height: 100%;
+  position: relative;
+  /* IE10 Consumer Preview */
+  background: #f7f7f7;
+  padding-left: 200px;
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  .block-list {
+    position: relative;
+    min-height: 100%;
+    height: 100%;
+    .block {
+      min-height: 100%;
+      &.animated {
+        position: absolute !important;
+        top: 0 !important;
+      }
+      &.active {
+        display: block !important;
+      }
+    }
+  }
+
+  .row {
+    height: 100%;
+  }
+
+  .col-item {
+        
+    @include make-sm-column(12);
+    @include make-lg-column(4);
+
+    padding-left: 0px;
+    padding-right: 0px;
+    
+    .video-container {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    &:nth-child(3n+1) {
+      clear: both;
+    }
+    @media screen and (max-width:992px) {
+        &:nth-child(2n+1) { clear: both; }
+    }
+    video {
+      position: absolute;
+      z-index: 100;
+      top: 0;
+      left: 0;
+
+    }
+    .effeckt-caption {
+      padding-bottom: 80%;
+    }
+    .content {
+
+      
+      width: 100%;
+      padding: 10px 15px 15px 15px;
+      font-size: 18px;
+      figure {
+        overflow: hidden;
+      }
+      figcaption {
+        position: absolute;
+        z-index: 400;
+      }
+      .effeckt-caption {
+
+        background:rgba(44,90,151,0.40);
+        width: 100%;
+        margin-top: 10px;
+        position: relative;
+        
+        @include transition(0.2s);
+        &:hover {
+          background:rgba(44,90,151,0.60);
+        }
+      }
+      img {
+        width: 100%;
+        @include transition(0.2s);
+        @include scale(1);
+        &:hover {
+          @include scale(1.1);
+        }
+      }
+      .effeckt-figcaption-wrap {
+        padding: 10px 0px 10px 20px;
+        color: white;
+        font-size: 16px;
+        word-wrap: break-word;
+        padding-right: 25px;
+        line-height: 1.2;
+        background:rgba(0,0,0,0.5);
+      }
+    }
+  }
+}
+
+#loader-wrapper .loader-section {
+    position: fixed;
+    top: 0;
+    width: 51%;
+    height: 100%;
+    background: #222222;
+    z-index: 1000;
+}
+ 
+#loader-wrapper .loader-section.section-left {
+    left: 0;
+}
+ 
+#loader-wrapper .loader-section.section-right {
+    right: 0;
+}
+
+#loader {
+    z-index: 1001; /* anything higher than z-index: 1000 of .loader-section */
+}
+h1 {
+    color: #EEEEEE;
+}
+
+
+
+@mixin linc-color($color: '#000',$colorHover: false,$colorActiv: false) {
+  color: $color;
+  @if ($colorHover != false) {
+    &:hover {
+      color: $colorHover;
+    }
+    @if ($colorActiv != false) {
+      &.-active-,
+      &:active{
+        color: $colorActiv;
+      }
+    } @else{
+      &.-active-,
+      &:active{
+        color: $colorHover;
+      }
+    }
+  } @else {
+    &.-active-,
+    &:active,
+    &:hover {
+      color: $color;
+    }
+  }
+}
