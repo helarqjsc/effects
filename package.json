@@ -12,6 +12,7 @@
   "devDependencies": {
     "coffee-script": "^1.7.1",
     "gulp": "3.8.8",
+    "gulp-bower": "0.0.7",
     "gulp-clean": "",
     "gulp-coffee": "^1.4.1",
     "gulp-compass": "^1.1.8",
