@@ -215,6 +215,7 @@ body {
   .col-item {
         
     @include make-sm-column(12);
+    @include make-md-column(6);
     @include make-lg-column(4);
 
     padding-left: 0px;
