@@ -1,61 +1,35 @@
-<div ng-app="effects" ng-controller="MainCtrl" ng-class="{loaded: loaded}">
-
-  <div id="loader-wrapper">
-      <div id="loader"></div>
-      <div class="loader-section section-left"></div>
-      <div class="loader-section section-right"></div>
-  </div>
-
+<div ng-controller="AdminCtrl">
+    <%= @test %>
     <div class="site" id="content">
-        <% if user_signed_in? %>
-            <span>Здравствуйте, <%= current_user.email %></span>
-            <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
-        <% else %>
-            <%= link_to 'Войти', new_user_session_path %>
-        <% end %>
         <div class="menu">
         <ul>
-            <li ng-click="changePage('all')">
-              <span>Все</span>
-              Все
-            </li>
-
-            <li ng-repeat="item in data" ng-click="changePage(item.page)">
-                <span>{{ item.name }}</span>
-                {{ item.name }}
-            </li>
+            <li ui-sref="pages">Страницы</li>
+            <li ui-sref="videos">Видео</li>
+            <li ui-sref="options">Настройки</li>
 
         </ul>
         </div>
         <article class="list">
             <div class="bg"></div>
-            <div class="container">
-                <div class="block-list">
+            <div ui-view="main" class="container">
 
-                  <div ng-show="isPageSelected(item.page)" class="block" ng-repeat="item in data">
-                      <div class="row">
-                          <div class="col-item" ng-repeat="element in item.items">
-                              <a href="{{ element.link }}" target=_blank>
-                                  <div class="content">
-                                      <figure data-effeckt-type="quarter-fall-in" class="effeckt-caption">
-                                          <figcaption>
-                                              <div class="effeckt-figcaption-wrap">{{ element.title }}</div>
-                                          </figcaption>
-                                          <video-webm video="element.video" 
-                                                      play-on-page="item.page"
-                                                      current-page="page"></video-webm>
-                                      </figure>
-                                  </div>
-                              </a>
-                          </div>
+                  <p>some admin shit</p>  
 
-                      </div>
-                  </div>
-
-   
-                </div>
             </div>
         </article>
     </div>
+
+    <script type="text/ng-template" id="home.html">
+    </script> 
+
+    <script type="text/ng-template" id="pages.html">
+    </script> 
+
+    <script type="text/ng-template" id="videos.html">
+    </script> 
+
+    <script type="text/ng-template" id="options.html">
+    </script> 
+
 
 </div>

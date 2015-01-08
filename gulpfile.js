@@ -10,6 +10,11 @@ var out = 'public/assets/';
 
 var js_src = src + 'javascripts/';
 var js_out = out + 'javascripts/';
+var main_js_files = [
+  js_src + '*.js',
+  js_src + '/home/*.js',
+  js_src + '/admin/*.js'
+];
 
 var css_src = src + 'stylesheets/';
 var css_out = out + 'stylesheets/';
@@ -27,7 +32,7 @@ gulp.task('libs', function() {
 
 gulp.task("js", function() {
   return gulp
-    .src([js_src + '*.js'])
+    .src(main_js_files)
     .pipe($.ngAnnotate())
     .pipe($.concat("application.js"))
     // .pipe($.uglify())
@@ -56,7 +61,7 @@ gulp.task('watch', function() {
     css_src + "*.scss",
     css_src + "libs/*.scss"
     ], ['css']);
-  gulp.watch([js_src + '*.js'], ['js']);
+  gulp.watch(main_js_files, ['js']);
   gulp.watch(bowerFiles(), ['libs']);
   return gulp.watch([js_src + 'lib/*.js'], ['libs']);
 });

@@ -1,8 +1,7 @@
 !/log/.keep
 /.bundle
-.idea
+**/.idea/
 .sass-cache
-/.vagrant
 /bower_components
 /db/*.sqlite3
 /db/*.sqlite3-journal
