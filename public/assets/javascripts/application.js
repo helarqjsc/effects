@@ -1,6 +1,6 @@
-var app = angular.module('effects', ['ui.router','effects.data']);
 
-var app = angular.module('effects');
+
+var app = angular.module('effects.home', ['effects.data']);
 
 app.directive('videoWebm', function(){
   return {
@@ -36,7 +36,7 @@ app.directive('videoWebm', function(){
 });
 
 app.controller('MainCtrl', ["$scope", "data", function($scope, data) {
-  $scope.data = data;
+  // $scope.data = data;
   
   $scope.changePage = function(page) {
     $scope.page = page;
@@ -87,11 +87,12 @@ angular
             ]
         });
 
-var app = angular.module('effects');
+var app = angular.module('effects.admin', ['ui.router']);
 
-app.config(["$stateProvider", "$locationProvider", function ($stateProvider, $locationProvider) {
+app.config(["$stateProvider", function ($stateProvider) {
   $stateProvider
   .state('home', {
+    url: '/home/',
     views:{
       'main':{
         templateUrl: 'home.html'
@@ -99,6 +100,7 @@ app.config(["$stateProvider", "$locationProvider", function ($stateProvider, $lo
     }
   })
   .state('pages', {
+    url: '/pages/',
     views:{
       'main':{
         templateUrl: 'pages.html'
@@ -106,6 +108,7 @@ app.config(["$stateProvider", "$locationProvider", function ($stateProvider, $lo
     }
   })
   .state('videos', {
+    url: '/videos/',
     views:{
       'main':{
         templateUrl: 'videos.html'
@@ -113,29 +116,43 @@ app.config(["$stateProvider", "$locationProvider", function ($stateProvider, $lo
     }
   })
   .state('options', {
+    url: '/options/',
     views:{
       'main':{
         templateUrl: 'options.html'
       }
     }
   });
-
-    // $locationProvider.html5Mode(true);
 }]);
 
-app.controller('AdminCtrl', ["$scope", "$state", function($scope, $state) {
-  
-  $scope.changePage = function(page) {
-    $scope.page = page;
+app.directive('editable', ["$timeout", function($timeout){
+  return {
+    scope: { value: '=' },
+    template: '<div ng-show="!edit" ng-click="edit = true">{{ value }}</div>'+
+              '<input ng-show="edit" ng-blur="edit = false" type="text" ng-model="value">',
+    link: function(scope, element, attrs){
+      scope.$watch('edit', function(edit){
+        if(edit){
+          $timeout(function(){
+            var el = element.find('input').get(0);
+            el.selectionStart = el.value.length;
+            el.selectionEnd = el.value.length;
+            element.find('input').focus();
+          });
+        }
+      });
+    }
   };
-  
-  $scope.isPageSelected = function(page){
-    return (page === $scope.page || $scope.page === 'all');
-  };
+}]);
 
-  $scope.changePage('hovers');
-  $scope.loaded = true;
+// app.factory('')
+app.controller('AdminCtrl', ["$scope", "$preload", "$state", "$http", function($scope, $preload, $state, $http) {
+  $scope.pages = $preload.pages;
+
   // $state.go('home');
+  $scope.save = function(obj){
+    $http.post('/admin/save/' + obj, $scope[obj]);
+  };
 }]);
 
 

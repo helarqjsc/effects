@@ -1,4 +1,4 @@
-<div ng-controller="MainCtrl" ng-class="{loaded: loaded}">
+<div ng-app="effects.home" ng-controller="MainCtrl" ng-class="{loaded: loaded}">
 
   <div id="loader-wrapper">
       <div id="loader"></div>
@@ -58,4 +58,12 @@
         </article>
     </div>
 
+  <script type="application/javascript">
+    angular.module('effects.home')
+      .factory('$preload', function(){
+        return {
+          pages: <%= raw(@pages.to_json) %>
+        };
+      });
+  </script>
 </div>

@@ -1,4 +1,4 @@
-var app = angular.module('effects');
+var app = angular.module('effects.home', ['effects.data']);
 
 app.directive('videoWebm', function(){
   return {
@@ -34,7 +34,7 @@ app.directive('videoWebm', function(){
 });
 
 app.controller('MainCtrl', function($scope, data) {
-  $scope.data = data;
+  // $scope.data = data;
   
   $scope.changePage = function(page) {
     $scope.page = page;

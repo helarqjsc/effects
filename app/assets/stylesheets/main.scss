@@ -7,8 +7,13 @@
 @import'libs/bootstrap/mixins/_vendor-prefixes.scss';
 @import'libs/bootstrap/mixins/_tab-focus.scss';
 @import'libs/bootstrap/mixins/_image.scss';
+@import'libs/bootstrap/mixins/_table-row.scss';
+@import'libs/bootstrap/mixins/_opacity.scss';
+@import'libs/bootstrap/mixins/_buttons.scss';
 
 @import'libs/bootstrap/_normalize.scss';
+@import'libs/bootstrap/_buttons.scss';
+@import'libs/bootstrap/_tables.scss';
 @import'libs/bootstrap/scaffolding.scss';
 @import'libs/bootstrap/grid.scss';
 
@@ -308,10 +313,6 @@ body {
 #loader {
     z-index: 1001; /* anything higher than z-index: 1000 of .loader-section */
 }
-h1 {
-    color: #EEEEEE;
-}
-
 
 
 @mixin linc-color($color: '#000',$colorHover: false,$colorActiv: false) {
