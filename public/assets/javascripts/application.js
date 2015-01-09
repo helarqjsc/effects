@@ -1,26 +1,28 @@
 
 
-var app = angular.module('effects.home', ['effects.data']);
+var app = angular.module('effects.home', ['ngFx']);
 
 app.directive('videoWebm', function(){
   return {
     template:
     '<video class="video-container" width="100%" height="100%" loop muted preload="none">' +
-    '<source src="{{video}}" type=\'video/webm; codecs="vp8, vorbis"\' />' +
+    '<source src="{{videoURL}}" type=\'video/webm; codecs="vp8, vorbis"\' />' +
     '</video>',
     restrict: "E",
     scope: { 
-      video: '=',
+      filename: '=',
       playOnPage: '=',
       currentPage: '='
     },
     replace: true,
     link: function(scope, el, atts){
-      scope.video = 'assets/video/' + scope.video;
+      scope.videoURL = 'assets/video/' + scope.filename;
 
       var video = el.get(0);
-      scope.$watch('currentPage', function(currentPage){
-        if(currentPage === scope.playOnPage || currentPage === 'all'){
+      scope.$watch('currentPage.id', function(currentPage){
+        console.log('currentPage:', currentPage);
+        console.log('scope.playOnPage:', scope.playOnPage);
+        if(currentPage === scope.playOnPage.id || currentPage === 'all'){
           if(video.paused){
             video.play();
           }
@@ -35,20 +37,30 @@ app.directive('videoWebm', function(){
   };
 });
 
-app.controller('MainCtrl', ["$scope", "data", function($scope, data) {
-  // $scope.data = data;
-  
-  $scope.changePage = function(page) {
-    $scope.page = page;
+
+
+app.filter('onlyPage', function(){
+  return function(input, currentPage){
+    console.log('filter onlypage', 'currentPage', currentPage);
+    return input.filter(function(val){
+      return (val.page_id === currentPage.id || currentPage.id === 'all');
+    });
   };
-  
-  $scope.isPageSelected = function(page){
-    return (page === $scope.page || $scope.page === 'all');
+});
+
+app.controller('MainCtrl', function($scope, $preload) {
+  // $scope.data = data;
+  $scope.pages = $preload.pages;
+  $scope.videos = $preload.videos;
+
+  $scope.changePage = function(page) {
+    $scope.page.id = page;
   };
 
-  $scope.changePage('hovers');
+  // $scope.changePage($scope.pages[0].id);
+  $scope.page = {id: $scope.pages[0].id};
   $scope.loaded = true;
-}]);
+});
 
 
 
@@ -89,7 +101,7 @@ angular
 
 var app = angular.module('effects.admin', ['ui.router']);
 
-app.config(["$stateProvider", function ($stateProvider) {
+app.config(function ($stateProvider) {
   $stateProvider
   .state('home', {
     url: '/home/',
@@ -123,9 +135,9 @@ app.config(["$stateProvider", function ($stateProvider) {
       }
     }
   });
-}]);
+});
 
-app.directive('editable', ["$timeout", function($timeout){
+app.directive('editable', function($timeout){
   return {
     scope: { value: '=' },
     template: '<div ng-show="!edit" ng-click="edit = true">{{ value }}</div>'+
@@ -143,16 +155,16 @@ app.directive('editable', ["$timeout", function($timeout){
       });
     }
   };
-}]);
+});
 
 // app.factory('')
-app.controller('AdminCtrl', ["$scope", "$preload", "$state", "$http", function($scope, $preload, $state, $http) {
+app.controller('AdminCtrl', function($scope, $preload, $state, $http) {
   $scope.pages = $preload.pages;
 
   // $state.go('home');
   $scope.save = function(obj){
     $http.post('/admin/save/' + obj, $scope[obj]);
   };
-}]);
+});
 
 

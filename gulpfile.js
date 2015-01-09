@@ -12,8 +12,8 @@ var js_src = src + 'javascripts/';
 var js_out = out + 'javascripts/';
 var main_js_files = [
   js_src + '*.js',
-  js_src + '/home/*.js',
-  js_src + '/admin/*.js'
+  js_src + 'home/*.js',
+  js_src + 'admin/*.js'
 ];
 
 var css_src = src + 'stylesheets/';
@@ -33,9 +33,9 @@ gulp.task('libs', function() {
 gulp.task("js", function() {
   return gulp
     .src(main_js_files)
-    .pipe($.ngAnnotate())
-    .pipe($.concat("application.js"))
+    // .pipe($.ngAnnotate())
     // .pipe($.uglify())
+    .pipe($.concat("application.js"))
     .pipe(gulp.dest(js_out));
 });
 
@@ -62,7 +62,7 @@ gulp.task('watch', function() {
     css_src + "libs/*.scss"
     ], ['css']);
   gulp.watch(main_js_files, ['js']);
-  gulp.watch(bowerFiles(), ['libs']);
+  gulp.watch(['bower_components/**/*'], ['libs']);
   return gulp.watch([js_src + 'lib/*.js'], ['libs']);
 });
 
