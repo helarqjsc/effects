@@ -26,22 +26,24 @@
 
                   <div class="block">
                     <div class="row">
-                      <div ng-repeat="video in videos | onlyPage:page"
-                          class="col-item">
 
-                          <a href="{{ video.url }}" target=_blank>
-                            <div class="content">
-                              <figure data-effeckt-type="quarter-fall-in" class="effeckt-caption">
-                                <figcaption>
-                                  <div class="effeckt-figcaption-wrap">{{ video.title }}</div>
-                                </figcaption>
-                                <video-webm filename="video.filename" 
-                                            play-on-page="page"
-                                            current-page="page"></video-webm>
-                              </figure>
-                            </div>
-                          </a>
+                      <div ng-repeat="video in videos | onlyPage:page" class="col-item">
+                        <a href="{{ video.url }}" target=_blank>
+                          <div class="content">
+                            <figure data-effeckt-type="quarter-fall-in" class="effeckt-caption">
+                              <figcaption>
+                                <div class="effeckt-figcaption-wrap">{{ video.title }}</div>
+                              </figcaption>
+                              <video-webm filename="video.filename"></video-webm>
+                            </figure>
+                          </div>
+                        </a>
                       </div>
+                      
+                      <div ng-show="(videos | onlyPage:page).length <= 0">
+                        <p>No content here yet.</p>
+                      </div>
+                      
                     </div>
                   </div>
                 </div>

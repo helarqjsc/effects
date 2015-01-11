@@ -10,36 +10,23 @@ app.directive('videoWebm', function(){
     '</video>',
     restrict: "E",
     scope: { 
-      filename: '=',
-      playOnPage: '=',
-      currentPage: '='
+      filename: '='
     },
     replace: true,
     link: function(scope, el, atts){
       scope.videoURL = 'assets/video/' + scope.filename;
 
       var video = el.get(0);
-      scope.$watch('currentPage.id', function(currentPage){
-        console.log('currentPage:', currentPage);
-        console.log('scope.playOnPage:', scope.playOnPage);
-        if(currentPage === scope.playOnPage.id || currentPage === 'all'){
-          if(video.paused){
-            video.play();
-          }
-          // console.log('start', el.find('source').attr('src'));
-        }else{ 
-          // video.currentTime = 0;
-          video.pause();
-          // console.log('stop', el.find('source').attr('src'));
-        }
-      });
+      if(video.paused){
+        video.play();
+      }
     }
   };
 });
 
 app.filter('onlyPage', function(){
   return function(input, currentPage){
-    console.log('filter onlypage', 'currentPage', currentPage);
+    // console.log('filter onlypage', 'currentPage', currentPage);
     return input.filter(function(val){
       return (val.page_id === currentPage.id || currentPage.id === 'all');
     });
@@ -52,6 +39,7 @@ app.controller('MainCtrl', function($scope, $preload) {
   $scope.videos = $preload.videos;
 
   $scope.changePage = function(page) {
+    if($scope.page.id === page) return;
     $('.block').animate({opacity: 0}, 500, function(){
       $scope.page.id = page;
       $scope.$apply();
@@ -65,41 +53,6 @@ app.controller('MainCtrl', function($scope, $preload) {
 });
 
 
-
-angular
-    .module('effects.data', [])
-    .factory('data', function() {
-            return [
-                {name: "Наведение", page: "hovers", items: [
-                    {link: "http://tympanus.net/Tutorials/CircleHoverEffects/index.html", title: "Circle Hover Effects", video: "circle.webm"},
-                    {link: "http://tympanus.net/Development/HoverEffectIdeas/index2.html", title: "Hover Effect Ideas. По ссылке больше примеров", video: "hover2.webm"},
-                    {link: "http://tympanus.net/Tutorials/ShapeHoverEffectSVG/index.html", title: "Shape Hover Effect with SVG", video: "hover3.webm"}
-                ]},
-                {name: "Кнопки", page: "buttons", items: [
-                    {link: "http://codepen.io/itsnoureddine/pen/QwEjpK", title: "Buttons menu", video: "button.webm"}
-                ]},
-                {name: "Попапы", page: "popups", items: [
-                    {link: "http://tristanedwards.me/sweetalert", title: "Sweet Alert", video: "alert.webm"},
-                    {link: "http://tympanus.net/Development/DialogEffects/index.html", title: "Dialog Effects. По ссылке больше примеров", video: "popups.webm"},
-                ]},
-                {name: "Переходы", page: "transitions", items: [
-                    {link: "http://tympanus.net/Development/ArticleIntroEffects/", title: "Переход из картинки в контент", video: "perehod.webm"},
-                    {link: "http://tympanus.net/Development/PageLoadingEffects/index3.html", title: "Красивая смена страницы. По ссылке больше примеров", video: "perehod2.webm"},
-                    {link: "http://codepen.io/pixelass/pen/gixzc", title: "Apple Mac", video: "mac.webm"}
-                ]},
-                {name: "Лоадеры", page: "loaders", items: [
-                    {link: "http://pasqualevitiello.github.io/Tumblr-Style-Cog-Spinners/", title: "Tumblr-Style Cog Loader", video: "loaders.webm"}
-                ]},
-                {name: "Иконки", page: "icons", items: [
-                    {link: "http://fian.my.id/marka/", title: "Marka", video: "icons.webm"}
-                ]},
-                {name: "Прогресс бары", page: "progress-bars", items: [
-                ]},
-
-                {name: "Табы", page: "tabs", items: [
-                ]}
-            ]
-        });
 
 var app = angular.module('effects.admin', ['ui.router']);
 
@@ -142,9 +95,18 @@ app.config(function ($stateProvider) {
 app.directive('editable', function($timeout){
   return {
     scope: { value: '=' },
-    template: '<div ng-show="!edit" ng-click="edit = true">{{ value }}</div>'+
-              '<input ng-show="edit" ng-blur="edit = false" type="text" ng-model="value">',
+    template: '<div ng-show="!edit" ng-click="changeMode(true)">{{ value }}</div>'+
+              '<input ng-show="edit" ng-blur="changeMode(false)" type="text" ng-model="value">',
     link: function(scope, element, attrs){
+      console.log('scope.value', scope.value);
+      scope.changeMode = function(edit){
+        if(scope.value.trim() === ''){
+          scope.edit = true;
+          return;
+        }
+        scope.edit = edit;
+      };
+      scope.changeMode(false);
       scope.$watch('edit', function(edit){
         if(edit){
           $timeout(function(){
@@ -159,14 +121,37 @@ app.directive('editable', function($timeout){
   };
 });
 
-// app.factory('')
-app.controller('AdminCtrl', function($scope, $preload, $state, $http) {
-  $scope.pages = $preload.pages;
+app.controller('AdminCtrl', function($scope, $state) {
+  // $state.go('pages');
+});
 
-  // $state.go('home');
-  $scope.save = function(obj){
-    $http.post('/admin/save/' + obj, $scope[obj]);
+app.controller('PagesCtrl', function($scope, $preload, $http) {
+  $scope.pages = $preload.pages;
+  $scope.pagesToDelete = [];
+
+  $scope.videos = $preload.videos;
+
+  $scope.add = function(){
+    $scope.pages.push({title: '', slug: ''});
+  };
+
+  $scope.delete = function(index){
+    $scope.pagesToDelete.push($scope.pages[index]);
+    $scope.pages.splice(index, 1);
+  };
+
+  $scope.save = function(){
+    var data = {
+      update: $scope.pages,
+      delete: $scope.pagesToDelete
+    };
+    $http.post('/admin/save_pages', data).then(function(response){
+      $scope.pages = response.data;
+      $scope.pagesToDelete = [];
+    });
   };
 });
 
-
+app.controller('VideosCtrl', function($scope, $preload) {
+  $scope.videos = $preload.videos;
+});

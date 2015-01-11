@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'home#index'
   get '/admin' => 'admin#index', as: 'user_root'
-  post '/admin/save/:obj' => 'admin#save'
+  post '/admin/save_pages' => 'admin#save_pages'
   
   devise_for :users, 
     path: '', 

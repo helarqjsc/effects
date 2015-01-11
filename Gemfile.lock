@@ -38,8 +38,6 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.0)
     bcrypt (3.1.9)
-    binding_of_caller (0.7.2)
-      debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (3.5.1)
       columnize (~> 0.8)
@@ -54,7 +52,6 @@ GEM
     coffee-script-source (1.8.0)
     columnize (0.9.0)
     daemons (1.1.9)
-    debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -158,11 +155,6 @@ GEM
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
-    web-console (2.0.0)
-      activemodel (~> 4.0)
-      binding_of_caller (>= 0.7.2)
-      railties (~> 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
 
 PLATFORMS
   ruby
@@ -180,4 +172,3 @@ DEPENDENCIES
   thin
   turbolinks
   uglifier (>= 1.3.0)
-  web-console (~> 2.0)

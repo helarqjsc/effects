@@ -1,0 +1,21 @@
+TODO:
+
+Home page
+- Use ui.router to switch between pages
+
+Admin panel
+- Pages section
+-- Display states better when making requests to the server
+--- Edited/unedited field
+--- Request is in the process
+- Video section
+-- Basic editing of title, page, url; removing and adding new videos
+-- Video upload
+- Settings section
+-- Password change
+-- Language selection
+
+Make json generated on server to be separated by page (faster rendering of a lot of videos)
+- Duplicate everything for "All" page?
+
+Do some styling

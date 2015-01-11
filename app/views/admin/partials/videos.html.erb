@@ -1,5 +1,25 @@
-videos test
+<div ng-controller="VideosCtrl">
+	<h1>Videos</h1>
 
-<% @videos.each do |video| %>
-	<%= video.inspect %>
-<% end %>
+	<table class="table table-striped">
+		<thead>
+			<td>ID</td>
+			<td>Associated page</td>
+			<td>Title</td>
+			<td>URL to original</td>
+			<td>Filename</td>
+		</thead>
+		<tbody>
+			<tr ng-repeat="video in videos">
+				<td ng-bind="video.id"></td>
+				<td ng-bind="video.page.title"></td>
+				<td ng-bind="video.title"></td>
+				<td ng-bind="video.url"></td>
+				<td ng-bind="video.filename"></td>
+			</tr>
+
+		</tbody>
+	</table>
+
+	<input ng-click="" type="button" class="btn btn-default" value="Save">
+</div>

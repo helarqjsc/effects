@@ -39,9 +39,18 @@ app.config(function ($stateProvider) {
 app.directive('editable', function($timeout){
   return {
     scope: { value: '=' },
-    template: '<div ng-show="!edit" ng-click="edit = true">{{ value }}</div>'+
-              '<input ng-show="edit" ng-blur="edit = false" type="text" ng-model="value">',
+    template: '<div ng-show="!edit" ng-click="changeMode(true)">{{ value }}</div>'+
+              '<input ng-show="edit" ng-blur="changeMode(false)" type="text" ng-model="value">',
     link: function(scope, element, attrs){
+      console.log('scope.value', scope.value);
+      scope.changeMode = function(edit){
+        if(scope.value.trim() === ''){
+          scope.edit = true;
+          return;
+        }
+        scope.edit = edit;
+      };
+      scope.changeMode(false);
       scope.$watch('edit', function(edit){
         if(edit){
           $timeout(function(){
@@ -56,14 +65,37 @@ app.directive('editable', function($timeout){
   };
 });
 
-// app.factory('')
-app.controller('AdminCtrl', function($scope, $preload, $state, $http) {
-  $scope.pages = $preload.pages;
+app.controller('AdminCtrl', function($scope, $state) {
+  // $state.go('pages');
+});
 
-  // $state.go('home');
-  $scope.save = function(obj){
-    $http.post('/admin/save/' + obj, $scope[obj]);
+app.controller('PagesCtrl', function($scope, $preload, $http) {
+  $scope.pages = $preload.pages;
+  $scope.pagesToDelete = [];
+
+  $scope.videos = $preload.videos;
+
+  $scope.add = function(){
+    $scope.pages.push({title: '', slug: ''});
+  };
+
+  $scope.delete = function(index){
+    $scope.pagesToDelete.push($scope.pages[index]);
+    $scope.pages.splice(index, 1);
+  };
+
+  $scope.save = function(){
+    var data = {
+      update: $scope.pages,
+      delete: $scope.pagesToDelete
+    };
+    $http.post('/admin/save_pages', data).then(function(response){
+      $scope.pages = response.data;
+      $scope.pagesToDelete = [];
+    });
   };
 });
 
-
+app.controller('VideosCtrl', function($scope, $preload) {
+  $scope.videos = $preload.videos;
+});

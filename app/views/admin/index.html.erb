@@ -23,7 +23,8 @@
       angular.module('effects.admin')
         .factory('$preload', function(){
           return {
-            pages: <%= raw(@pages.to_json) %>
+            pages: <%= raw(@pages.to_json) %>,
+            videos: <%= raw(@videos.to_json) %>
           };
         });
     </script>

@@ -1,20 +1,31 @@
-<h1>Pages</h1>
+<div ng-controller="PagesCtrl">
+	<h1>Pages</h1>
 
-<table class="table table-striped">
-	<thead>
-		<td>ID</td>
-		<td>Title</td>
-		<td>Slug</td>
-		<td>Created At</td>
-	</thead>
-	<tbody>
-		<tr ng-repeat="page in pages">
-			<td ng-bind="page.id"></td>
-			<td><div editable value="page.title"></div></td>
-			<td><div editable value="page.slug"></div></td>
-			<td ng-bind="page.created_at | date:'d MMM yyyy'"></td>
-		</tr>
-	</tbody>
-</table>
+	<table class="table table-striped">
+		<thead>
+			<td>ID</td>
+			<td>Title</td>
+			<td>Slug</td>
+			<td>Created At</td>
+		</thead>
+		<tbody>
+			<tr ng-repeat="page in pages">
+				<td ng-bind="page.id"></td>
+				<td><div editable value="page.title"></div></td>
+				<td><div editable value="page.slug"></div></td>
+				<td ng-bind="page.created_at | date:'d MMM yyyy'"></td>
+				<td><input ng-click="delete($index)" type="button" class="btn btn-default" value="Delete"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><input ng-click="add()" type="button" class="btn btn-default" value="Add"></td>
+			</tr>
 
-<input ng-click="save('pages')" type="button" class="btn btn-default" value="Save">
+		</tbody>
+	</table>
+
+	<input ng-click="save()" type="button" class="btn btn-default" value="Save">
+</div>
