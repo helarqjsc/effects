@@ -35,8 +35,6 @@ app.directive('videoWebm', function(){
   };
 });
 
-
-
 app.filter('onlyPage', function(){
   return function(input, currentPage){
     console.log('filter onlypage', 'currentPage', currentPage);
@@ -52,7 +50,11 @@ app.controller('MainCtrl', function($scope, $preload) {
   $scope.videos = $preload.videos;
 
   $scope.changePage = function(page) {
-    $scope.page.id = page;
+    $('.block').animate({opacity: 0}, 500, function(){
+      $scope.page.id = page;
+      $scope.$apply();
+      $(this).animate({opacity: 1}, 500);
+    });
   };
 
   // $scope.changePage($scope.pages[0].id);
