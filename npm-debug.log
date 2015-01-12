@@ -1,0 +1,129 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.35
+4 verbose node symlink /usr/bin/node
+5 warn package.json @ No repository field.
+6 verbose readDependencies using package.json deps
+7 verbose install where, deps [ '/home/vagrant/effects',
+7 verbose install   [ 'glob',
+7 verbose install     'gulp',
+7 verbose install     'gulp-clean',
+7 verbose install     'gulp-concat',
+7 verbose install     'gulp-concat-css',
+7 verbose install     'gulp-csscomb',
+7 verbose install     'gulp-load-plugins',
+7 verbose install     'gulp-minify-css',
+7 verbose install     'gulp-ng-annotate',
+7 verbose install     'gulp-sass',
+7 verbose install     'gulp-uglify',
+7 verbose install     'gulp-util',
+7 verbose install     'has-ansi',
+7 verbose install     'main-bower-files',
+7 verbose install     'node-sass',
+7 verbose install     'readable-stream',
+7 verbose install     'run-sequence',
+7 verbose install     'tar-fs' ] ]
+8 info preinstall @
+9 verbose readDependencies using package.json deps
+10 verbose already installed skipping gulp-clean@ /home/vagrant/effects
+11 verbose already installed skipping gulp-concat@^2.4.2 /home/vagrant/effects
+12 verbose already installed skipping gulp-concat-css@^1.1.1 /home/vagrant/effects
+13 verbose already installed skipping gulp-csscomb@^3.0.3 /home/vagrant/effects
+14 verbose already installed skipping gulp-load-plugins@^0.5.0 /home/vagrant/effects
+15 verbose already installed skipping gulp-minify-css@^0.3.11 /home/vagrant/effects
+16 verbose already installed skipping gulp-ng-annotate@^0.4.3 /home/vagrant/effects
+17 verbose already installed skipping gulp-sass@^1.2.4 /home/vagrant/effects
+18 verbose already installed skipping gulp-uglify@^1.0.2 /home/vagrant/effects
+19 verbose already installed skipping gulp-util@^3.0.1 /home/vagrant/effects
+20 verbose already installed skipping has-ansi@^1.0.1 /home/vagrant/effects
+21 verbose already installed skipping main-bower-files@^2.4.1 /home/vagrant/effects
+22 verbose already installed skipping node-sass@^2.0.0-beta /home/vagrant/effects
+23 verbose already installed skipping readable-stream@^1.0.33 /home/vagrant/effects
+24 verbose already installed skipping run-sequence@^1.0.2 /home/vagrant/effects
+25 verbose already installed skipping tar-fs@^1.4.1 /home/vagrant/effects
+26 verbose already installed skipping glob@^4.3.2 /home/vagrant/effects
+27 verbose already installed skipping gulp@3.8.10 /home/vagrant/effects
+28 silly resolved []
+29 info build /home/vagrant/effects
+30 verbose linkStuff [ false, false, false, '/home/vagrant' ]
+31 info linkStuff @
+32 verbose linkBins @
+33 verbose linkMans @
+34 verbose rebuildBundles @
+35 verbose rebuildBundles [ '.bin',
+35 verbose rebuildBundles   'angular',
+35 verbose rebuildBundles   'angular-ui-router',
+35 verbose rebuildBundles   'coffee-script',
+35 verbose rebuildBundles   'glob',
+35 verbose rebuildBundles   'gulp',
+35 verbose rebuildBundles   'gulp-bower',
+35 verbose rebuildBundles   'gulp-bower-files',
+35 verbose rebuildBundles   'gulp-clean',
+35 verbose rebuildBundles   'gulp-concat',
+35 verbose rebuildBundles   'gulp-concat-css',
+35 verbose rebuildBundles   'gulp-connect',
+35 verbose rebuildBundles   'gulp-csscomb',
+35 verbose rebuildBundles   'gulp-if',
+35 verbose rebuildBundles   'gulp-image-optimization',
+35 verbose rebuildBundles   'gulp-imagemin',
+35 verbose rebuildBundles   'gulp-load-plugins',
+35 verbose rebuildBundles   'gulp-minify-css',
+35 verbose rebuildBundles   'gulp-ng-annotate',
+35 verbose rebuildBundles   'gulp-order',
+35 verbose rebuildBundles   'gulp-sass',
+35 verbose rebuildBundles   'gulp-uglify',
+35 verbose rebuildBundles   'gulp-util',
+35 verbose rebuildBundles   'has-ansi',
+35 verbose rebuildBundles   'imagemin',
+35 verbose rebuildBundles   'main-bower-files',
+35 verbose rebuildBundles   'node-sass',
+35 verbose rebuildBundles   'readable-stream',
+35 verbose rebuildBundles   'run-sequence',
+35 verbose rebuildBundles   'tar-fs' ]
+36 verbose rebuild bundle /home/vagrant/effects/node_modules/angular
+37 info build /home/vagrant/effects/node_modules/angular
+38 info preinstall angular@1.3.8
+39 verbose linkStuff [ false, false, false, '/home/vagrant/effects/node_modules' ]
+40 info linkStuff angular@1.3.8
+41 verbose linkBins angular@1.3.8
+42 verbose linkMans angular@1.3.8
+43 verbose rebuildBundles angular@1.3.8
+44 info install angular@1.3.8
+45 info postinstall angular@1.3.8
+46 verbose rebuild bundle /home/vagrant/effects/node_modules/angular-ui-router
+47 info build /home/vagrant/effects/node_modules/angular-ui-router
+48 info preinstall angular-ui-router@0.2.13
+49 verbose linkStuff [ false, false, false, '/home/vagrant/effects/node_modules' ]
+50 info linkStuff angular-ui-router@0.2.13
+51 verbose linkBins angular-ui-router@0.2.13
+52 verbose linkMans angular-ui-router@0.2.13
+53 verbose rebuildBundles angular-ui-router@0.2.13
+54 info install angular-ui-router@0.2.13
+55 info postinstall angular-ui-router@0.2.13
+56 verbose rebuild bundle /home/vagrant/effects/node_modules/coffee-script
+57 info build /home/vagrant/effects/node_modules/coffee-script
+58 info preinstall coffee-script@1.8.0
+59 verbose linkStuff [ false, false, false, '/home/vagrant/effects/node_modules' ]
+60 info linkStuff coffee-script@1.8.0
+61 warn prefer global coffee-script@1.8.0 should be installed with -g
+62 verbose linkBins coffee-script@1.8.0
+63 verbose link bins [ { coffee: './bin/coffee', cake: './bin/cake' },
+63 verbose link bins   '/home/vagrant/effects/node_modules/.bin',
+63 verbose link bins   false ]
+64 verbose linkMans coffee-script@1.8.0
+65 verbose rebuildBundles coffee-script@1.8.0
+66 verbose rebuildBundles [ 'mkdirp' ]
+67 error Error: UNKNOWN, symlink '../coffee-script/bin/cake'
+68 error If you need help, you may report this *entire* log,
+68 error including the npm and node versions, at:
+68 error     <http://github.com/npm/npm/issues>
+69 error System Linux 3.2.0-23-generic-pae
+70 error command "/usr/bin/node" "/usr/bin/npm" "install"
+71 error cwd /home/vagrant/effects
+72 error node -v v0.10.35
+73 error npm -v 1.4.28
+74 error path ../coffee-script/bin/cake
+75 error code UNKNOWN
+76 error errno -1
+77 verbose exit [ -1, true ]
