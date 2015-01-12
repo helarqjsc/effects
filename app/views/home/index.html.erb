@@ -15,8 +15,12 @@
         <% end %>
         <div class="menu">
         <ul>
-          <li ng-click="changePage('all')">Все</li>
-          <li ng-repeat="page in pages" ng-click="changePage(page.id)">{{ page.title }}</li>
+          <li>
+            <a href="#/all">Все</a>
+          </li>
+          <li ng-repeat="page in pages">
+            <a ng-href="#/{{page.slug}}">{{ page.title }}</a>
+          </li>
         </ul>
         </div>
         <article class="list">

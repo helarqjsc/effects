@@ -1,7 +1,7 @@
 TODO:
 
 Home page
-- Use ui.router to switch between pages
+-- Use Angular's $animate service instead of jQuery animations
 
 Admin panel
 - Pages section
@@ -17,5 +17,7 @@ Admin panel
 
 Make json generated on server to be separated by page (faster rendering of a lot of videos)
 - Duplicate everything for "All" page?
+- Should also be done for better routing on home page. Currently it loops through all pages
 
 Do some styling
+Check for uniqueness of slugs in pages

@@ -62,8 +62,8 @@ gulp.task('watch', function() {
     css_src + "libs/*.scss"
     ], ['css']);
   gulp.watch(main_js_files, ['js']);
-  gulp.watch(['bower_components/**/*'], ['libs']);
+  gulp.watch(['bower.json'], ['libs']);
   return gulp.watch([js_src + 'lib/*.js'], ['libs']);
 });
 
-gulp.task('default', ['libs', 'js', 'css','watch']);
+gulp.task('default', ['libs', 'js', 'css', 'watch']);

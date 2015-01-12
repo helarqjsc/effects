@@ -1,6 +1,4 @@
-
-
-var app = angular.module('effects.home', ['ngFx']);
+var app = angular.module('effects.home', []);
 
 app.directive('videoWebm', function(){
   return {
@@ -33,22 +31,40 @@ app.filter('onlyPage', function(){
   };
 });
 
-app.controller('MainCtrl', function($scope, $preload) {
-  // $scope.data = data;
+app.controller('MainCtrl', function($scope, $preload, $location) {
   $scope.pages = $preload.pages;
+  $scope.page = {id: $scope.pages[0].id};
+
   $scope.videos = $preload.videos;
+  
+  //"routing"
+  $scope.$watch(function(){
+    return $location.path();
+  }, 
+  function(path){
+    path = path.replace(/^\//,''); //removing prefix slash
+    if(path === 'all'){
+      $scope.changePage('all');
+      return;
+    }
+    var page = $scope.pages.filter(function(i){
+      return (i.slug === path);
+    })[0];  
+    $scope.changePage(page.id);
+  });
+
 
   $scope.changePage = function(page) {
     if($scope.page.id === page) return;
     $('.block').animate({opacity: 0}, 500, function(){
       $scope.page.id = page;
       $scope.$apply();
+      // console.log($scope.page);
       $(this).animate({opacity: 1}, 500);
     });
   };
 
-  // $scope.changePage($scope.pages[0].id);
-  $scope.page = {id: $scope.pages[0].id};
+  $scope.changePage($scope.pages[0].id);
   $scope.loaded = true;
 });
 

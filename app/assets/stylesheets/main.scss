@@ -157,6 +157,15 @@ body {
       margin-bottom: 20px;
       text-align: left;
       cursor: pointer;
+      a{
+        color: inherit;
+        display: block;
+        &:hover,
+        &:focus{
+          color: inherit;
+          text-decoration: none;
+        }
+      }
       span {
         position: absolute;
         @include inline();
