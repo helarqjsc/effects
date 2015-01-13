@@ -12,14 +12,19 @@
 		<tbody>
 			<tr ng-repeat="video in videos">
 				<td ng-bind="video.id"></td>
-				<td ng-bind="video.page.title"></td>
-				<td ng-bind="video.title"></td>
-				<td ng-bind="video.url"></td>
+				<td>
+					<select 
+						ng-model="video.page_id" 
+						ng-options="page.id as page.title for page in pages">
+					</select>
+				</td>
+				<td editable value="video.title"></td>
+				<td editable value="video.url"></td>
 				<td ng-bind="video.filename"></td>
 			</tr>
 
 		</tbody>
 	</table>
 
-	<input ng-click="" type="button" class="btn btn-default" value="Save">
+	<input ng-click="save()" type="button" class="btn btn-default" value="Save">
 </div>

@@ -5,33 +5,25 @@ app.config(function ($stateProvider) {
   .state('home', {
     url: '/home/',
     views:{
-      'main':{
-        templateUrl: 'home.html'
-      }
+      main:{ templateUrl: 'home.html' }
     }
   })
   .state('pages', {
     url: '/pages/',
     views:{
-      'main':{
-        templateUrl: 'pages.html'
-      }
+      main:{ templateUrl: 'pages.html' }
     }
   })
   .state('videos', {
     url: '/videos/',
     views:{
-      'main':{
-        templateUrl: 'videos.html'
-      }
+      main:{ templateUrl: 'videos.html' }
     }
   })
   .state('options', {
     url: '/options/',
     views:{
-      'main':{
-        templateUrl: 'options.html'
-      }
+      main:{ templateUrl: 'options.html' }
     }
   });
 });
@@ -96,6 +88,16 @@ app.controller('PagesCtrl', function($scope, $preload, $http) {
   };
 });
 
-app.controller('VideosCtrl', function($scope, $preload) {
+app.controller('VideosCtrl', function($scope, $preload, $http) {
   $scope.videos = $preload.videos;
+  $scope.pages = $preload.pages;
+
+  $scope.save = function(){
+    var data = {
+      update: $scope.videos
+    };
+    $http.post('/admin/save_videos', data).then(function(response){
+      $scope.videos = response.data;
+    });
+  };
 });

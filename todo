@@ -4,12 +4,14 @@ Home page
 -- Use Angular's $animate service instead of jQuery animations
 
 Admin panel
+- Move $scope.pages and $scope.videos to a service
 - Pages section
 -- Display states better when making requests to the server
 --- Edited/unedited field
 --- Request is in the process
 - Video section
 -- Basic editing of title, page, url; removing and adding new videos
+-- Select of page
 -- Video upload
 - Settings section
 -- Password change

@@ -43,6 +43,10 @@ app.controller('MainCtrl', function($scope, $preload, $location) {
   }, 
   function(path){
     path = path.replace(/^\//,''); //removing prefix slash
+    if(path === ''){
+      $location.path('/'+$scope.pages[0].slug);
+      return;
+    }
     if(path === 'all'){
       $scope.changePage('all');
       return;

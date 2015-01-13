@@ -4,7 +4,7 @@ class AdminController < ApplicationController
 
 	def index
 		@pages = Page.all
-		@videos = Video.all.as_json(include: {page: {only: :title} })
+		@videos = Video.all
 		#Rails.logger.warn @videos.inspect
 	end
 
@@ -27,4 +27,19 @@ class AdminController < ApplicationController
 		@pages = Page.all
 		render json: @pages.to_json
 	end
+
+	def save_videos
+		params[:update].each do |video|
+			if video[:id].nil?
+				Video.create(title: video[:title], url: video[:url], page_id: video[:page_id])
+			else
+				Video.update(video[:id], title: video[:title], url: video[:url], page_id: video[:page_id])
+			end
+		end
+
+		@videos = Video.all
+		render json: @videos.to_json
+	end
+
+
 end
