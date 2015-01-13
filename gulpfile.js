@@ -67,4 +67,4 @@ gulp.task('watch', function() {
 });
 
 gulp.task('build', ['libs', 'js', 'css']);
-gulp.task('default', ['libs', 'js', 'css', 'watch']);
+gulp.task('default', ['build', 'watch']);

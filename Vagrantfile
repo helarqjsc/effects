@@ -33,6 +33,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   		cd /home/vagrant/effects
   		sudo npm install --no-bin-links
   		sudo npm update --no-bin-links
+
+      echo "cd /home/vagrant/effects" >>  /home/vagrant/.bashrc
     SCRIPT
 
     $script_no_root = <<-SCRIPT
