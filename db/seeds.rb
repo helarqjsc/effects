@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create(email: 'admin@lel.lan', password: '123')
+User.create(username: 'admin', password: '123')
 
 Page.create(title: 'Наведения', slug: 'hovers')
 	.videos.create([                    

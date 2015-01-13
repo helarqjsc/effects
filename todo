@@ -21,3 +21,4 @@ Make json generated on server to be separated by page (faster rendering of a lot
 
 Do some styling
 Check for uniqueness of slugs in pages
+Write some tests
