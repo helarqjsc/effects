@@ -4,7 +4,7 @@ class AdminController < ApplicationController
 
 	def index
 		@pages = Page.all
-		@videos = Video.all
+		@videos = Video.all_with_files
 		#Rails.logger.warn @videos.inspect
 	end
 
@@ -45,7 +45,8 @@ class AdminController < ApplicationController
 		if upload_params[:id].nil?
 			video = Video.new(upload_params)
 			if video.save
-				render json: {success: video.file.path, wat: video.file.url}
+				@videos = Video.all
+				render json: @videos.to_json
 			else
 				render json: video.errors
 			end

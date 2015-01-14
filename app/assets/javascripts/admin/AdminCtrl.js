@@ -36,7 +36,7 @@ app.directive('editable', function($timeout){
     link: function(scope, element, attrs){
       // console.log('scope.value', scope.value);
       scope.changeMode = function(edit){
-        if(scope.value == null || scope.value.trim() === ''){
+        if(scope.value === null || scope.value.trim() === ''){
           scope.edit = true;
           return;
         }
@@ -94,13 +94,15 @@ app.controller('VideosCtrl', function($scope, $preload, $http, $upload) {
 
   $scope.fileSelected = function($files, event){
     for (var i = 0; i < $files.length; i++) {
-        var file = $files[i];
-        $scope.upload = $upload.upload({
-          url: 'admin/upload_video',
-          method: 'POST',
-          data: {id: 34434},
-          file: file,
-          fileFormDataName: 'video[file]'
+      var file = $files[i];
+      $upload.upload({
+        url: 'admin/upload_video',
+        method: 'POST',
+        data: {id: 34434},
+        file: file,
+        fileFormDataName: 'video[file]'
+      }).then(function(response){
+        $scope.videos = response.data;
       });
     }
 
