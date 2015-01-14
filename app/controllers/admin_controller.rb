@@ -22,7 +22,7 @@ class AdminController < ApplicationController
 			params[:delete].each do |page|
 				Page.delete(page[:id])
 			end
-			end
+		end
 
 		@pages = Page.all
 		render json: @pages.to_json
@@ -41,5 +41,19 @@ class AdminController < ApplicationController
 		render json: @videos.to_json
 	end
 
+	def upload_video
+		if upload_params[:id].nil?
+			video = Video.new(upload_params)
+			if video.save
+				render json: {success: video.file.path, wat: video.file.url}
+			else
+				render json: video.errors
+			end
+		end
+	end
 
+	private
+		def upload_params
+			params.require(:video).permit(:id, :file)
+		end
 end

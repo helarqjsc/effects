@@ -1,7 +1,8 @@
 TODO:
 
 Home page
--- Use Angular's $animate service instead of jQuery animations
+- Use Angular's $animate service instead of jQuery animations
+- Proper routing
 
 Admin panel
 - Move $scope.pages and $scope.videos to a service
@@ -24,3 +25,4 @@ Make json generated on server to be separated by page (faster rendering of a lot
 Do some styling
 Check for uniqueness of slugs in pages
 Write some tests
+Translate this file

@@ -3,7 +3,6 @@ class CreateVideos < ActiveRecord::Migration
     create_table :videos do |t|
       t.string :title
       t.string :url
-      t.string :filename
       t.integer :page_id
 
       t.timestamps null: false

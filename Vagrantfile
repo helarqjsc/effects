@@ -25,6 +25,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       source /home/vagrant/.rvm/scripts/rvm
       chown -R vagrant /usr/local/rvm
 
+      #sudo apt-get install -y imagemagick libmagickcore-dev
+      #sudo apt-get install -y libmagickwand-dev
+      #sudo gem install rmagick
+
   		curl -sL https://deb.nodesource.com/setup | sudo bash -
   		apt-get install -y nodejs
   		sudo npm install -g gulp

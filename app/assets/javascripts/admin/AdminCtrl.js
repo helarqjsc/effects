@@ -1,4 +1,4 @@
-var app = angular.module('effects.admin', ['ui.router']);
+var app = angular.module('effects.admin', ['ui.router', 'angularFileUpload']);
 
 app.config(function ($stateProvider) {
   $stateProvider
@@ -34,9 +34,9 @@ app.directive('editable', function($timeout){
     template: '<div ng-show="!edit" ng-click="changeMode(true)">{{ value }}</div>'+
               '<input ng-show="edit" ng-blur="changeMode(false)" type="text" ng-model="value">',
     link: function(scope, element, attrs){
-      console.log('scope.value', scope.value);
+      // console.log('scope.value', scope.value);
       scope.changeMode = function(edit){
-        if(scope.value.trim() === ''){
+        if(scope.value == null || scope.value.trim() === ''){
           scope.edit = true;
           return;
         }
@@ -88,10 +88,23 @@ app.controller('PagesCtrl', function($scope, $preload, $http) {
   };
 });
 
-app.controller('VideosCtrl', function($scope, $preload, $http) {
+app.controller('VideosCtrl', function($scope, $preload, $http, $upload) {
   $scope.videos = $preload.videos;
   $scope.pages = $preload.pages;
 
+  $scope.fileSelected = function($files, event){
+    for (var i = 0; i < $files.length; i++) {
+        var file = $files[i];
+        $scope.upload = $upload.upload({
+          url: 'admin/upload_video',
+          method: 'POST',
+          data: {id: 34434},
+          file: file,
+          fileFormDataName: 'video[file]'
+      });
+    }
+
+  };
   $scope.save = function(){
     var data = {
       update: $scope.videos
