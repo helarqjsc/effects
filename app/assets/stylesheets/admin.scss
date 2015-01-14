@@ -59,27 +59,7 @@
     }
   }
 }
-@media screen and (max-width:1200px) { 
-  .table {
-    td {      
-      .editable {
-        max-width: 400px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-  }
-}
 
-@media screen and (max-width:1200px) { 
-  .table {
-    td {      
-      .editable {
-        max-width: 250px;
-      }
-    }
-  }
-}
 
 /* table for video page */
 

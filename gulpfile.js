@@ -43,8 +43,11 @@ gulp.task("js", function() {
 gulp.task("css", function() {
   return gulp
   .src([
-    css_src + "*.scss",
-    css_src + "libs/*.scss"
+    css_src + "libs/*.scss",
+    css_src + "main.scss",
+    css_src + "admin.scss",
+    css_src + "adaptive.scss",
+    css_src + "*.scss",        
     ])
   .pipe($.sass({errLogToConsole: true}))
   .pipe($.concat("application.css"))
