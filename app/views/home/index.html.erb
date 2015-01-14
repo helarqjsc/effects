@@ -7,21 +7,34 @@
   </div>
 
     <div class="site" id="content">
-        <% if user_signed_in? %>
-            <span>Здравствуйте, <%= current_user.username %></span>
-            <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
-        <% else %>
-            <%= link_to 'Войти', new_user_session_path %>
-        <% end %>
-        <div class="menu">
-        <ul>
-          <li>
-            <a href="#/all">Все</a>
-          </li>
-          <li ng-repeat="page in pages">
-            <a ng-href="#/{{page.slug}}">{{ page.title }}</a>
-          </li>
-        </ul>
+
+        <div class="menu-container">
+            <div class="menu-mobile">
+              Меню
+              <div class="close">X</div>
+            </div>      
+          <div class="menu">
+          <ul>
+            <li>
+              <a href="#/all">Все</a>
+            </li>
+            <li ng-repeat="pageOne in pages" ng-class="{ 'active': clickedPage.id === pageOne.id }">                
+              <a ng-href="#/{{pageOne.slug}}">{{ pageOne.title }}</a>            
+            </li>
+          </ul>
+
+          <% if user_signed_in? %>
+              <div class="login-block">
+                <span>Здравствуйте, <%= current_user.username %></span>
+                <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+              </div>
+          <% else %>
+              <div class="login-block">
+                <%= link_to 'Войти', new_user_session_path %>
+              </div>
+          <% end %>
+
+          </div>
         </div>
         <article class="list">
             <div class="bg"></div>
@@ -51,6 +64,7 @@
                     </div>
                   </div>
                 </div>
+
             </div>
         </article>
     </div>

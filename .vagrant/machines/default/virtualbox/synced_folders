@@ -1,1 +1,1 @@
-{"virtualbox":{"/home/vagrant/effects":{"guestpath":"/home/vagrant/effects","hostpath":"C:/xampp/htdocs/Effects","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/xampp/htdocs/Effects","disabled":false}}}
+{"virtualbox":{"/home/vagrant/effects":{"guestpath":"/home/vagrant/effects","hostpath":"C:/xamppN/htdocs/effectsN","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/xamppN/htdocs/effectsN","disabled":false}}}

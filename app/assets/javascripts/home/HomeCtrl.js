@@ -34,7 +34,7 @@ app.filter('onlyPage', function(){
 app.controller('MainCtrl', function($scope, $preload, $location) {
   $scope.pages = $preload.pages;
   $scope.page = {id: $scope.pages[0].id};
-
+  $scope.clickedPage = $scope.page;
   $scope.videos = $preload.videos;
   
   //"routing"
@@ -59,8 +59,9 @@ app.controller('MainCtrl', function($scope, $preload, $location) {
 
 
   $scope.changePage = function(page) {
-    if($scope.page.id === page) return;
-    $('.block').animate({opacity: 0}, 500, function(){
+    if($scope.clickedPage.id === page) return;    
+    $scope.clickedPage.id = page;
+    $('.block').stop().animate({opacity: 0}, 500, function(){
       $scope.page.id = page;
       $scope.$apply();
       // console.log($scope.page);

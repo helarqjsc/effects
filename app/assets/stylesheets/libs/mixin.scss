@@ -20,6 +20,16 @@
             box-sizing:border-box;
 }
 
+@mixin brightness($a) {
+      &:hover {
+        -webkit-filter: brightness($a);
+        -moz-filter: brightness($a);
+        -ms-filter: brightness($a);
+        -o-filter: brightness($a);
+        filter: brightness($a);
+      }
+}
+
 
 @mixin transition-e($delay) {
   transition: all $delay ease;
