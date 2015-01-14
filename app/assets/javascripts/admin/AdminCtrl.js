@@ -31,7 +31,7 @@ app.config(function ($stateProvider) {
 app.directive('editable', function($timeout){
   return {
     scope: { value: '=' },
-    template: '<div ng-show="!edit" ng-click="changeMode(true)">{{ value }}</div>'+
+    template: '<div class="editable" ng-show="!edit" ng-click="changeMode(true)">{{ value }}</div>'+
               '<input ng-show="edit" ng-blur="changeMode(false)" type="text" ng-model="value">',
     link: function(scope, element, attrs){
       console.log('scope.value', scope.value);

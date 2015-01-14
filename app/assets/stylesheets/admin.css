@@ -1,0 +1,62 @@
+/* Admin */
+/* style for table */
+/* line 6, admin.scss */
+.btn-default {
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear; }
+
+/* line 13, admin.scss */
+.table {
+  width: 100%; }
+/* line 15, admin.scss */
+.table .btn-default {
+  height: 20px !important;
+  line-height: 20px !important;
+  padding: 0 !important; }
+/* line 21, admin.scss */
+.table thead td {
+  padding-bottom: 5px !important; }
+/* line 26, admin.scss */
+.table tr:nth-child(2n+2) td {
+  background: rgba(0, 0, 0, 0.03); }
+/* line 31, admin.scss */
+.table tr:last-child td {
+  background: none !important; }
+/* line 36, admin.scss */
+.table td {
+  width: 15%;
+  vertical-align: middle;
+  padding-left: 10px; }
+/* line 40, admin.scss */
+.table td:nth-child(2) {
+  width: auto; }
+/* line 43, admin.scss */
+.table td:nth-child(1) {
+  width: 5%; }
+/* line 46, admin.scss */
+.table td .editable {
+  padding: 10px 0px 10px 0px;
+  cursor: pointer; }
+/* line 50, admin.scss */
+.table td input {
+  width: 100%;
+  padding-left: 10px;
+  margin-left: -12px;
+  height: 20px;
+  line-height: 20px;
+  padding-right: 20px; }
+
+/* table for video page */
+/* line 66, admin.scss */
+#page-videos .table td:nth-child(3) {
+  width: auto; }
+/* line 69, admin.scss */
+#page-videos .table td:nth-child(2) {
+  width: 15%; }
+
+/* menu */
+/* line 78, admin.scss */
+.menu li.active {
+  color: #b7c5d8; }

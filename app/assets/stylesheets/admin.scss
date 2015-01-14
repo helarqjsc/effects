@@ -1,3 +1,81 @@
-// Place all the styles related to the Admin controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+/* Admin */
+
+
+/* style for table */
+
+.btn-default {
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.table {
+  width: 100%;
+  .btn-default {   
+    height: 20px !important; 
+    line-height: 20px !important;
+    padding: 0 !important;
+  }
+
+  thead td {
+    padding-bottom: 5px !important;
+  }
+  tr {
+    &:nth-child(2n+2) {      
+      td {
+        background: rgba(0,0,0,.03);      
+      }
+    }
+    &:last-child {
+      td {
+        background: none !important;
+      }
+    }
+  }
+  td {
+    width: 15%;          
+    vertical-align: middle;
+    padding-left: 10px;
+    &:nth-child(2) {
+      width: auto;
+    }
+    &:nth-child(1) {
+      width: 5%;
+    }        
+    .editable {
+      padding: 10px 0px 10px 0px;
+      cursor: pointer;
+    }
+    input {
+      width: 100%;
+      padding-left: 10px;
+      margin-left: -12px;      
+      height: 20px;
+      line-height: 20px;
+      padding-right: 20px;
+    }
+  }
+}
+
+/* table for video page */
+
+#page-videos {    
+  .table {
+    td {      
+      &:nth-child(3) {
+        width: auto;
+      }
+      &:nth-child(2) {
+        width: 15%;
+      }    
+    }    
+  }
+}
+
+/* menu */
+.menu {
+  li.active {
+    color: #b7c5d8;
+  }
+}
