@@ -320,29 +320,3 @@ body {
     z-index: 1001; /* anything higher than z-index: 1000 of .loader-section */
 }
 
-
-@mixin linc-color($color: '#000',$colorHover: false,$colorActiv: false) {
-  color: $color;
-  @if ($colorHover != false) {
-    &:hover {
-      color: $colorHover;
-    }
-    @if ($colorActiv != false) {
-      &.-active-,
-      &:active{
-        color: $colorActiv;
-      }
-    } @else{
-      &.-active-,
-      &:active{
-        color: $colorHover;
-      }
-    }
-  } @else {
-    &.-active-,
-    &:active,
-    &:hover {
-      color: $color;
-    }
-  }
-}
