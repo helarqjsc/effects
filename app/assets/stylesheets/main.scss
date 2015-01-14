@@ -1,6 +1,11 @@
 @import 'libs/mixin.scss';
 @import 'helpers.scss';
 
+@import 'libs/bootstrap/_normalize.scss';
+@import 'libs/bootstrap/_buttons.scss';
+@import 'libs/bootstrap/scaffolding.scss';
+@import 'libs/bootstrap/grid.scss';
+@import 'libs/bootstrap/_glyphicons.scss';
 
 * {
     box-sizing: border-box;

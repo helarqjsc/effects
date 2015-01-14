@@ -44,13 +44,21 @@
     font-size: 1.5em;
     cursor: pointer;
 
+    .glyphicon {
+      font-family: "Calibri";
+      &:before {
+        font-family: 'Glyphicons Halflings';
+        margin-left: -30px;
+        position: absolute;
+      }
+    }
+
     .close {
       position: absolute;                
       width: 20px;      
       height: 20px;
       right: 20px;
-      top: 0px;      
-      font-family: "Arial";
+      top: 15px;            
       cursor: pointer;
       color: white;
       z-index: 10009;
