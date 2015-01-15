@@ -1,0 +1,4 @@
+#!/bin/sh
+bundle install
+bower install
+rake db:drop db:create db:migrate db:seed

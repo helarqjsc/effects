@@ -1,4 +1,11 @@
-<div ng-controller="VideosCtrl" id="page-videos">
+<div ng-controller="VideosCtrl" id="page-videos"
+			ng-file-drop 
+			ng-model="files"
+			ng-file-change="fileSelected($files, $event)"
+	    drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
+	    multiple="true" 
+	    accept="video/webm">
+
 	<h1>Videos</h1>
 
 	<table class="table table-striped">
@@ -16,15 +23,28 @@
 					<select 
 						ng-model="video.page_id" 
 						ng-options="page.id as page.title for page in pages">
+							<option></option>
 					</select>
 				</td>
 				<td editable value="video.title"></td>
 				<td editable value="video.url"></td>
-				<td ng-bind="video.filename"></td>
+				<td ng-bind="video.file_file_name"></td>
 			</tr>
 
 		</tbody>
 	</table>
+
+	<button 
+		class="btn btn-default" 
+		ng-file-select 
+		ng-model="files" 
+		multiple="true" 
+		accept="video/webm"	
+		ng-file-change="fileSelected($files, $event)">
+			Upload new video
+	</button>
+
+
 
 	<input ng-click="save()" type="button" class="btn btn-default" value="Save">
 </div>

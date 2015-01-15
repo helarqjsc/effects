@@ -1,26 +1,25 @@
 TODO:
 
-Home page
--- Use Angular's $animate service instead of jQuery animations
+Главная
+- Юзать сервис $animate вместо анимаций jQuery
+- Нормальный роутинг вместо костылей
 
-Admin panel
-- Move $scope.pages and $scope.videos to a service
-- Pages section
--- Display states better when making requests to the server
---- Edited/unedited field
---- Request is in the process
-- Video section
--- Basic editing of title, page, url; removing and adding new videos
--- Select of page
--- Video upload
-- Settings section
--- Password change
--- Language selection
+Админка
+- Засунуть $scope.pages и $scope.videos в сервис, чтобы можно было изменить из разных контроллеров
 
-Make json generated on server to be separated by page (faster rendering of a lot of videos)
-- Duplicate everything for "All" page?
-- Should also be done for better routing on home page. Currently it loops through all pages
+- Страница "Страницы"
+-- Показывать состояние запроса к серверу
+-- Измененные поля должны выделяться
 
-Do some styling
-Check for uniqueness of slugs in pages
-Write some tests
+- Страница "Видео"
+-- Добавление и удаление видео
+-- Показывать процесс загрузки
+
+- Страница "Настройки"
+-- Смена пароля
+-- Выбор языка
+
+Норм стили
+Проверять уникальность названия страницы
+Запилить тесты
+Юзать Rails Assets Pipeline

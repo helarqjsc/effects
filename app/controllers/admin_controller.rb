@@ -4,7 +4,7 @@ class AdminController < ApplicationController
 
 	def index
 		@pages = Page.all
-		@videos = Video.all
+		@videos = Video.all_with_files
 		#Rails.logger.warn @videos.inspect
 	end
 
@@ -22,7 +22,7 @@ class AdminController < ApplicationController
 			params[:delete].each do |page|
 				Page.delete(page[:id])
 			end
-			end
+		end
 
 		@pages = Page.all
 		render json: @pages.to_json
@@ -41,5 +41,20 @@ class AdminController < ApplicationController
 		render json: @videos.to_json
 	end
 
+	def upload_video
+		if upload_params[:id].nil?
+			video = Video.new(upload_params)
+			if video.save
+				@videos = Video.all
+				render json: @videos.to_json
+			else
+				render json: video.errors
+			end
+		end
+	end
 
+	private
+		def upload_params
+			params.require(:video).permit(:id, :file)
+		end
 end
