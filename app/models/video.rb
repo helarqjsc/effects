@@ -2,7 +2,10 @@ class Video < ActiveRecord::Base
 	belongs_to :page
 	
 	has_attached_file :file
-	validates_attachment_content_type :file, :content_type => 'video/webm'
+	validates_attachment :file, {
+		content_type: { content_type: 'video/webm' },
+		size: { in: 1..10.megabytes }
+	}
 
 	def self.all_with_files
 		all.as_json.map do |video|
