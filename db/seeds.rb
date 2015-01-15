@@ -8,7 +8,7 @@
 
 User.create(username: 'admin', password: '123')
 
-base_path = "#{Rails.root}/public/assets/video/"
+base_path = "#{Rails.root}/db/seeds/video/"
 Page.create(title: 'Наведения', slug: 'hovers')
 	.videos.create([                    
 		{

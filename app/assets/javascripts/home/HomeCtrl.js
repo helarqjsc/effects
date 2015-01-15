@@ -4,16 +4,14 @@ app.directive('videoWebm', function(){
   return {
     template:
     '<video class="video-container" width="100%" height="100%" loop muted preload="none">' +
-    '<source src="{{videoURL}}" type=\'video/webm; codecs="vp8, vorbis"\' />' +
+    '<source src="{{url}}" type=\'video/webm; codecs="vp8, vorbis"\' />' +
     '</video>',
     restrict: "E",
     scope: { 
-      filename: '='
+      url: '='
     },
     replace: true,
     link: function(scope, el, atts){
-      scope.videoURL = 'assets/video/' + scope.filename;
-
       var video = el.get(0);
       if(video.paused){
         video.play();
