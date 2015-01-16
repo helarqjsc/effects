@@ -1,5 +1,7 @@
 !/log/.keep
 **/.idea/
+*.css
+*.orig
 .bundle/
 .sass-cache/
 .vagrant/
