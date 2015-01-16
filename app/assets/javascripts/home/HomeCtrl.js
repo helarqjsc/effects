@@ -13,7 +13,7 @@ app.directive('videoWebm', function(){
       url: '='
     },
     replace: true,
-    link: function(scope, el, atts){
+    link: function(scope, el, atts){      
       var video = el.get(0);
       if(video.paused){
         video.play();
