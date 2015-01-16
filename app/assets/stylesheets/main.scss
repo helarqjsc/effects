@@ -16,6 +16,7 @@
 html, body {
   height: 100%;
   max-height: 100%;
+  background-color: #f7f7f7;
 }
 
 .container {
@@ -183,26 +184,22 @@ body {
 }
 
 .site {
-  width: 100%;
-  min-height: 100%;
+  width: 100%;  
 }
 
-.list {
-  min-height: 100%;
+.list {  
   position: relative;
   /* IE10 Consumer Preview */
   background: #f7f7f7;
-  padding-left: 200px;
+  padding-left: 200px;  
   a {
     color: black;
     text-decoration: none;
   }
   .block-list {
-    position: relative;
-    min-height: 100%;
+    position: relative;    
     height: 100%;
-    .block {
-      min-height: 100%;
+    .block {      
       &.animated {
         position: absolute !important;
         top: 0 !important;
