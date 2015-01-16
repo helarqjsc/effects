@@ -18,6 +18,8 @@ gem "paperclip", "~> 4.2"
 
 
 group :development, :test do
+	gem 'better_errors'
+	gem "binding_of_caller"
 	gem 'thin'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

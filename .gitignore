@@ -13,3 +13,4 @@ public/assets/stylesheets/
 public/system/videos/
 puppet/
 tmp/
+Vagrantfile

@@ -3,8 +3,8 @@ class AdminController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-		@pages = Page.all
-		@videos = Video.all_with_files
+		@pages = Page.all_json
+		@videos = Video.all_json
 		#Rails.logger.warn @videos.inspect
 	end
 

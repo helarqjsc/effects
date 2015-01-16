@@ -7,10 +7,9 @@ class Video < ActiveRecord::Base
 		size: { in: 1..10.megabytes }
 	}
 
-	def self.all_with_files
+	def self.all_json
 		all.as_json.map do |video|
 			video[:file_url] = Video.find(video['id']).file.url
-			Rails.logger.warn video
 			video
 		end
 	end
