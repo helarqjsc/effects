@@ -2,6 +2,7 @@
 
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
+var production = !!$.util.env.production;
 
 var bowerFiles = require('main-bower-files');
 
@@ -25,16 +26,16 @@ gulp.task('libs', function() {
         js_src + "libs/modernizr.custom.js", 
         js_src + "libs/*.js"
       ]))
-    .pipe($.concat("libs.js"))
-    // .pipe($.uglify())
+    .pipe($.concat("libs.js"))    
+    .pipe($.if(production, $.uglify()))
     .pipe(gulp.dest(js_out));
 });
 
 gulp.task("js", function() {
   return gulp
     .src(main_js_files)
-    // .pipe($.ngAnnotate())
-    // .pipe($.uglify())
+    .pipe($.if(production, $.ngAnnotate()))
+    .pipe($.if(production, $.uglify()))
     .pipe($.concat("application.js"))
     .pipe(gulp.dest(js_out));
 });
