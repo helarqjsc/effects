@@ -1,5 +1,7 @@
 !/log/.keep
 **/.idea/
+*.css
+*.orig
 .bundle/
 .sass-cache/
 .vagrant/
@@ -13,3 +15,4 @@ public/assets/stylesheets/
 public/system/videos/
 puppet/
 tmp/
+Vagrantfile

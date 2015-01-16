@@ -3,9 +3,9 @@
 
 /* Main Page */
 
-@media (max-width:450px) { 
-  .overflow-hidden {    
-      overflow: hidden !important;    
+@media (max-width:768px) { 
+  .no-scroll {    
+    overflow: hidden !important;    
   }
 
   .list {
@@ -14,11 +14,11 @@
   }
 
   .menu {        
-    display: block;
     width: 100%;
     z-index: 900;
     position: relative;   
-    height: 100%;          
+    height: 100%; 
+    
   }
 
   .menu-container {

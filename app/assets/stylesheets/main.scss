@@ -110,6 +110,9 @@ html, body {
 
 body {
   font-family: "Calibri";
+  &.no-scroll{
+    overflow: hidden;
+  }
 }
 
 

@@ -1,4 +1,7 @@
-<div ng-app="effects.home" ng-controller="MainCtrl" ng-class="{loaded: loaded}">
+<body ng-app="effects.home"
+      ng-controller="MainCtrl"
+      ng-class="{'no-scroll': menuVisible && !isDesktop, 
+                 loaded: loaded}">
 
   <div id="loader-wrapper">
       <div id="loader"></div>
@@ -6,68 +9,64 @@
       <div class="loader-section section-right"></div>
   </div>
 
-    <div class="site" id="content">
+  <div class="site" id="content">
 
-        <div class="menu-container">
-            <div class="menu-mobile">
-              <span class="glyphicon glyphicon-th">Меню</span>
-              <div class="close glyphicon glyphicon-remove"></div>
-            </div>      
-          <div class="menu">
-          <ul>
-            <li>
-              <a href="#/all">Все</a>
-            </li>
-            <li ng-repeat="pageOne in pages" ng-class="{ 'active': clickedPage.id === pageOne.id }">                
-              <a ng-href="#/{{pageOne.slug}}">{{ pageOne.title }}</a>            
-            </li>
-          </ul>
+    <div class="menu-container" ng-class="{'no-scroll': !menuVisible}">
+      <div class="menu-mobile">
+        <span ng-click="menuVisible = true" class="glyphicon glyphicon-th">Меню</span>
+        <div ng-click="menuVisible = false" class="close glyphicon glyphicon-remove"></div>
+      </div> 
 
+      <div ng-show="isDesktop || menuVisible" class="menu fx-fade-normal fx-speed-100">
+        <ul>
+          <li ng-repeat="page in pages" ng-class="{ 'active': page.id === currentPage.id }">                
+            <a ng-href="#/{{page.slug}}">{{ page.title }}</a>            
+          </li>
+        </ul>
+
+        <div class="login-block">
           <% if user_signed_in? %>
-              <div class="login-block">
-                <span>Здравствуйте, <%= current_user.username %></span>
-                <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
-              </div>
+            <span>Здравствуйте, <%= current_user.username %></span>
+            <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
           <% else %>
-              <div class="login-block">
-                <%= link_to 'Войти', new_user_session_path %>
-              </div>
+            <%= link_to 'Войти', new_user_session_path %>
           <% end %>
-
-          </div>
         </div>
-        <article class="list">
-            <div class="bg"></div>
-            <div class="container">
-                <div class="block-list">
-
-                  <div class="block">
-                    <div class="row">
-
-                      <div ng-repeat="video in videos | onlyPage:page" class="col-item">
-                        <a href="{{ video.url }}" target=_blank>
-                          <div class="content">
-                            <figure data-effeckt-type="quarter-fall-in" class="effeckt-caption">
-                              <figcaption>
-                                <div class="effeckt-figcaption-wrap">{{ video.title }}</div>
-                              </figcaption>
-                              <video-webm url="video.file_url"></video-webm>
-                            </figure>
-                          </div>
-                        </a>
-                      </div>
-                      
-                      <div ng-show="(videos | onlyPage:page).length <= 0">
-                        <p>No content here yet.</p>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
-
-            </div>
-        </article>
+      </div>
     </div>
+
+    <article class="list">
+        <div class="bg"></div>
+        <div class="container">
+            <div class="block-list">
+
+              <div class="block">
+                <div class="row">
+
+                  <div ng-repeat="video in videos | onlyPage:currentPage" class="col-item">
+                    <a href="{{ video.url }}" target=_blank>
+                      <div class="content">
+                        <figure data-effeckt-type="quarter-fall-in" class="effeckt-caption">
+                          <figcaption>
+                            <div class="effeckt-figcaption-wrap">{{ video.title }}</div>
+                          </figcaption>
+                          <video-webm url="video.file_url"></video-webm>
+                        </figure>
+                      </div>
+                    </a>
+                  </div>
+                  
+                  <div ng-show="(videos | onlyPage:currentPage).length <= 0">
+                    <p>No content here yet.</p>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+
+        </div>
+    </article>
+  </div>
 
   <script type="application/javascript">
     angular.module('effects.home')
@@ -78,4 +77,5 @@
         };
       });
   </script>
-</div>
+
+</body>

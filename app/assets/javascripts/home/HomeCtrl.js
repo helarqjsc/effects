@@ -1,4 +1,6 @@
-var app = angular.module('effects.home', []);
+var app = angular.module('effects.home', ['ngFx']);
+
+app.value('maxMobileWidth', 768);
 
 app.directive('videoWebm', function(){
   return {
@@ -22,19 +24,38 @@ app.directive('videoWebm', function(){
 
 app.filter('onlyPage', function(){
   return function(input, currentPage){
-    // console.log('filter onlypage', 'currentPage', currentPage);
     return input.filter(function(val){
       return (val.page_id === currentPage.id || currentPage.id === 'all');
     });
   };
 });
 
-app.controller('MainCtrl', function($scope, $preload, $location) {
+app.controller('MainCtrl', function($scope, $preload, $location, $window, maxMobileWidth) {
   $scope.pages = $preload.pages;
-  $scope.page = {id: $scope.pages[0].id};
-  $scope.clickedPage = $scope.page;
+  $scope.currentPage = {id: $scope.pages[0].id};
   $scope.videos = $preload.videos;
+  $scope.loaded = true;
+  $scope.menuVisible = true;
+  // $scope.isDesktop = ($window.innerWidth > maxMobileWidth);
   
+  $($window).on('resize', function(){
+    $scope.isDesktop = ($window.innerWidth > maxMobileWidth);
+    $scope.$apply();
+  });
+  $($window).resize();
+
+  $scope.changePage = function(page) {
+    if($scope.currentPage.id === page) return;   
+    $scope.menuVisible = false;
+    $('.block').stop(true).animate({opacity: 0}, 300, function(){
+      $scope.currentPage.id = page;
+      $scope.$apply();
+      $(this).animate({opacity: 1}, 300);
+    });
+  };
+  $scope.changePage($scope.pages[0].id);
+
+
   //"routing"
   $scope.$watch(function(){
     return $location.path();
@@ -55,20 +76,6 @@ app.controller('MainCtrl', function($scope, $preload, $location) {
     $scope.changePage(page.id);
   });
 
-
-  $scope.changePage = function(page) {
-    if($scope.clickedPage.id === page) return;    
-    $scope.clickedPage.id = page;
-    $('.block').stop().animate({opacity: 0}, 500, function(){
-      $scope.page.id = page;
-      $scope.$apply();
-      // console.log($scope.page);
-      $(this).animate({opacity: 1}, 500);
-    });
-  };
-
-  $scope.changePage($scope.pages[0].id);
-  $scope.loaded = true;
 });
 
 
