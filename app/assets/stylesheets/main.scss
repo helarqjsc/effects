@@ -112,6 +112,8 @@ body {
   font-family: "Calibri";
   &.no-scroll{
     overflow: hidden;
+    margin-left: calc(100vw - 100%);    
+    margin-right: 0;    
   }
 }
 

@@ -14,10 +14,10 @@
     <div class="menu-container" ng-class="{'no-scroll': !menuVisible}">
       <div class="menu-mobile">
         <span ng-click="menuVisible = true" class="glyphicon glyphicon-th">Меню</span>
-        <div ng-click="menuVisible = false" class="close glyphicon glyphicon-remove"></div>
+        <div ng-click="menuVisible = false" class="close glyphicon glyphicon-remove fx-fade-normal fx-speed-200" ng-show="menuVisible"></div>
       </div> 
 
-      <div ng-show="isDesktop || menuVisible" class="menu fx-fade-normal fx-speed-100">
+      <div ng-show="isDesktop || menuVisible" class="menu fx-fade-normal fx-speed-200">
         <ul>
           <li ng-repeat="page in pages" ng-class="{ 'active': page.id === currentPage.id }">                
             <a ng-href="#/{{page.slug}}">{{ page.title }}</a>            
