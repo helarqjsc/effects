@@ -1,6 +1,11 @@
 var app = angular.module('effects.admin', ['ui.router', 'angularFileUpload']);
 
-app.config(function ($stateProvider) {
+app.config(function ($stateProvider, $locationProvider) {
+  $locationProvider.html5Mode({
+    enabled: true,
+    requireBase: false
+  });
+
   $stateProvider
   .state('home', {
     url: '/home/',

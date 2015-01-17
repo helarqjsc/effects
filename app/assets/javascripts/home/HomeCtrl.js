@@ -36,17 +36,18 @@ app.controller('MainCtrl', function($scope, $preload, $location, $window, maxMob
   $scope.videos = $preload.videos;
   $scope.loaded = true;
   $scope.menuVisible = true;
-  // $scope.isDesktop = ($window.innerWidth > maxMobileWidth);
   
   $($window).on('resize', function(){
-    $scope.isDesktop = ($window.innerWidth > maxMobileWidth);
-    $scope.$apply();
+    $scope.$evalAsync(function(){
+      $scope.isDesktop = ($window.innerWidth > maxMobileWidth);
+    });
   });
   $($window).resize();
 
   $scope.changePage = function(page) {
     if($scope.currentPage.id === page) return;   
     $scope.menuVisible = false;
+
     $('.block').stop(true).animate({opacity: 0}, 300, function(){
       $scope.currentPage.id = page;
       $scope.$apply();

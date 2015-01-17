@@ -1,51 +1,55 @@
-﻿<body>
-  <div ng-app="effects.admin" ng-controller="AdminCtrl">
-      <div class="site" id="content">
-          <div class="menu">
-          <ul>
-              <li ui-sref-active="active" ui-sref="pages">Страницы</li>
-              <li ui-sref-active="active" ui-sref="videos">Видео</li>
-              <li ui-sref-active="active" ui-sref="options">Настройки</li>
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <%= render file: 'partials/head' %>
+  <base href="/admin/">
+</head>
+<body>
 
-          </ul>
-          </div>
-          <article class="list">
-              <div class="bg"></div>
-              <div ui-view="main" class="container">
-
-                    <p>some admin shit</p>  
-
-              </div>
-          </article>
+<div ng-app="effects.admin" ng-controller="AdminCtrl">
+  <div class="site" id="content">
+    <div class="menu">
+      <ul>
+        <li ui-sref-active="active" ui-sref="pages">Страницы</li>
+        <li ui-sref-active="active" ui-sref="videos">Видео</li>
+        <li ui-sref-active="active" ui-sref="options">Настройки</li>
+      </ul>
+    </div>
+    <article class="list">
+      <div class="bg"></div>
+      <div ui-view="main" class="container">
+        <p>some admin shit</p>  
       </div>
-
-
-      <script type="application/javascript">
-        angular.module('effects.admin')
-          .factory('$preload', function(){
-            return {
-              pages: <%= raw(@pages.to_json) %>,
-              videos: <%= raw(@videos.to_json) %>
-            };
-          });
-      </script>
-
-      <script type="text/ng-template" id="home.html">
-        <%= render file: 'admin/partials/home' %>
-      </script> 
-
-      <script type="text/ng-template" id="pages.html">
-        <%= render file: 'admin/partials/pages' %>
-      </script> 
-
-      <script type="text/ng-template" id="videos.html">
-        <%= render file: 'admin/partials/videos' %>
-      </script> 
-
-      <script type="text/ng-template" id="options.html">
-        <%= render file: 'admin/partials/options' %>
-      </script> 
-
-
+    </article>
   </div>
+
+
+  <script type="application/javascript">
+    angular.module('effects.admin')
+      .factory('$preload', function(){
+        return {
+          pages: <%= raw(@pages.to_json) %>,
+          videos: <%= raw(@videos.to_json) %>
+        };
+      });
+  </script>
+
+  <script type="text/ng-template" id="home.html">
+    <%= render file: 'admin/partials/home' %>
+  </script> 
+
+  <script type="text/ng-template" id="pages.html">
+    <%= render file: 'admin/partials/pages' %>
+  </script> 
+
+  <script type="text/ng-template" id="videos.html">
+    <%= render file: 'admin/partials/videos' %>
+  </script> 
+
+  <script type="text/ng-template" id="options.html">
+    <%= render file: 'admin/partials/options' %>
+  </script> 
+</div>
+
 </body>
+</html>

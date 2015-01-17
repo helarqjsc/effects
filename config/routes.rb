@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   root 'home#index'
+
   get '/admin' => 'admin#index', as: 'user_root'
   post '/admin/save_pages' => 'admin#save_pages'
   post '/admin/save_videos' => 'admin#save_videos'
   post '/admin/upload_video' => 'admin#upload_video'
-  
+  get '/admin/*anything' => 'admin#index'
+
   devise_for :users, 
     path: '', 
     path_names: {
