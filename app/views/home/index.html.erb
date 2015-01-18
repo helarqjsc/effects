@@ -16,7 +16,7 @@
       <div class="loader-section section-right"></div>
   </div>
 
-  <div class="site" id="content">
+  <article class="site" id="content">
 
     <div class="menu-container" ng-class="{'no-scroll': !menuVisible}">
       <div class="menu-mobile">
@@ -25,25 +25,27 @@
       </div> 
 
       <div ng-show="isDesktop || menuVisible" class="menu fx-fade-normal fx-speed-250">
-        <ul>
-          <li ng-repeat="page in pages" ng-class="{ 'active': page.id === clickedPage.id }">                            
-            <a ng-href="#/{{page.slug}}">
-              <span>{{ page.title }}</span>
-              {{ page.title }}
-            </a>            
-          </li>
-        </ul>
+        <nav>
+          <ul>
+            <li ng-repeat="page in pages" ng-class="{ 'active': page.id === clickedPage.id }">                            
+              <a ng-href="#/{{page.slug}}">
+                <span>{{ page.title }}</span>
+                {{ page.title }}
+              </a>            
+            </li>
+          </ul>
+        </nav>
 
-        <div class="login-block">
+        <section class="login-block">
           <% if user_signed_in? %>
             <span>Здравствуйте, <%= current_user.username %></span>
             <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
           <% else %>
             <%= link_to 'Войти', new_user_session_path %>
           <% end %>
-        </div>
+        </section>
 
-        <div class="form-container" ng-controller="videoFormCtrl" ng-click="$event.stopPropagation();">
+        <section class="form-container" ng-controller="videoFormCtrl" ng-click="$event.stopPropagation();">
           <div class="send-video" ng-show="!isShowForm">
             <div class="button-show-tooltip">
               Отправить ссылку на эффект
@@ -58,17 +60,17 @@
               <input type="submit" value="Отправить" ng-click="sendForm()" ng-class="{'active':validateForm()}" />
             </form>
           </div>
-        </div>
+        </section>
 
       </div>
     </div>
 
-    <article class="list">
+    <main class="list" role="main">
         <div class="bg"></div>
         <div class="container">
             <div class="block-list">
 
-              <div class="block">
+              <section class="block">
                 <div class="row">
 
                   <div ng-repeat="video in videos | onlyPage:currentPage" class="col-item">
@@ -89,12 +91,12 @@
                   </div>
                   
                 </div>
-              </div>
+              </section>
             </div>
 
         </div>
-    </article>
-  </div>
+    </main>
+  </article>
 
   <script type="application/javascript">
     angular.module('effects.home')

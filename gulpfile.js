@@ -45,6 +45,7 @@ gulp.task("css", function() {
   return gulp
   .src([
     css_src + "libs/*.scss",
+    css_src + "libs/*.css",
     css_src + "main.scss",
     css_src + "admin.scss",
     css_src + "adaptive.scss",
@@ -56,10 +57,11 @@ gulp.task("css", function() {
       browsers: ['last 5 versions'],
       cascade: false
   }))  
-  // .pipe($.minifyCss({
-  //     keepBreaks: true,
-  //     processImport: false
-  //   }))
+  .pipe($.if(production, $.minifyCss({
+       keepBreaks: true,
+       processImport: false
+     })
+  ))  
   .pipe(gulp.dest(css_out));
 });
 

@@ -30,7 +30,26 @@ app.filter('onlyPage', function(){
   };
 });
 
-app.controller('videoFormCtrl', function($scope) {
+app.factory('showNotification', function() {
+  return function(text, type) {          
+      var n = noty({
+          layout: 'topLeft',
+          theme: 'relax',
+          text: text,
+          type: type,
+          timeout     : 3000,
+          closeWith   : ['click'],
+          animation: {
+                open: 'animated flipInX', // Animate.css class names
+                close: 'animated flipOutX', // Animate.css class names
+                easing: 'swing', // unavailable - no need
+                speed: 500 // unavailable - no need
+             }          
+      });  
+    }  
+});
+
+app.controller('videoFormCtrl', function($scope, showNotification) {
   $scope.isShowForm = false;  
   $scope.send = { link: "" };    
 
@@ -42,7 +61,8 @@ app.controller('videoFormCtrl', function($scope) {
     if ($scope.validateForm()) {      
       $scope.send.link = "";      
       $scope.isShowForm = false;
-    }
+      showNotification("Спасибо. Ваша ссылка была отправлена.", "success");
+    } 
   };
 
   angular.element('body').bind("click", function() {
