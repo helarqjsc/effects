@@ -30,12 +30,35 @@ app.filter('onlyPage', function(){
   };
 });
 
+app.controller('videoFormCtrl', function($scope) {
+  $scope.isShowForm = false;  
+  $scope.send = { link: "" };    
+
+  $scope.validateForm = function() {  
+      return $scope.send.link.length;
+  };
+
+  $scope.sendForm = function() {
+    if ($scope.validateForm()) {      
+      $scope.send.link = "";      
+      $scope.isShowForm = false;
+    }
+  };
+
+  angular.element('body').bind("click", function() {
+    $scope.isShowForm = false;
+    $scope.$apply();
+  });
+
+});
+
 app.controller('MainCtrl', function($scope, $preload, $location, $window, maxMobileWidth) {
   $scope.pages = $preload.pages;
   $scope.currentPage = {id: $scope.pages[0].id};
   $scope.videos = $preload.videos;
   $scope.loaded = true;
   $scope.menuVisible = true;
+  $scope.clickedPage = $scope.currentPage;
   
   $($window).on('resize', function(){
     $scope.$evalAsync(function(){
@@ -47,13 +70,14 @@ app.controller('MainCtrl', function($scope, $preload, $location, $window, maxMob
   $scope.changePage = function(page) {
     if($scope.currentPage.id === page) return;   
     $scope.menuVisible = false;
-
+    $scope.clickedPage.id = page;
     $('.block').stop(true).animate({opacity: 0}, 300, function(){
       $scope.currentPage.id = page;
       $scope.$apply();
       $(this).animate({opacity: 1}, 300);
     });
   };
+
   $scope.changePage($scope.pages[0].id);
 
 

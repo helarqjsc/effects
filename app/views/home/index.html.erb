@@ -7,7 +7,8 @@
 <body ng-app="effects.home"
       ng-controller="MainCtrl"
       ng-class="{'no-scroll': menuVisible && !isDesktop, 
-                 loaded: loaded}">
+                 loaded: loaded}"
+                 >
 
   <div id="loader-wrapper">
       <div id="loader"></div>
@@ -19,14 +20,17 @@
 
     <div class="menu-container" ng-class="{'no-scroll': !menuVisible}">
       <div class="menu-mobile">
-        <span ng-click="menuVisible = true" class="glyphicon glyphicon-th">Меню</span>
-        <div ng-click="menuVisible = false" class="close glyphicon glyphicon-remove fx-fade-normal fx-speed-200" ng-show="menuVisible"></div>
+        <span ng-click="menuVisible = !menuVisible" class="glyphicon glyphicon-th">Меню</span>
+        <div ng-click="menuVisible = false" class="close glyphicon glyphicon-remove fx-fade-normal fx-speed-250" ng-show="menuVisible"></div>
       </div> 
 
-      <div ng-show="isDesktop || menuVisible" class="menu fx-fade-normal fx-speed-200">
+      <div ng-show="isDesktop || menuVisible" class="menu fx-fade-normal fx-speed-250">
         <ul>
-          <li ng-repeat="page in pages" ng-class="{ 'active': page.id === currentPage.id }">                
-            <a ng-href="#/{{page.slug}}">{{ page.title }}</a>            
+          <li ng-repeat="page in pages" ng-class="{ 'active': page.id === clickedPage.id }">                            
+            <a ng-href="#/{{page.slug}}">
+              <span>{{ page.title }}</span>
+              {{ page.title }}
+            </a>            
           </li>
         </ul>
 
@@ -38,6 +42,22 @@
             <%= link_to 'Войти', new_user_session_path %>
           <% end %>
         </div>
+
+        <div class="form-container" ng-controller="videoFormCtrl" ng-click="$event.stopPropagation();">
+          <div class="send-video" ng-show="!isShowForm">
+            <div class="button-show-tooltip">
+              Отправить ссылку на эффект
+            </div>
+            <div class="glyphicon glyphicon-plus button-show-form" ng-click="isShowForm = true"></div>
+          </div>
+          <div class="form fx-fade-normal fx-speed-250" ng-show="isShowForm">          
+            <form action="">              
+              <input type="text" ng-model="send.link" ng-change="validateForm()" value="" />  
+              <input type="submit" value="Отправить" ng-click="sendForm()" ng-class="{'active':validateForm()}" />
+            </form>
+          </div>
+        </div>
+
       </div>
     </div>
 

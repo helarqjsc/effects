@@ -52,6 +52,10 @@ gulp.task("css", function() {
     ])
   .pipe($.sass({errLogToConsole: true}))
   .pipe($.concat("application.css"))
+  .pipe($.autoprefixer({
+      browsers: ['last 5 versions'],
+      cascade: false
+  }))  
   // .pipe($.minifyCss({
   //     keepBreaks: true,
   //     processImport: false
