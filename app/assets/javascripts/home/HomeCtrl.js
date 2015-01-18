@@ -55,10 +55,12 @@ app.controller('videoFormCtrl', function($scope) {
 app.controller('MainCtrl', function($scope, $preload, $location, $window, maxMobileWidth) {
   $scope.pages = $preload.pages;
   $scope.currentPage = {id: $scope.pages[0].id};
+  $scope.clickedPage = {id: $scope.pages[0].id};  
+
   $scope.videos = $preload.videos;
   $scope.loaded = true;
   $scope.menuVisible = true;
-  $scope.clickedPage = $scope.currentPage;
+  
   
   $($window).on('resize', function(){
     $scope.$evalAsync(function(){
