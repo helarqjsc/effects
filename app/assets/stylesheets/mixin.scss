@@ -1,0 +1,227 @@
+
+@mixin border-radius($radius) {
+		  -webkit-border-radius: $radius;
+		  -moz-border-radius: $radius;
+		  border-radius: $radius;
+          behavior: url(PIE.htc);
+}
+
+
+@mixin translatez() {
+	transform: translatez(0);
+}
+
+@mixin box() {
+		@include inline();
+	  -webkit-box-sizing:border-box;
+       -moz-box-sizing:border-box;
+        -ms-box-sizing:border-box;
+         -o-box-sizing:border-box;
+            box-sizing:border-box;
+}
+
+@mixin brightness($a) {
+      &:hover {
+        -webkit-filter: brightness($a);
+        -moz-filter: brightness($a);
+        -ms-filter: brightness($a);
+        -o-filter: brightness($a);
+        filter: brightness($a);
+      }
+}
+
+
+@mixin transition-e($delay) {
+  transition: all $delay ease;
+  -o-transition: all $delay ease;
+  -ms-transition: all $delay ease;
+  -moz-transition: all $delay ease;
+  -webkit-transition: all $delay ease;
+}
+
+@mixin transition($delay) {
+	transition: all $delay linear;
+	-o-transition: all $delay linear;
+	-ms-transition: all $delay linear;
+	-moz-transition: all $delay linear;
+	-webkit-transition: all $delay linear;
+}
+
+@mixin transition-filter($delay) {
+	transition: filter $delay linear;
+	-o-transition: -o-filter $delay linear;
+	-ms-transition: -ms-filter $delay linear;
+	-moz-transition: -moz-filter $delay linear;
+	-webkit-transition: -webkit-filter $delay linear;
+}
+
+@mixin transition-bg($delay) {
+	transition: background $delay linear;
+	-o-transition: background $delay linear;
+	-ms-transition: background $delay linear;
+	-moz-transition: background $delay linear;
+	-webkit-transition: background $delay linear;
+}
+@mixin scale($size) {
+	transform: scale($size);
+	-webkit-transform: scale($size);
+	-o-transform: scale($size);
+	-moz-transform: scale($size);
+}
+
+@mixin scale_important($size) {
+	transform: scale($size) !important;
+	-webkit-transform: scale($size) !important;
+	-o-transform: scale($size) !important;
+	-moz-transform: scale($size) !important;
+}
+
+
+@mixin inline() {
+	display: inline-block;
+  	zoom: 1;
+  	*display: inline;
+  	vertical-align: top;
+}
+
+@mixin inline-block() {
+	display: inline-block;
+  	zoom: 1;
+  	*display: inline;
+  	vertical-align: top;
+}
+
+
+@mixin clear() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin placeholder($color) {
+	::-webkit-input-placeholder {
+	   color: $color;
+	}
+
+	:-moz-placeholder { /* Firefox 18- */
+	   color: $color;
+	}
+
+	::-moz-placeholder {  /* Firefox 19+ */
+	   color: $color;
+	}
+
+	:-ms-input-placeholder {
+	   color: $color;
+	}
+}
+
+
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@function calculateEm($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+
+
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes $animation-name {
+    @content;
+  }
+  @-moz-keyframes $animation-name {
+    @content;
+  }
+  @-ms-keyframes $animation-name {
+    @content;
+  }
+  @-o-keyframes $animation-name {
+    @content;
+  }
+  @keyframes $animation-name {
+    @content;
+  }
+
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};
+  
+  -webkit-animation-timing-function: ease;
+-o-animation-timing-function: ease;
+-ms-animation-timing-function: ease;
+animation-timing-function: ease;
+}
+
+/*
+@include keyframes(fadeIn) {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
+@include animation('slide-down 5s 3');
+
+
+
+*/
+
+@mixin gridle-row($gutter, $margin-top) {
+
+    @include clear();
+    margin-right: - ($gutter / 2);
+    margin-left: - ($gutter / 2);
+    margin-top: -($margin-top);
+    .col {
+    	margin-top: $margin-top;
+    }
+    
+
+}
+
+@mixin gridle-row-i($gutter, $margin-top) {
+    @include clear();
+    margin-right: - ($gutter / 2) !important;
+    margin-left: - ($gutter / 2) !important;
+    margin-top: -($margin-top) !important;
+    .col {
+    	margin-top: $margin-top !important;
+    }
+}
+
+
+@mixin fantom($target:'&:before') {
+  #{$target} {
+    content: "";
+    height: 100%;
+    width: 0;
+    margin-left: -0.3em;
+    display: inline-block;
+    vertical-align: middle;
+
+  }
+}
+
