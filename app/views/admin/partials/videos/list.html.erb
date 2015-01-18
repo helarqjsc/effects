@@ -17,7 +17,7 @@
 			<td>Filename</td>
 		</thead>
 		<tbody>
-			<tr ng-repeat="video in videos">
+			<tr ng-repeat="video in videos | onlySlug:pageSlug:pages">
 				<td ng-bind="video.id"></td>
 				<td>
 					<select 

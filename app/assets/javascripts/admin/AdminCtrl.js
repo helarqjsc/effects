@@ -1,36 +1,38 @@
 var app = angular.module('effects.admin', ['ui.router', 'angularFileUpload']);
 
-app.config(function ($stateProvider, $locationProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode({
     enabled: true,
-    requireBase: false
+    requireBase: true
   });
 
   $stateProvider
-  .state('home', {
-    url: '/home/',
-    views:{
-      main:{ templateUrl: 'home.html' }
-    }
-  })
   .state('pages', {
-    url: '/pages/',
+    url: '/pages',
     views:{
       main:{ templateUrl: 'pages.html' }
     }
   })
   .state('videos', {
-    url: '/videos/',
+    url: '/videos',
     views:{
-      main:{ templateUrl: 'videos.html' }
+      main:{ templateUrl: 'videos/index.html' }
+    }
+  })
+  .state('videos.list', {
+    url: '/:slug',
+    views:{
+      'main@':{ templateUrl: 'videos/list.html' }
     }
   })
   .state('options', {
-    url: '/options/',
+    url: '/options',
     views:{
       main:{ templateUrl: 'options.html' }
     }
   });
+
+  $urlRouterProvider.otherwise('/pages');
 });
 
 app.directive('editable', function($timeout){
@@ -62,15 +64,30 @@ app.directive('editable', function($timeout){
   };
 });
 
-app.controller('AdminCtrl', function($scope, $state) {
-  // $state.go('pages');
+
+app.filter('onlySlug', function(){
+  return function(input, slug, pages){
+    var pageBySlug = function(slug){
+      return pages.filter(function(val){
+        return val.slug === slug;
+      })[0];
+    };
+    console.log(slug);
+    console.log(pageBySlug(slug));
+    return input.filter(function(val){
+      return (val.page_id === pageBySlug(slug).id || slug === 'all');
+    });
+  };
 });
 
-app.controller('PagesCtrl', function($scope, $preload, $http) {
+app.controller('AdminCtrl', function($scope, $preload, $state) {
   $scope.pages = $preload.pages;
+  $scope.videos = $preload.videos;
+});
+
+app.controller('PagesCtrl', function($scope, $http) {
   $scope.pagesToDelete = [];
 
-  $scope.videos = $preload.videos;
 
   $scope.add = function(){
     $scope.pages.push({title: '', slug: ''});
@@ -93,10 +110,15 @@ app.controller('PagesCtrl', function($scope, $preload, $http) {
   };
 });
 
-app.controller('VideosCtrl', function($scope, $preload, $http, $upload) {
-  $scope.videos = $preload.videos;
-  $scope.pages = $preload.pages;
+app.controller('VideosSelectPageCtrl', function($scope, $state) {
+  $scope.goToPage = function(slug){
+    $state.go('videos.list', {slug: slug});
+  };
+});
 
+app.controller('VideosCtrl', function($scope, $stateParams, $http, $upload) {
+  $scope.pageSlug = $stateParams.slug;
+  // console.log($scope.pageSlug);
   $scope.fileSelected = function($files, event){
     for (var i = 0; i < $files.length; i++) {
       var file = $files[i];
