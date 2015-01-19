@@ -64,25 +64,32 @@ app.directive('editable', function($timeout){
   };
 });
 
+app.factory('data', function($preload){
+  var pages = $preload.pages;
+  var videos = $preload.videos;
 
-app.filter('onlySlug', function(){
-  return function(input, slug, pages){
-    var pageBySlug = function(slug){
+  return {
+    pages: pages,
+    videos: videos,
+    findPageBySlug: function(slug){
       return pages.filter(function(val){
         return val.slug === slug;
       })[0];
-    };
-    console.log(slug);
-    console.log(pageBySlug(slug));
+    }
+  };
+});
+
+app.filter('onlyPage', function(){
+  return function(input, page){
     return input.filter(function(val){
-      return (val.page_id === pageBySlug(slug).id || slug === 'all');
+      return (val.page_id === page.id || page.id === 'all');
     });
   };
 });
 
-app.controller('AdminCtrl', function($scope, $preload, $state) {
-  $scope.pages = $preload.pages;
-  $scope.videos = $preload.videos;
+app.controller('AdminCtrl', function($scope, data) {
+  $scope.pages = data.pages;
+  $scope.videos = data.videos;
 });
 
 app.controller('PagesCtrl', function($scope, $http) {
@@ -111,13 +118,13 @@ app.controller('PagesCtrl', function($scope, $http) {
 });
 
 app.controller('VideosSelectPageCtrl', function($scope, $state) {
-  $scope.goToPage = function(slug){
-    $state.go('videos.list', {slug: slug});
+  $scope.goToPage = function(page){
+    $state.go('videos.list', {slug: page.slug});
   };
 });
 
-app.controller('VideosCtrl', function($scope, $stateParams, $http, $upload) {
-  $scope.pageSlug = $stateParams.slug;
+app.controller('VideosCtrl', function($scope, $stateParams, $http, $upload, data) {
+  $scope.currentPage = data.findPageBySlug($stateParams.slug);
   // console.log($scope.pageSlug);
   $scope.fileSelected = function($files, event){
     for (var i = 0; i < $files.length; i++) {
