@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'home#index'
+  post '/submit_url' => 'home#submit_url'
 
   get '/admin' => 'admin#index', as: 'user_root'
   post '/admin/save_pages' => 'admin#save_pages'

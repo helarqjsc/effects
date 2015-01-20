@@ -8,6 +8,8 @@
 
 User.create(username: 'admin', password: '123')
 
+ContributedUrl.create(url: 'http://google.com', ip_addr: '8.8.8.8')
+
 base_path = "#{Rails.root}/db/seeds/video/"
 Page.create(title: 'Наведения', slug: 'hovers')
 	.videos.create([                    

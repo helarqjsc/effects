@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150114120911) do
+ActiveRecord::Schema.define(version: 20150120182749) do
+
+  create_table "contributed_urls", force: :cascade do |t|
+    t.string   "url"
+    t.string   "ip_addr"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "options", force: :cascade do |t|
     t.string   "name"

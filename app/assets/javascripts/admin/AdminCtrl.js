@@ -30,6 +30,12 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     views:{
       main:{ templateUrl: 'options.html' }
     }
+  })
+  .state('contributedLinks', {
+    url: '/contributed-links',
+    views:{
+      main:{ templateUrl: 'contributed.html' }
+    }
   });
 
   $urlRouterProvider.otherwise('/pages');
@@ -67,10 +73,12 @@ app.directive('editable', function($timeout){
 app.factory('data', function($preload){
   var pages = $preload.pages;
   var videos = $preload.videos;
+  var contributedLinks = $preload.contributedLinks;
 
   return {
     pages: pages,
     videos: videos,
+    contributedLinks: contributedLinks,
     findPageBySlug: function(slug){
       return pages.filter(function(val){
         return val.slug === slug;
@@ -90,6 +98,7 @@ app.filter('onlyPage', function(){
 app.controller('AdminCtrl', function($scope, data) {
   $scope.pages = data.pages;
   $scope.videos = data.videos;
+  $scope.contributedLinks = data.contributedLinks;
 });
 
 app.controller('PagesCtrl', function($scope, $http) {
@@ -121,6 +130,10 @@ app.controller('VideosSelectPageCtrl', function($scope, $state) {
   $scope.goToPage = function(page){
     $state.go('videos.list', {slug: page.slug});
   };
+});
+
+app.controller('ContributedUrlsCtrl', function($scope, data) {
+
 });
 
 app.controller('VideosCtrl', function($scope, $stateParams, $http, $upload, data) {

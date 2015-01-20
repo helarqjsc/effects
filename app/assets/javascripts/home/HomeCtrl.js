@@ -49,7 +49,7 @@ app.factory('showNotification', function() {
     }  
 });
 
-app.controller('videoFormCtrl', function($scope, showNotification) {
+app.controller('videoFormCtrl', function($scope, $http, showNotification) {
   $scope.isShowForm = false;  
   $scope.send = { link: "" };    
 
@@ -58,10 +58,15 @@ app.controller('videoFormCtrl', function($scope, showNotification) {
   };
 
   $scope.sendForm = function() {
-    if ($scope.validateForm()) {      
-      $scope.send.link = "";      
-      $scope.isShowForm = false;
-      showNotification("Спасибо. Ваша ссылка была отправлена.", "success");
+    if($scope.validateForm()) {
+      var data = {
+        url: $scope.send.link
+      };
+      $http.post('/submit_url', data).then(function(){
+        $scope.send.link = "";
+        $scope.isShowForm = false;
+        showNotification("Спасибо. Ваша ссылка была отправлена.", "success");
+      });
     } 
   };
 

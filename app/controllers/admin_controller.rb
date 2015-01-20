@@ -5,6 +5,8 @@ class AdminController < ApplicationController
 	def index
 		@pages = Page.all_json
 		@videos = Video.all_json
+		@contributed_links = ContributedUrl.all
+
 		#Rails.logger.warn @videos.inspect
 	end
 
@@ -52,6 +54,7 @@ class AdminController < ApplicationController
 			end
 		end
 	end
+
 
 	private
 		def upload_params
