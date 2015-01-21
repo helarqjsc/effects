@@ -86,10 +86,17 @@
 
 /* login block */
 
-.login-block {
-  border-top: 1px solid gray;
-  padding: 20px 20px 0px 20px; 
+.login-block {    
   span { color: white; }
+  position: absolute;
+  right: 20px;
+  top: 15px;  
+  a {
+    color: #808080;
+    &:hover {
+      color: white;
+    }
+  }
 }
 
 /* login */

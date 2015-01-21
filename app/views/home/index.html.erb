@@ -26,6 +26,27 @@
       </div> 
 
       <div ng-show="isDesktop || menuVisible" class="menu fx-fade-normal fx-speed-250">
+
+        <div class="menu-top">
+          <!-- login link -->
+          <section class="login-block">
+            <% if user_signed_in? %>
+              <span>Здравствуйте, <%= current_user.username %></span>
+              <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+            <% else %>
+              <%= link_to 'Войти', new_user_session_path %>
+            <% end %>
+          </section>   
+               
+          <!-- tags -->
+          <div class="tags-container">          
+              <label>Tags: </label>
+              <div class="tag" ng-repeat="tag in tags">              
+                <label><input type="checkbox" ng-model="tag.check" value="true" /><span>{{ tag.id }}</span></label>
+              </div>          
+          </div>
+        </div>
+      
         <nav>
           <ul>
             <li ng-repeat="page in pages" ng-class="{ 'active': page.id === clickedPage.id }">                            
@@ -37,16 +58,6 @@
           </ul>
         </nav>
         
-        <!-- login link -->
-        <section class="login-block">
-          <% if user_signed_in? %>
-            <span>Здравствуйте, <%= current_user.username %></span>
-            <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
-          <% else %>
-            <%= link_to 'Войти', new_user_session_path %>
-          <% end %>
-        </section>
-
         <!-- send form -->
         <section class="form-container" ng-controller="videoFormCtrl" ng-click="$event.stopPropagation();">
           <div class="send-video" ng-show="!isShowForm">
@@ -70,15 +81,7 @@
 
     <main class="list" role="main">
 
-        <div class="bg"></div>
-
-        <!-- tags -->
-        <div class="tags-container">          
-            <label>Tags: </label>
-            <div class="tag" ng-repeat="tag in tags">              
-              <label><input type="checkbox" ng-model="tag.check" value="true" /><span>{{ tag.id }}</span></label>
-            </div>          
-        </div>
+        <div class="bg"></div>    
 
         <div class="container">
             <div class="block-list">
@@ -128,7 +131,7 @@
     add: 
     "tags": ["angular", "css"]
   !-->
-  
+
   <script type="application/javascript">
   angular.module('effects.home')
     .factory('$preload', function(){

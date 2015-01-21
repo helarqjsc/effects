@@ -42,16 +42,23 @@ body {
   background-repeat: no-repeat;
 }
 
-.tags-container {
-  position: relative;    
+.menu-top {
+  position: relative;   
+  position: fixed;
+  background: #282828;
   width: 100%;  
-  padding-left: 17px;  
+  left: 0;
+  top: 0;
+  padding-left: 215px;  
   height: 40px;
   padding-top: 15px;
+  z-index: 1000;
+  color: white; 
+  height: 55px;
   label {
     margin-right: 10px;
-    font-size: 20px;    
-    margin-top: -2px;
+    font-size: 18px;    
+    margin-top: 0px;
     @include inline();
   }
   .tag {
@@ -62,8 +69,7 @@ body {
     input[type="checkbox"] {
       cursor: pointer;
       @include inline();
-      margin-top: 9px;
-
+      margin-top: 7px;
     }
     span {
       cursor: pointer;
@@ -79,8 +85,9 @@ body {
 
 .menu-container {
   position: relative;  
-  .login-block {
-    display: none;
+  nav {
+    z-index: 1003;
+    position: relative;
   }
   .send-video {
     position: fixed;
@@ -199,7 +206,7 @@ body {
     opacity: 1;
   }
   background:#282828;
-  z-index: 200;
+  z-index: 1001;
   width: 200px;
   ul {
     list-style: none;
@@ -261,6 +268,7 @@ body {
   .block-list {
     position: relative;    
     height: 100%;
+    padding-top: 50px;
     .block {      
       &.animated {
         position: absolute !important;
