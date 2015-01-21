@@ -41,13 +41,18 @@
           <!-- tags -->
           <div class="tags-container">          
               <label>Tags: </label>
-              <div class="tag" ng-repeat="tag in tags">              
-                <label><input type="checkbox" ng-model="tag.check" value="true" /><span>{{ tag.id }}</span></label>
+              <div class="tag" ng-repeat="tag in tags" ng-class="{ 'checked': tag.check }" > 
+                <label>
+                  <input type="checkbox" ng-model="tag.check" value="true" />
+                  <span class="icon"></span>
+                  <span>{{ tag.id }}</span>                  
+                </label>                                
               </div>          
           </div>
         </div>
 
         <nav>
+          <label>Category:</label>          
           <ul>
             <li ng-repeat="page in pages" ng-class="{ 'active': page.id === clickedPage.id }">                            
               <a ng-href="#/{{page.slug}}">

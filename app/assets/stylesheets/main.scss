@@ -56,21 +56,72 @@ body {
   color: white; 
   height: 55px;
   label {
-    margin-right: 10px;
+    margin-right: 12px;
     font-size: 18px;    
     margin-top: 0px;
     @include inline();
+
   }
   .tag {
     cursor: pointer;
     @include inline();
+    position: relative;
     margin-right: 7px;
-    font-size: 18px;    
+    font-size: 18px;        
+    opacity: 0.6;
+    &.checked {
+      opacity: 1;  
+    }
+
+    input[type=checkbox]:checked + .icon {
+      &:after {
+        opacity: 1;
+      }      
+    }
+    .icon {
+      cursor: pointer;
+      position: absolute;
+      width: 16px;
+      height: 16px;      
+      border-radius: 4px;
+      margin-left: 0px;
+      left: -1px;
+      top: 4px;
+      -webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
+      -moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
+      box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
+      background: -webkit-linear-gradient(top, #222 0%, #45484d 100%);
+      background: -moz-linear-gradient(top, #222 0%, #45484d 100%);
+      background: -o-linear-gradient(top, #222 0%, #45484d 100%);
+      background: -ms-linear-gradient(top, #222 0%, #45484d 100%);
+      background: linear-gradient(top, #222 0%, #45484d 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222', endColorstr='#45484d',GradientType=0 );    
+      &:after {              
+        opacity: 0;
+        content: '';
+        position: absolute;
+        width: 9px;
+        height: 5px;
+        background: transparent;
+        top: 5px;
+        left: 4px;
+        border: 3px solid #fcfff4;
+        border-top: none;
+        border-right: none;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg);        
+      }      
+    }
     input[type="checkbox"] {
       cursor: pointer;
       @include inline();
-      margin-top: 7px;
+      margin-top: 7px;          
+      visibility: hidden;  
     }
+    
     span {
       cursor: pointer;
       @include inline();
@@ -88,6 +139,12 @@ body {
   nav {
     z-index: 1003;
     position: relative;
+    label {
+      display: none;
+      color: white;
+      font-size: 18px;
+      padding-left: 20px;    
+    }    
   }
   .send-video {
     position: fixed;
@@ -211,7 +268,7 @@ body {
   ul {
     list-style: none;
     padding: 0;
-    padding: 20px 25px 20px 20px;
+    padding: 33px 25px 20px 20px;
     margin: 0;
     color: white;
     font-size: calculateEm(16px);

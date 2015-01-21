@@ -22,6 +22,13 @@
     margin-top: -50px;
     padding-top: 50px;
     min-height: 100%;
+    ul {
+      padding-top: 10px;
+    }
+    nav label {
+      display: block;
+      padding-top: 10px;
+    }    
   }
   .menu-container {
     position: fixed;
