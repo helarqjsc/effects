@@ -42,6 +42,37 @@ body {
   background-repeat: no-repeat;
 }
 
+.tags-container {
+  position: relative;    
+  width: 100%;  
+  padding-left: 17px;  
+  height: 40px;
+  padding-top: 15px;
+  label {
+    margin-right: 10px;
+    font-size: 20px;    
+    margin-top: -2px;
+    @include inline();
+  }
+  .tag {
+    cursor: pointer;
+    @include inline();
+    margin-right: 7px;
+    font-size: 18px;    
+    input[type="checkbox"] {
+      cursor: pointer;
+      @include inline();
+      margin-top: 9px;
+
+    }
+    span {
+      cursor: pointer;
+      @include inline();
+      margin-left: 5px;
+    }
+  }
+}
+
 .menu-mobile { 
   display: none;
 }

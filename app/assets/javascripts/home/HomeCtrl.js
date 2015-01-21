@@ -30,6 +30,16 @@ app.filter('onlyPage', function(){
   };
 });
 
+app.filter('filterTags', function(){
+  return function(input, tags){    
+    return input.filter(function(val){                  
+      for (var i = 0; i < tags.length; i++) {                                  
+          return (val.tags.indexOf(tags[i].id)>=0 && tags[i].check);                   
+      }            
+    });
+  };
+});
+
 app.factory('showNotification', function() {
   return function(text, type) {          
       var n = noty({
@@ -86,6 +96,17 @@ app.controller('MainCtrl', function($scope, $preload, $location, $window, maxMob
   $scope.loaded = true;
   $scope.menuVisible = true;
   
+  $scope.tags = [
+    {
+      id: "angular",
+      check: true
+    },
+    {
+      id: "css",
+      check: true
+    }
+  ];
+
   
   $($window).on('resize', function(){
     $scope.$evalAsync(function(){

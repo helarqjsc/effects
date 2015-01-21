@@ -15,9 +15,10 @@
       <div class="loader-section section-left"></div>
       <div class="loader-section section-right"></div>
   </div>
-
+  
   <article class="site" id="content">
 
+    <!-- menu -->
     <div class="menu-container" ng-class="{'no-scroll': !menuVisible}">
       <div class="menu-mobile">
         <span ng-click="menuVisible = !menuVisible" class="glyphicon glyphicon-th">Меню</span>
@@ -35,7 +36,8 @@
             </li>
           </ul>
         </nav>
-
+        
+        <!-- login link -->
         <section class="login-block">
           <% if user_signed_in? %>
             <span>Здравствуйте, <%= current_user.username %></span>
@@ -45,6 +47,7 @@
           <% end %>
         </section>
 
+        <!-- send form -->
         <section class="form-container" ng-controller="videoFormCtrl" ng-click="$event.stopPropagation();">
           <div class="send-video" ng-show="!isShowForm">
             <div class="button-show-tooltip">
@@ -66,14 +69,25 @@
     </div>
 
     <main class="list" role="main">
+
         <div class="bg"></div>
+
+        <!-- tags -->
+        <div class="tags-container">          
+            <label>Tags: </label>
+            <div class="tag" ng-repeat="tag in tags">              
+              <label><input type="checkbox" ng-model="tag.check" value="true" /><span>{{ tag.id }}</span></label>
+            </div>          
+        </div>
+
         <div class="container">
             <div class="block-list">
 
               <section class="block">
                 <div class="row">
 
-                  <div ng-repeat="video in videos | onlyPage:currentPage" class="col-item">
+                  <!-- videos -->
+                  <div ng-repeat="video in videos | onlyPage:currentPage | filterTags:tags" class="col-item">
                     <a href="{{ video.url }}" target=_blank>
                       <div class="content">
                         <figure data-effeckt-type="quarter-fall-in" class="effeckt-caption">
@@ -108,6 +122,256 @@
       });
   </script>
 
+  <!-- trash -->
+
+  <!-- 
+    add: 
+    "tags": ["angular", "css"]
+  !-->
+  
+  <script type="application/javascript">
+  angular.module('effects.home')
+    .factory('$preload', function(){
+      return {
+        pages: [{"id":"all","title":"Все","slug":"all"},{"id":1,"title":"Наведения","slug":"hovers","created_at":"2015-01-21T15:00:16.813Z","updated_at":"2015-01-21T15:00:16.813Z"},{"id":2,"title":"UI","slug":"ui","created_at":"2015-01-21T15:00:18.085Z","updated_at":"2015-01-21T15:00:18.085Z"},{"id":3,"title":"List","slug":"list","created_at":"2015-01-21T15:00:18.544Z","updated_at":"2015-01-21T15:00:18.544Z"},{"id":4,"title":"Попапы","slug":"popups","created_at":"2015-01-21T15:00:18.685Z","updated_at":"2015-01-21T15:00:18.685Z"},{"id":5,"title":"Переходы","slug":"transitions","created_at":"2015-01-21T15:00:18.994Z","updated_at":"2015-01-21T15:00:18.994Z"},{"id":6,"title":"Иконки","slug":"icons","created_at":"2015-01-21T15:00:19.443Z","updated_at":"2015-01-21T15:00:19.443Z"},{"id":7,"title":"Галереи","slug":"galleries","created_at":"2015-01-21T15:00:19.615Z","updated_at":"2015-01-21T15:00:19.615Z"},{"id":8,"title":"Параллакс","slug":"Parallax","created_at":"2015-01-21T15:00:20.012Z","updated_at":"2015-01-21T15:00:20.012Z"},{"id":9,"title":"Табы","slug":"tabs","created_at":"2015-01-21T15:00:20.177Z","updated_at":"2015-01-21T15:00:20.177Z"}],
+        videos: [{
+            "tags": ["angular", "css"],
+            "id": 1,
+            "title": "Circle Hover Effects",
+            "url": "http://tympanus.net/Tutorials/CircleHoverEffects/index.html",
+            "page_id": 1,
+            "created_at": "2015-01-21T15:00:17.120Z",
+            "updated_at": "2015-01-21T15:00:17.120Z",
+            "file_file_name": "circle.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 1275254,
+            "file_updated_at": "2015-01-21T15:00:17.079Z",
+            "file_url": "/system/videos/files/000/000/001/original/circle.webm?1421852417"
+        }, {
+            "tags": ["angular"],
+            "id": 2,
+            "title": "Hover Effect Ideas. По ссылке больше примеров",
+            "url": "http://tympanus.net/Development/HoverEffectIdeas/index2.html",
+            "page_id": 1,
+            "created_at": "2015-01-21T15:00:17.786Z",
+            "updated_at": "2015-01-21T15:00:17.786Z",
+            "file_file_name": "hover2.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 1883585,
+            "file_updated_at": "2015-01-21T15:00:17.760Z",
+            "file_url": "/system/videos/files/000/000/002/original/hover2.webm?1421852417"
+        }, {
+          "tags": ["css"],
+            "id": 3,
+            "title": "Shape Hover Effect with SVG",
+            "url": "http://tympanus.net/Tutorials/ShapeHoverEffectSVG/index.html",
+            "page_id": 1,
+            "created_at": "2015-01-21T15:00:17.934Z",
+            "updated_at": "2015-01-21T15:00:17.934Z",
+            "file_file_name": "hover3.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 818444,
+            "file_updated_at": "2015-01-21T15:00:17.909Z",
+            "file_url": "/system/videos/files/000/000/003/original/hover3.webm?1421852417"
+        }, {
+            "tags": ["angular"],
+            "id": 4,
+            "title": "Border Animation SVG",
+            "url": "http://tympanus.net/Tutorials/BorderAnimationSVG/",
+            "page_id": 1,
+            "created_at": "2015-01-21T15:00:18.054Z",
+            "updated_at": "2015-01-21T15:00:18.054Z",
+            "file_file_name": "hoverborder.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 157471,
+            "file_updated_at": "2015-01-21T15:00:18.030Z",
+            "file_url": "/system/videos/files/000/000/004/original/hoverborder.webm?1421852418"
+        }, {
+            "tags": ["css"],
+            "id": 5,
+            "title": "Buttons menu",
+            "url": "http://codepen.io/itsnoureddine/pen/QwEjpK",
+            "page_id": 2,
+            "created_at": "2015-01-21T15:00:18.150Z",
+            "updated_at": "2015-01-21T15:00:18.150Z",
+            "file_file_name": "button.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 32056,
+            "file_updated_at": "2015-01-21T15:00:18.128Z",
+            "file_url": "/system/videos/files/000/000/005/original/button.webm?1421852418"
+        }, {
+            "tags": ["angular", "css"],
+            "id": 6,
+            "title": "Dot Navigation. По ссылке больше примеров",
+            "url": "http://tympanus.net/Development/DotNavigationStyles/",
+            "page_id": 2,
+            "created_at": "2015-01-21T15:00:18.224Z",
+            "updated_at": "2015-01-21T15:00:18.224Z",
+            "file_file_name": "dot.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 86930,
+            "file_updated_at": "2015-01-21T15:00:18.202Z",
+            "file_url": "/system/videos/files/000/000/006/original/dot.webm?1421852418"
+        }, {
+            "tags": ["angular", "css"],
+            "id": 7,
+            "title": "Tumblr-Style Cog Loader",
+            "url": "http://pasqualevitiello.github.io/Tumblr-Style-Cog-Spinners/",
+            "page_id": 2,
+            "created_at": "2015-01-21T15:00:18.407Z",
+            "updated_at": "2015-01-21T15:00:18.407Z",
+            "file_file_name": "loaders.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 523997,
+            "file_updated_at": "2015-01-21T15:00:18.383Z",
+            "file_url": "/system/videos/files/000/000/007/original/loaders.webm?1421852418"
+        }, {
+            "tags": ["angular"],
+            "id": 8,
+            "title": "Select Box",
+            "url": "http://tympanus.net/Development/SelectInspiration/index.html",
+            "page_id": 2,
+            "created_at": "2015-01-21T15:00:18.508Z",
+            "updated_at": "2015-01-21T15:00:18.508Z",
+            "file_file_name": "select.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 306747,
+            "file_updated_at": "2015-01-21T15:00:18.485Z",
+            "file_url": "/system/videos/files/000/000/008/original/select.webm?1421852418"
+        }, {
+            "tags": ["angular", "css"],
+            "id": 9,
+            "title": "Grid animation effects",
+            "url": "http://thecodeplayer.com/walkthrough/grid-animation-effects",
+            "page_id": 3,
+            "created_at": "2015-01-21T15:00:18.625Z",
+            "updated_at": "2015-01-21T15:00:18.625Z",
+            "file_file_name": "3dgrid.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 549673,
+            "file_updated_at": "2015-01-21T15:00:18.598Z",
+            "file_url": "/system/videos/files/000/000/009/original/3dgrid.webm?1421852418"
+        }, {
+            "tags": ["angular", "css"],
+            "id": 10,
+            "title": "Sweet Alert",
+            "url": "http://tristanedwards.me/sweetalert",
+            "page_id": 4,
+            "created_at": "2015-01-21T15:00:18.767Z",
+            "updated_at": "2015-01-21T15:00:18.767Z",
+            "file_file_name": "alert.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 217811,
+            "file_updated_at": "2015-01-21T15:00:18.744Z",
+            "file_url": "/system/videos/files/000/000/010/original/alert.webm?1421852418"
+        }, {
+            "tags": ["angular", "css"],
+            "id": 11,
+            "title": "Dialog Effects. По ссылке больше примеров",
+            "url": "http://tympanus.net/Development/DialogEffects/index.html",
+            "page_id": 4,
+            "created_at": "2015-01-21T15:00:18.866Z",
+            "updated_at": "2015-01-21T15:00:18.866Z",
+            "file_file_name": "popups.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 402713,
+            "file_updated_at": "2015-01-21T15:00:18.841Z",
+            "file_url": "/system/videos/files/000/000/011/original/popups.webm?1421852418"
+        }, {
+            "tags": ["angular", "css"],
+            "id": 12,
+            "title": "Morphing Buttons. По ссылке больше примеров",
+            "url": "http://tympanus.net/Development/ButtonComponentMorph/index.html",
+            "page_id": 4,
+            "created_at": "2015-01-21T15:00:18.961Z",
+            "updated_at": "2015-01-21T15:00:18.961Z",
+            "file_file_name": "morph.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 213021,
+            "file_updated_at": "2015-01-21T15:00:18.938Z",
+            "file_url": "/system/videos/files/000/000/012/original/morph.webm?1421852418"
+        }, {
+            "tags": ["angular", "css"],
+            "id": 13,
+            "title": "Переход из картинки в контент",
+            "url": "http://tympanus.net/Development/ArticleIntroEffects/",
+            "page_id": 5,
+            "created_at": "2015-01-21T15:00:19.091Z",
+            "updated_at": "2015-01-21T15:00:19.091Z",
+            "file_file_name": "perehod.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 675853,
+            "file_updated_at": "2015-01-21T15:00:19.066Z",
+            "file_url": "/system/videos/files/000/000/013/original/perehod.webm?1421852419"
+        }, {
+            "tags": ["angular", "css"],
+            "id": 14,
+            "title": "Красивая смена страницы. По ссылке больше примеров",
+            "url": "http://tympanus.net/Development/PageLoadingEffects/index3.html",
+            "page_id": 5,
+            "created_at": "2015-01-21T15:00:19.224Z",
+            "updated_at": "2015-01-21T15:00:19.224Z",
+            "file_file_name": "perehod2.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 271640,
+            "file_updated_at": "2015-01-21T15:00:19.197Z",
+            "file_url": "/system/videos/files/000/000/014/original/perehod2.webm?1421852419"
+        }, {
+            "tags": ["angular", "css"],
+            "id": 15,
+            "title": "Apple Mac",
+            "url": "http://codepen.io/pixelass/pen/gixzc",
+            "page_id": 5,
+            "created_at": "2015-01-21T15:00:19.396Z",
+            "updated_at": "2015-01-21T15:00:19.396Z",
+            "file_file_name": "mac.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 651544,
+            "file_updated_at": "2015-01-21T15:00:19.371Z",
+            "file_url": "/system/videos/files/000/000/015/original/mac.webm?1421852419"
+        }, {
+            "tags": ["angular", "css"],
+            "id": 16,
+            "title": "Marka",
+            "url": "http://fian.my.id/marka/",
+            "page_id": 6,
+            "created_at": "2015-01-21T15:00:19.540Z",
+            "updated_at": "2015-01-21T15:00:19.540Z",
+            "file_file_name": "icons.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 808212,
+            "file_updated_at": "2015-01-21T15:00:19.513Z",
+            "file_url": "/system/videos/files/000/000/016/original/icons.webm?1421852419"
+        }, {
+            "tags": ["angular"],
+            "id": 17,
+            "title": "Photo Swipe",
+            "url": "http://photoswipe.com/",
+            "page_id": 7,
+            "created_at": "2015-01-21T15:00:19.973Z",
+            "updated_at": "2015-01-21T15:00:19.973Z",
+            "file_file_name": "photoswipe.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 470411,
+            "file_updated_at": "2015-01-21T15:00:19.949Z",
+            "file_url": "/system/videos/files/000/000/017/original/photoswipe.webm?1421852419"
+        }, {
+            "tags": ["angular", "css"],
+            "id": 18,
+            "title": "Scroll Magic",
+            "url": "http://janpaepke.github.io/ScrollMagic/",
+            "page_id": 8,
+            "created_at": "2015-01-21T15:00:20.106Z",
+            "updated_at": "2015-01-21T15:00:20.106Z",
+            "file_file_name": "parallax.webm",
+            "file_content_type": "video/webm",
+            "file_file_size": 1108113,
+            "file_updated_at": "2015-01-21T15:00:20.081Z",
+            "file_url": "/system/videos/files/000/000/018/original/parallax.webm?1421852420"
+        }]
+      };
+    });
+  </script>
 
 </body>
 </html>
