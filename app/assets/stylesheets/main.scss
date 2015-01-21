@@ -56,11 +56,13 @@ body {
   color: white; 
   height: 55px;
   label {
-    margin-right: 12px;
+    margin-right: 10px;
     font-size: 18px;    
     margin-top: 0px;
     @include inline();
-
+    &.tags-title {
+      margin-right: 13px;
+    }
   }
   .tag {
     cursor: pointer;
