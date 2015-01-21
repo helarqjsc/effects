@@ -33,9 +33,15 @@ app.filter('onlyPage', function(){
 app.filter('filterTags', function(){
   return function(input, tags){    
     return input.filter(function(val){                  
-      for (var i = 0; i < tags.length; i++) {                                  
-          return (val.tags.indexOf(tags[i].id)>=0 && tags[i].check);                   
-      }            
+      var isAdd = false;
+      for (var i = 0; i < tags.length; i++) {                                            
+          if (isAdd === false){
+            if (val.tags.indexOf(tags[i].id)>=0 && tags[i].check) {
+              isAdd = true;
+            }
+          }          
+      }    
+      return isAdd;        
     });
   };
 });
