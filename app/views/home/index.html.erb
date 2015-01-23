@@ -8,6 +8,7 @@
       ng-controller="MainCtrl"
       ng-class="{'no-scroll': menuVisible && !isDesktop, 
                  loaded: loaded}"
+      ng-click="form.display = false"
                  >
 
   <div id="loader-wrapper">
@@ -54,7 +55,7 @@
         <nav>
           <label>Category:</label>          
           <ul>
-            <li ng-repeat="page in pages" ng-class="{ 'active': page.id === clickedPage.id }">                            
+            <li ng-repeat="page in pages" ng-class="{ 'active': page.id === currentPage.clicked_id }">
               <a ng-href="#/{{page.slug}}">
                 <span>{{ page.title }}</span>
                 {{ page.title }}
@@ -65,17 +66,17 @@
         
         <!-- send form -->
         <section class="form-container" ng-controller="videoFormCtrl" ng-click="$event.stopPropagation();">
-          <div class="send-video" ng-show="!isShowForm">
+          <div class="send-video" ng-show="!form.display">
             <div class="button-show-tooltip">
               Отправить ссылку на эффект
             </div>
-            <div class="glyphicon glyphicon-plus button-show-form" ng-click="isShowForm = true"></div>
+            <div class="glyphicon glyphicon-plus button-show-form" ng-click="form.display = true"></div>
           </div>
-          <div class="form fx-fade-normal fx-speed-250" ng-show="isShowForm">                      
+          <div class="form fx-fade-normal fx-speed-250" ng-show="form.display">
             <form action="">              
-              <div class="close glyphicon glyphicon-remove" ng-click="isShowForm = false"></div>
+              <div class="close glyphicon glyphicon-remove" ng-click="form.display = false"></div>
               <label>Отправить ссылку на эффект</label>
-              <input type="text" ng-model="send.link" ng-change="validateForm()" value="" />  
+              <input type="text" ng-model="form.url" ng-change="validateForm()" value="" />
               <input type="submit" value="Отправить" ng-click="sendForm()" ng-class="{'active':validateForm()}" />
             </form>
           </div>

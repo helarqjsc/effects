@@ -66,39 +66,36 @@ app.factory('showNotification', function() {
 });
 
 app.controller('videoFormCtrl', function($scope, $http, showNotification) {
-  $scope.isShowForm = false;  
-  $scope.send = { link: "" };    
-
   $scope.validateForm = function() {  
-      return $scope.send.link.length;
+      return $scope.form.url.length;
   };
 
   $scope.sendForm = function() {
     if($scope.validateForm()) {
       var data = {
-        url: $scope.send.link
+        url: $scope.form.url
       };
       $http.post('/submit_url', data).then(function(){
-        $scope.send.link = "";
-        $scope.isShowForm = false;
+        $scope.form.url = "";
+        $scope.form.display = false;
         showNotification("Спасибо. Ваша ссылка была отправлена.", "success");
       });
     } 
   };
-
-  angular.element('body').bind("click", function() {
-    $scope.isShowForm = false;
-    $scope.$apply();
-  });
-
 });
 
 app.controller('MainCtrl', function($scope, $preload, $location, $window, maxMobileWidth) {
   $scope.pages = $preload.pages;
-  $scope.currentPage = {id: $scope.pages[0].id};
-  $scope.clickedPage = {id: $scope.pages[0].id};  
-
   $scope.videos = $preload.videos;
+
+  $scope.form = {
+    display: false,
+    url: ''
+  };
+  $scope.currentPage = {
+    id: 0,
+    clicked_id: 0
+  };
   $scope.loaded = true;
   $scope.menuVisible = true;
   
@@ -124,7 +121,7 @@ app.controller('MainCtrl', function($scope, $preload, $location, $window, maxMob
   $scope.changePage = function(page) {
     if($scope.currentPage.id === page) return;   
     $scope.menuVisible = false;
-    $scope.clickedPage.id = page;
+    $scope.currentPage.clicked_id = page;
     $('.block').stop(true).animate({opacity: 0}, 300, function(){
       $scope.currentPage.id = page;
       $scope.$apply();
