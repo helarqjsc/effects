@@ -192,6 +192,7 @@ body {
     color: white;    
     background:#282828;
     position: relative;    
+    z-index: 1010;
   }
   form {    
     width: 100%;
@@ -199,10 +200,11 @@ body {
     padding-left: 20px;
     text-align: center;    
     padding-top: 15px;    
+    padding-bottom: 20px;
     border-top: 1px solid gray;
     position: fixed;
     width: 200px;
-    bottom: 20px;
+    bottom: 0px;
     background:#282828;
     .close {
       position: absolute;
