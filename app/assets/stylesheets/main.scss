@@ -261,7 +261,7 @@ body {
   background:#282828;
   z-index: 1001;
   width: 200px;
-  &.visible {
+  &.menu-visible-mobile {
     display: block;
   }  
   &:hover {

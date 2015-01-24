@@ -7,7 +7,7 @@
 
 <body ng-app="effects.home"
       ng-controller="MainCtrl"
-      ng-class="{'no-scroll': menuVisible, 
+      ng-class="{'no-scroll': menuMobileVisible, 
                  loaded: loaded }"
       ng-click="form.display = false">
 
@@ -22,11 +22,11 @@
     <!-- menu -->
     <div class="menu-container">
       <div class="menu-mobile">
-        <div class="menu-header" ng-click="menuVisible = !menuVisible"><span class="glyphicon glyphicon-th">Меню</span></div>
-        <div ng-click="menuVisible = false" class="close glyphicon glyphicon-remove" ng-show="menuVisible"></div>
+        <div class="menu-header" ng-click="menuMobileVisible = !menuMobileVisible"><span class="glyphicon glyphicon-th">Меню</span></div>
+        <div ng-click="menuMobileVisible = false" class="close glyphicon glyphicon-remove" ng-show="menuMobileVisible"></div>
       </div> 
 
-      <div ng-class="{ 'visible':menuVisible }" class="menu">
+      <div ng-class="{ 'menu-visible-mobile':menuMobileVisible }" class="menu">
 
         <div class="menu-top">
           <!-- login link -->
@@ -56,7 +56,7 @@
           <label>Category:</label>          
           <ul>
             <li ng-repeat="page in pages" ng-class="{ 'active': page.id === currentPage.clicked_id }">
-              <a ui-sref="{{page.slug}}" ng-click="menuVisible = false">
+              <a ui-sref="{{page.slug}}" ng-click="menuMobileVisible = false">
                 <span>{{ page.title }}</span>
                 {{ page.title }}
               </a>            
