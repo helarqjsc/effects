@@ -2,8 +2,10 @@
 @import 'helpers.scss';
 /* Main Page */
 @media (max-width: 768px) {
-  .no-scroll {
-    overflow: hidden !important;
+  .no-scroll {    
+      overflow: hidden;
+      margin-left: calc(100vw - 100%);    
+      margin-right: 0;        
   }
   .list {
     padding-left: 0px;

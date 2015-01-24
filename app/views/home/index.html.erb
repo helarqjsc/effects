@@ -7,10 +7,9 @@
 
 <body ng-app="effects.home"
       ng-controller="MainCtrl"
-      ng-class="{'no-scroll': menuVisible && !isDesktop, 
-                 loaded: loaded}"
-      ng-click="form.display = false"
-      on-resize="checkMobile()">
+      ng-class="{'no-scroll': menuVisible, 
+                 loaded: loaded }"
+      ng-click="form.display = false">
 
   <div id="loader-wrapper">
       <div id="loader"></div>

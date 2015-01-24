@@ -24,8 +24,6 @@ app.config(function ($preloadProvider, $stateProvider, $urlRouterProvider, $loca
   $urlRouterProvider.otherwise('/all');
 });
 
-app.value('maxMobileWidth', 768);
-
 app.directive('videoWebm', function(){
   return {
     template:
@@ -43,14 +41,6 @@ app.directive('videoWebm', function(){
         video.play();
       }
     }
-  };
-});
-
-app.directive('onResize', function($window){
-  return function($scope, el, attrs){
-    angular.element($window).bind('resize', function(){
-      $scope.$evalAsync(attrs.onResize);
-    });
   };
 });
 
@@ -117,7 +107,7 @@ app.controller('FormCtrl', function($scope, $http, showNotification) {
 });
 
 
-app.controller('MainCtrl', function($scope, $preload, $location, $window, maxMobileWidth) {
+app.controller('MainCtrl', function($scope, $preload, $location, $window) {
   $scope.pages = $preload.pages;
   $scope.videos = $preload.videos;
 
@@ -143,10 +133,6 @@ app.controller('MainCtrl', function($scope, $preload, $location, $window, maxMob
     }
   ];
 
-  $scope.checkMobile = function(){
-    $scope.isDesktop = ($window.innerWidth > maxMobileWidth);
-  };
-  $scope.checkMobile();
 });
 
 
