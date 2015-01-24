@@ -28,11 +28,7 @@ html, body {
 
 body {
   font-family: "Calibri";
-  &.no-scroll{
-    overflow: hidden;
-    margin-left: calc(100vw - 100%);    
-    margin-right: 0;    
-  }
+  margin-left: 0px;
 }
 
 
@@ -196,6 +192,7 @@ body {
     color: white;    
     background:#282828;
     position: relative;    
+    z-index: 1010;
   }
   form {    
     width: 100%;
@@ -203,10 +200,11 @@ body {
     padding-left: 20px;
     text-align: center;    
     padding-top: 15px;    
+    padding-bottom: 20px;
     border-top: 1px solid gray;
     position: fixed;
     width: 200px;
-    bottom: 20px;
+    bottom: 0px;
     background:#282828;
     .close {
       position: absolute;
@@ -260,13 +258,17 @@ body {
   display: block;
   min-height: 100%;
   opacity: 1;
+  display: none;
   @include transition(0.2s);
-  &:hover {
-    opacity: 1;
-  }
   background:#282828;
   z-index: 1001;
   width: 200px;
+  &.menu-visible-mobile {
+    display: block;
+  }  
+  &:hover {
+    opacity: 1;
+  }  
   ul {
     list-style: none;
     padding: 0;

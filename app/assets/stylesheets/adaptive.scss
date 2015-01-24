@@ -1,13 +1,17 @@
 @import 'mixin.scss';
 @import 'helpers.scss';
 /* Main Page */
+
 @media (max-width: 768px) {
-  .no-scroll {
-    overflow: hidden !important;
+  .no-scroll {    
+      overflow: hidden;
+      margin-left: calc(100vw - 100%);    
+      margin-right: 0;        
   }
-  .list {
-    padding-left: 0px;
+
+  .list {    
     padding-top: 50px;
+    padding-left: 0px;
   }
 
   .menu-top {
@@ -17,7 +21,7 @@
 
   .menu {    
     width: 100%;
-    z-index: 900;
+    z-index: 900;    
     position: relative;
     margin-top: -50px;
     padding-top: 50px;
@@ -100,6 +104,13 @@
     display: none;
   }
 }
+
+@media only screen and (min-width: 769px) { 
+  .menu {
+    display: block !important;    
+  }
+}
+
 /* Admin Page */
 
 @media only screen and (max-width: 1200px) {
