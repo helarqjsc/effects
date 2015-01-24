@@ -28,6 +28,7 @@ html, body {
 
 body {
   font-family: "Calibri";
+  margin-left: 0px;
 }
 
 
@@ -255,13 +256,17 @@ body {
   display: block;
   min-height: 100%;
   opacity: 1;
+  display: none;
   @include transition(0.2s);
-  &:hover {
-    opacity: 1;
-  }
   background:#282828;
   z-index: 1001;
   width: 200px;
+  &.visible {
+    display: block;
+  }  
+  &:hover {
+    opacity: 1;
+  }  
   ul {
     list-style: none;
     padding: 0;

@@ -20,13 +20,13 @@
   <article class="site" id="content">
 
     <!-- menu -->
-    <div class="menu-container" ng-class="{'no-scroll': !menuVisible}">
+    <div class="menu-container">
       <div class="menu-mobile">
-        <span ng-click="menuVisible = !menuVisible" class="glyphicon glyphicon-th">Меню</span>
-        <div ng-click="menuVisible = false" class="close glyphicon glyphicon-remove fx-fade-normal fx-speed-250" ng-show="menuVisible"></div>
+        <div class="menu-header" ng-click="menuVisible = !menuVisible"><span class="glyphicon glyphicon-th">Меню</span></div>
+        <div ng-click="menuVisible = false" class="close glyphicon glyphicon-remove" ng-show="menuVisible"></div>
       </div> 
 
-      <div ng-show="isDesktop || menuVisible" class="menu fx-fade-normal fx-speed-250">
+      <div ng-class="{ 'visible':menuVisible }" class="menu">
 
         <div class="menu-top">
           <!-- login link -->
