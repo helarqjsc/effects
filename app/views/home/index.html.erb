@@ -2,6 +2,7 @@
 <html>
 <head>
   <%= render file: 'partials/head' %>
+  <base href="/">
 </head>
 
 <body ng-app="effects.home"
@@ -9,7 +10,7 @@
       ng-class="{'no-scroll': menuVisible && !isDesktop, 
                  loaded: loaded}"
       ng-click="form.display = false"
-                 >
+      on-resize="checkMobile()">
 
   <div id="loader-wrapper">
       <div id="loader"></div>
@@ -56,7 +57,7 @@
           <label>Category:</label>          
           <ul>
             <li ng-repeat="page in pages" ng-class="{ 'active': page.id === currentPage.clicked_id }">
-              <a ng-href="#/{{page.slug}}">
+              <a ui-sref="{{page.slug}}" ng-click="menuVisible = false">
                 <span>{{ page.title }}</span>
                 {{ page.title }}
               </a>            
@@ -65,7 +66,7 @@
         </nav>
         
         <!-- send form -->
-        <section class="form-container" ng-controller="videoFormCtrl" ng-click="$event.stopPropagation();">
+        <section class="form-container" ng-controller="FormCtrl" ng-click="$event.stopPropagation();">
           <div class="send-video" ng-show="!form.display">
             <div class="button-show-tooltip">
               Отправить ссылку на эффект
@@ -86,7 +87,7 @@
     </div>
 
     <main class="list" role="main">
-
+        <div ui-view></div>
         <div class="bg"></div>    
 
         <div class="container">
@@ -123,10 +124,14 @@
 
   <script type="application/javascript">
     angular.module('effects.home')
-      .factory('$preload', function(){
+      .provider('$preload', function(){
         return {
-          pages: <%= raw(@pages.to_json) %>,
-          videos: <%= raw(@videos.to_json) %>
+          $get: function(){
+            return {
+              pages: <%= raw(@pages.to_json) %>,
+              videos: <%= raw(@videos.to_json) %>
+            }
+          }
         };
       });
   </script>

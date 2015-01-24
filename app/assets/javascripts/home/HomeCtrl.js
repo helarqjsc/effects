@@ -1,4 +1,28 @@
-var app = angular.module('effects.home', ['ngFx']);
+var app = angular.module('effects.home', ['ngFx', 'ui.router']);
+
+app.config(function ($preloadProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
+  $locationProvider.html5Mode({
+    enabled: true,
+    requireBase: true
+  });
+
+  angular.forEach($preloadProvider.$get().pages, function(page){
+    $stateProvider.state(page.slug, { 
+      url: '/' + page.slug,
+      template: '', 
+      controller: function($scope){
+        var scope = $scope.$parent;
+        scope.currentPage.clicked_id = page.id;
+        $('.block').stop(true).animate({opacity: 0}, 300, function(){
+          scope.currentPage.id = page.id;
+          scope.$apply();
+          $(this).animate({opacity: 1}, 300);
+        });
+      }
+    });
+  });
+  $urlRouterProvider.otherwise('/all');
+});
 
 app.value('maxMobileWidth', 768);
 
@@ -19,6 +43,15 @@ app.directive('videoWebm', function(){
         video.play();
       }
     }
+  };
+});
+
+app.directive('onResize', function($window){
+  return function($scope, el, attrs){
+    $($window).on('resize', function(){
+      $scope.$evalAsync(attrs.onResize);
+    });
+    $($window).resize();
   };
 });
 
@@ -65,7 +98,7 @@ app.factory('showNotification', function() {
     }  
 });
 
-app.controller('videoFormCtrl', function($scope, $http, showNotification) {
+app.controller('FormCtrl', function($scope, $http, showNotification) {
   $scope.validateForm = function() {  
       return $scope.form.url.length;
   };
@@ -83,6 +116,7 @@ app.controller('videoFormCtrl', function($scope, $http, showNotification) {
     } 
   };
 });
+
 
 app.controller('MainCtrl', function($scope, $preload, $location, $window, maxMobileWidth) {
   $scope.pages = $preload.pages;
@@ -110,48 +144,9 @@ app.controller('MainCtrl', function($scope, $preload, $location, $window, maxMob
     }
   ];
 
-  
-  $($window).on('resize', function(){
-    $scope.$evalAsync(function(){
-      $scope.isDesktop = ($window.innerWidth > maxMobileWidth);
-    });
-  });
-  $($window).resize();
-
-  $scope.changePage = function(page) {
-    if($scope.currentPage.id === page) return;   
-    $scope.menuVisible = false;
-    $scope.currentPage.clicked_id = page;
-    $('.block').stop(true).animate({opacity: 0}, 300, function(){
-      $scope.currentPage.id = page;
-      $scope.$apply();
-      $(this).animate({opacity: 1}, 300);
-    });
+  $scope.checkMobile = function(){
+    $scope.isDesktop = ($window.innerWidth > maxMobileWidth);
   };
-
-  $scope.changePage($scope.pages[0].id);
-
-
-  //"routing"
-  $scope.$watch(function(){
-    return $location.path();
-  }, 
-  function(path){
-    path = path.replace(/^\//,''); //removing prefix slash
-    if(path === ''){
-      $location.path('/'+$scope.pages[0].slug);
-      return;
-    }
-    if(path === 'all'){
-      $scope.changePage('all');
-      return;
-    }
-    var page = $scope.pages.filter(function(i){
-      return (i.slug === path);
-    })[0];  
-    $scope.changePage(page.id);
-  });
-
 });
 
 
