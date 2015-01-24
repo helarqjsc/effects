@@ -48,10 +48,9 @@ app.directive('videoWebm', function(){
 
 app.directive('onResize', function($window){
   return function($scope, el, attrs){
-    $($window).on('resize', function(){
+    angular.element($window).bind('resize', function(){
       $scope.$evalAsync(attrs.onResize);
     });
-    $($window).resize();
   };
 });
 
@@ -147,6 +146,7 @@ app.controller('MainCtrl', function($scope, $preload, $location, $window, maxMob
   $scope.checkMobile = function(){
     $scope.isDesktop = ($window.innerWidth > maxMobileWidth);
   };
+  $scope.checkMobile();
 });
 
 
