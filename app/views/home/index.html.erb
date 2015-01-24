@@ -74,11 +74,11 @@
             <div class="glyphicon glyphicon-plus button-show-form" ng-click="form.display = true"></div>
           </div>
           <div class="form fx-fade-normal fx-speed-250" ng-show="form.display">
-            <form action="">              
+            <form action="" name="URLForm">              
               <div class="close glyphicon glyphicon-remove" ng-click="form.display = false"></div>
               <label>Отправить ссылку на эффект</label>
-              <input type="text" ng-model="form.url" ng-change="validateForm()" value="" />
-              <input type="submit" value="Отправить" ng-click="sendForm()" ng-class="{'active':validateForm()}" />
+              <input type="text" ng-model="url" required value="" />
+              <input type="submit" value="Отправить" ng-submit="sendForm()" ng-disabled="URLForm.$invalid"/>
             </form>
           </div>
         </section>

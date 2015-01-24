@@ -98,11 +98,9 @@ app.factory('showNotification', function() {
 });
 
 app.controller('FormCtrl', function($scope, $http, showNotification) {
-  $scope.validateForm = function() {  
-      return $scope.form.url.length;
-  };
-
   $scope.sendForm = function() {
+    console.log($scope);
+    console.log($scope.URLForm);
     if($scope.validateForm()) {
       var data = {
         url: $scope.form.url

@@ -231,7 +231,7 @@ body {
       -webkit-backface-visibility:hidden;
       -webkit-transform:translateZ(o);
       cursor: default;
-      &.active {
+      &:enabled {
         cursor: pointer !important;
         background: #a4b7cf;
         @include transition(0.2s);
