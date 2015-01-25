@@ -4,10 +4,8 @@
 
 <title>Effects</title>
 
-<link rel="stylesheet" type="text/css" media="screen" href="<%="#{root_url}assets/stylesheets/application.css"%>">
-
-<script type="text/javascript" src="<%="#{root_url}assets/javascripts/libs.js"%>"></script>
-<script type="text/javascript" src="<%="#{root_url}assets/javascripts/application.js"%>"></script>
+<%= stylesheet_link_tag "application", media: "all" %>
+<%= javascript_include_tag "application" %>
 
 <!--[if (gte IE 6)&(lte IE 8)]>
 <script type="text/javascript" src="assets/javascripts/selectivizr-min.js"></script>

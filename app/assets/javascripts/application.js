@@ -1,3 +1,8 @@
+//= require bower_components/jquery/jquery
+//= require bower_components/angular/angular
+//= require bower_require
+//= require_tree .
+
 /* global angular, $ */
 
 var app = angular.module('effects', [
