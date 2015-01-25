@@ -3,3 +3,4 @@ bundle install
 npm install --no-bin-links
 rake bower:install bower:clean
 rake db:drop db:create db:migrate db:seed
+ 
