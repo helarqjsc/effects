@@ -6,20 +6,20 @@ app.config(function ($preloadProvider, $stateProvider, $urlRouterProvider, $loca
     requireBase: true
   });
 
-  angular.forEach($preloadProvider.$get().pages, function(page){
-    $stateProvider.state(page.slug, { 
-      url: '/' + page.slug,
-      template: '', 
-      controller: function($scope){
-        var scope = $scope.$parent;
-        scope.currentPage.clicked_id = page.id;
-        $('.block').stop(true).animate({opacity: 0}, 300, function(){
-          scope.currentPage.id = page.id;
-          scope.$apply();
-          $(this).animate({opacity: 1}, 300);
-        });
-      }
-    });
+  $stateProvider.state('category', { 
+    url: '/:category',
+    template: '', 
+    controller: function($scope, $stateParams){
+      var page = $preloadProvider.$get().pages.filter(function(page){
+        return page.slug === $stateParams.category;
+      })[0];
+      $scope.$parent.currentPage.clicked_id = page.id;
+      $('.block').stop(true).animate({opacity: 0}, 300, function(){
+        $scope.$parent.currentPage.id = page.id;
+        $scope.$parent.$apply();
+        $(this).animate({opacity: 1}, 300);
+      });
+    }
   });
   $urlRouterProvider.otherwise('/all');
 });
@@ -54,9 +54,9 @@ app.filter('onlyPage', function(){
 
 app.filter('filterTags', function(){
   return function(input, tags){    
-    return input.filter(function(video){           
+    return input.filter(function(video){
       return tags.filter(function(tag){
-        return (tag.check && video.tags.indexOf(tag.id))
+        return (tag.check && video.tags.indexOf(tag.id));
       }).length;
     });
   };

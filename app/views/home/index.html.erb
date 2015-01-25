@@ -56,7 +56,7 @@
           <label>Category:</label>          
           <ul>
             <li ng-repeat="page in pages" ng-class="{ 'active': page.id === currentPage.clicked_id }">
-              <a ui-sref="{{page.slug}}" ng-click="menuMobileVisible = false">
+              <a ui-sref="category({category: page.slug})" ng-click="menuMobileVisible = false">
                 <span>{{ page.title }}</span>
                 {{ page.title }}
               </a>            
