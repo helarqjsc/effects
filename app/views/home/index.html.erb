@@ -5,8 +5,8 @@
   <base href="/">
 </head>
 
-<body ng-app="effects.home"
-      ng-controller="MainCtrl"
+<body ng-app="effects"
+      ng-controller="HomeCtrl"
       ng-class="{'no-scroll': menuMobileVisible, 
                  loaded: loaded }"
       ng-click="form.display = false">
@@ -56,7 +56,7 @@
           <label>Category:</label>          
           <ul>
             <li ng-repeat="page in pages" ng-class="{ 'active': page.id === currentPage.clicked_id }">
-              <a ui-sref="category({category: page.slug})" ng-click="menuMobileVisible = false">
+              <a ui-sref="home({category: page.slug})" ng-click="menuMobileVisible = false">
                 <span>{{ page.title }}</span>
                 {{ page.title }}
               </a>            
@@ -122,7 +122,7 @@
   </article>
 
   <script type="application/javascript">
-    angular.module('effects.home')
+    angular.module('effects')
       .provider('$preload', function(){
         return {
           $get: function(){
@@ -143,7 +143,7 @@
   !-->
 
   <script type="application/javascript">
-  angular.module('effects.home')
+  angular.module('effects')
     .factory('$preload', function(){
       return {
         pages: [{"id":"all","title":"Все","slug":"all"},{"id":1,"title":"Наведения","slug":"hovers","created_at":"2015-01-21T15:00:16.813Z","updated_at":"2015-01-21T15:00:16.813Z"},{"id":2,"title":"UI","slug":"ui","created_at":"2015-01-21T15:00:18.085Z","updated_at":"2015-01-21T15:00:18.085Z"},{"id":3,"title":"List","slug":"list","created_at":"2015-01-21T15:00:18.544Z","updated_at":"2015-01-21T15:00:18.544Z"},{"id":4,"title":"Попапы","slug":"popups","created_at":"2015-01-21T15:00:18.685Z","updated_at":"2015-01-21T15:00:18.685Z"},{"id":5,"title":"Переходы","slug":"transitions","created_at":"2015-01-21T15:00:18.994Z","updated_at":"2015-01-21T15:00:18.994Z"},{"id":6,"title":"Иконки","slug":"icons","created_at":"2015-01-21T15:00:19.443Z","updated_at":"2015-01-21T15:00:19.443Z"},{"id":7,"title":"Галереи","slug":"galleries","created_at":"2015-01-21T15:00:19.615Z","updated_at":"2015-01-21T15:00:19.615Z"},{"id":8,"title":"Параллакс","slug":"Parallax","created_at":"2015-01-21T15:00:20.012Z","updated_at":"2015-01-21T15:00:20.012Z"},{"id":9,"title":"Табы","slug":"tabs","created_at":"2015-01-21T15:00:20.177Z","updated_at":"2015-01-21T15:00:20.177Z"}],
