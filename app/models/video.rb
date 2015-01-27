@@ -1,6 +1,6 @@
 class Video < ActiveRecord::Base
-	belongs_to :page
-	
+	has_and_belongs_to_many :category
+	has_and_belongs_to_many :tag
 	has_attached_file :file
 	validates_attachment :file, {
 		content_type: { content_type: 'video/webm' },

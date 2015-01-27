@@ -1,15 +1,20 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="effects">
 <head>
-  <%= render file: 'partials/head' %>
+  <title>Effects</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <%= csrf_meta_tags %>
+
+  <!--[if (gte IE 6)&(lte IE 8)]>
+  <script type="text/javascript" src="assets/javascripts/selectivizr-min.js"></script>
+  <![endif]-->
   <base href="/">
 </head>
 
-<body ng-app="effects"
-      ng-controller="HomeCtrl"
+<body ng-controller="MainCtrl"
       ng-class="{'no-scroll': menuMobileVisible, 
-                 loaded: loaded }"
-      ng-click="form.display = false">
+                 loaded: loaded }">
 
   <div id="loader-wrapper">
       <div id="loader"></div>
@@ -17,112 +22,14 @@
       <div class="loader-section section-right"></div>
   </div>
   
-  <article class="site" id="content">
+  <div ui-view="main"></div>
 
-    <!-- menu -->
-    <div class="menu-container">
-      <div class="menu-mobile">
-        <div class="menu-header" ng-click="menuMobileVisible = !menuMobileVisible"><span class="glyphicon glyphicon-th">Меню</span></div>
-        <div ng-click="menuMobileVisible = false" class="close glyphicon glyphicon-remove" ng-show="menuMobileVisible"></div>
-      </div> 
 
-      <div ng-class="{ 'menu-visible-mobile':menuMobileVisible }" class="menu">
-
-        <div class="menu-top">
-          <!-- login link -->
-          <section class="login-block">
-            <% if user_signed_in? %>
-              <span>Здравствуйте, <%= current_user.username %></span>
-              <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
-            <% else %>
-              <%= link_to 'Войти', new_user_session_path %>
-            <% end %>
-          </section>   
-               
-          <!-- tags -->
-          <div class="tags-container">          
-              <label class="tags-title">Tags: </label>
-              <div class="tag" ng-repeat="tag in tags" ng-class="{ 'checked': tag.check }" > 
-                <label>
-                  <input type="checkbox" ng-model="tag.check" value="true" />
-                  <span class="icon"></span>
-                  <span>{{ tag.id }}</span>                  
-                </label>                                
-              </div>          
-          </div>
-        </div>
-
-        <nav>
-          <label>Category:</label>          
-          <ul>
-            <li ng-repeat="page in pages" ng-class="{ 'active': page.id === currentPage.clicked_id }">
-              <a ui-sref="home({category: page.slug})" ng-click="menuMobileVisible = false">
-                <span>{{ page.title }}</span>
-                {{ page.title }}
-              </a>            
-            </li>
-          </ul>
-        </nav>
-        
-        <!-- send form -->
-        <section class="form-container" ng-controller="FormCtrl" ng-click="$event.stopPropagation();">
-          <div class="send-video" ng-show="!form.display">
-            <div class="button-show-tooltip">
-              Отправить ссылку на эффект
-            </div>
-            <div class="glyphicon glyphicon-plus button-show-form" ng-click="form.display = true"></div>
-          </div>
-          <div class="form fx-fade-normal fx-speed-250" ng-show="form.display">
-            <form action="" name="URLForm">              
-              <div class="close glyphicon glyphicon-remove" ng-click="form.display = false"></div>
-              <label>Отправить ссылку на эффект</label>
-              <input type="text" ng-model="url" required value="" />
-              <input type="submit" value="Отправить" ng-submit="sendForm()" ng-disabled="URLForm.$invalid"/>
-            </form>
-          </div>
-        </section>
-
-      </div>
-    </div>
-
-    <main class="list" role="main">
-        <div ui-view></div>
-        <div class="bg"></div>    
-
-        <div class="container">
-            <div class="block-list">
-
-              <section class="block">
-                <div class="row">
-
-                  <!-- videos -->
-                  <div ng-repeat="video in videos | onlyPage:currentPage | filterTags:tags" class="col-item">
-                    <a href="{{ video.url }}" target=_blank>
-                      <div class="content">
-                        <figure data-effeckt-type="quarter-fall-in" class="effeckt-caption">
-                          <figcaption>
-                            <div class="effeckt-figcaption-wrap">{{ video.title }}</div>
-                          </figcaption>
-                          <video-webm url="video.file_url"></video-webm>
-                        </figure>
-                      </div>
-                    </a>
-                  </div>
-                  
-                  <div ng-show="(videos | onlyPage:currentPage).length <= 0">
-                    <p>No content here yet.</p>
-                  </div>
-                  
-                </div>
-              </section>
-            </div>
-
-        </div>
-    </main>
-  </article>
+  <%= stylesheet_link_tag "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
 
   <script type="application/javascript">
-    angular.module('effects')
+    angular.module('effects.preload')
       .provider('$preload', function(){
         return {
           $get: function(){
@@ -143,7 +50,7 @@
   !-->
 
   <script type="application/javascript">
-  angular.module('effects')
+  angular.module('effects.preload', [])
     .factory('$preload', function(){
       return {
         pages: [{"id":"all","title":"Все","slug":"all"},{"id":1,"title":"Наведения","slug":"hovers","created_at":"2015-01-21T15:00:16.813Z","updated_at":"2015-01-21T15:00:16.813Z"},{"id":2,"title":"UI","slug":"ui","created_at":"2015-01-21T15:00:18.085Z","updated_at":"2015-01-21T15:00:18.085Z"},{"id":3,"title":"List","slug":"list","created_at":"2015-01-21T15:00:18.544Z","updated_at":"2015-01-21T15:00:18.544Z"},{"id":4,"title":"Попапы","slug":"popups","created_at":"2015-01-21T15:00:18.685Z","updated_at":"2015-01-21T15:00:18.685Z"},{"id":5,"title":"Переходы","slug":"transitions","created_at":"2015-01-21T15:00:18.994Z","updated_at":"2015-01-21T15:00:18.994Z"},{"id":6,"title":"Иконки","slug":"icons","created_at":"2015-01-21T15:00:19.443Z","updated_at":"2015-01-21T15:00:19.443Z"},{"id":7,"title":"Галереи","slug":"galleries","created_at":"2015-01-21T15:00:19.615Z","updated_at":"2015-01-21T15:00:19.615Z"},{"id":8,"title":"Параллакс","slug":"Parallax","created_at":"2015-01-21T15:00:20.012Z","updated_at":"2015-01-21T15:00:20.012Z"},{"id":9,"title":"Табы","slug":"tabs","created_at":"2015-01-21T15:00:20.177Z","updated_at":"2015-01-21T15:00:20.177Z"}],
@@ -385,6 +292,5 @@
       };
     });
   </script>
-
 </body>
 </html>

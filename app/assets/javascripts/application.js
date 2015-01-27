@@ -2,12 +2,16 @@
 //= require bower_components/angular/angular
 //= require bower_require
 //= require_tree .
+//= require angular-rails-templates
+//= require_tree ../templates
 
 /* global angular, $ */
 
 var app = angular.module('effects', [
 	'ui.router', 
 	'angularFileUpload',
+  'templates',
+  'effects.preload',
 	'effects.home.controllers',
 	'effects.admin.controllers',
 ]);
@@ -20,6 +24,14 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $pre
 
   $stateProvider
   .state('home', { 
+    url: '/',
+    views:{
+      main:{
+        templateUrl: 'home.html'    
+      }
+    }
+  })
+  .state('home.category', { 
     url: '/:category',
     template: '', 
     controller: function($scope, $stateParams){
@@ -59,5 +71,9 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $pre
     templateUrl: 'contributed.html'
   });
 
-  $urlRouterProvider.otherwise('/all');
+  $urlRouterProvider.otherwise('/');
+});
+
+app.controller('MainCtrl', function($scope){
+  $scope.loaded = true;
 });
