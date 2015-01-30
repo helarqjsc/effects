@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150125182200) do
+ActiveRecord::Schema.define(version: 20150130163705) do
 
   create_table "contributed_urls", force: :cascade do |t|
     t.string   "url"
@@ -27,22 +27,20 @@ ActiveRecord::Schema.define(version: 20150125182200) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pages", force: :cascade do |t|
-    t.string   "title"
-    t.string   "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true
-
-  create_table "tags", force: :cascade do |t|
+  create_table "taxonomies", force: :cascade do |t|
     t.string   "name"
-    t.string   "slug"
-    t.boolean  "default_check"
+    t.string   "taxonomy_type"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  create_table "taxonomies_videos", id: false, force: :cascade do |t|
+    t.integer "taxonomy_id"
+    t.integer "video_id"
+  end
+
+  add_index "taxonomies_videos", ["taxonomy_id", "video_id"], name: "index_taxonomies_videos_on_taxonomy_id_and_video_id"
+  add_index "taxonomies_videos", ["video_id"], name: "index_taxonomies_videos_on_video_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "username",               default: "", null: false
@@ -65,7 +63,6 @@ ActiveRecord::Schema.define(version: 20150125182200) do
   create_table "videos", force: :cascade do |t|
     t.string   "title"
     t.string   "url"
-    t.integer  "page_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.string   "file_file_name"
