@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20150130163705) do
 
   create_table "taxonomies", force: :cascade do |t|
     t.string   "name"
+    t.string   "slug"
     t.string   "taxonomy_type"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
