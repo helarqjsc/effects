@@ -6,6 +6,7 @@ class Video < ActiveRecord::Base
 		content_type: { content_type: 'video/webm' },
 		size: { in: 1..10.megabytes }
 	}
+	validates_presence_of [:title, :url]
 
 	def as_json
 		json = super(only: [:id, :title, :url, :created_at])

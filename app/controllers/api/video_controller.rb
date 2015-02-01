@@ -12,6 +12,7 @@ class Api::VideoController < ApplicationController
 
 	def create
 		@video = Video.new(params_create)
+		# byebug
 		if @video.save
 			render nothing: true, status: :ok
 		else
@@ -19,22 +20,23 @@ class Api::VideoController < ApplicationController
 		end
 	end
 
-	# def show
-	# 	render json: @video.as_json
-	# end
+	def show
+		render json: @video.as_json
+	end
 
-	# def update
-	# 	@video.update_attributes(params_update)
-	# 	if @video.save
-	# 		render nothing: true, status: :ok
-	# 	else
-	# 		render nothing: true, status: :bad_request
-	# 	end
-	# end
+	def update
+		@video.update_attributes(params_update)
+		if @video.save
+			render nothing: true, status: :ok
+		else
+			render nothing: true, status: :bad_request
+		end
+	end
 
-	# def destroy
-	# 	@video.destroy
-	# end
+	def destroy
+		@video.destroy
+		render nothing: true, status: :ok
+	end
 
 	private
 		def find_video
@@ -46,6 +48,6 @@ class Api::VideoController < ApplicationController
 		end
 
 		def params_update
-			params.permit(:title, :url)
+			params.permit(:id, :title, :url)
 		end
 end
