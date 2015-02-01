@@ -19,22 +19,22 @@ class Api::VideoController < ApplicationController
 		end
 	end
 
-	def show
-		render json: @video.as_json
-	end
+	# def show
+	# 	render json: @video.as_json
+	# end
 
-	def update
-		@video.update_attributes(params_update)
-		if @video.save
-			render nothing: true, status: :ok
-		else
-			render nothing: true, status: :bad_request
-		end
-	end
+	# def update
+	# 	@video.update_attributes(params_update)
+	# 	if @video.save
+	# 		render nothing: true, status: :ok
+	# 	else
+	# 		render nothing: true, status: :bad_request
+	# 	end
+	# end
 
-	def destroy
-		@video.destroy
-	end
+	# def destroy
+	# 	@video.destroy
+	# end
 
 	private
 		def find_video
@@ -42,10 +42,10 @@ class Api::VideoController < ApplicationController
 		end
 
 		def params_create
-			params.require(:video, :file, :title, :url)
+			 params.permit(:file, :title, :url)
 		end
 
 		def params_update
-			params.require(:name, :title)
+			params.permit(:title, :url)
 		end
 end

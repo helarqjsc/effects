@@ -5,7 +5,7 @@ gem 'sqlite3'
 
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem "bower-rails", "~> 0.9.1"
+gem 'bower-rails', '~> 0.9.1'
 gem 'angular-rails-templates'
 
 # Use jquery as the JavaScript library
@@ -16,18 +16,22 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 gem 'devise'
-gem "paperclip", "~> 4.2"
+gem 'paperclip', '~> 4.2'
 
 
 
 group :development, :test do
-	gem 'better_errors'
-	gem "binding_of_caller"
 	gem 'thin'
+	gem 'better_errors'
+	gem 'binding_of_caller'
+
+	gem 'rspec-rails', '~> 3.0'
+	gem 'factory_girl_rails', '~> 4.0'
+	gem 'faker'
+	gem 'database_cleaner'
+	
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
-  # gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
