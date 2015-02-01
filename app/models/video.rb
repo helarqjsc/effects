@@ -7,10 +7,9 @@ class Video < ActiveRecord::Base
 		size: { in: 1..10.megabytes }
 	}
 
-	def self.all_json
-		all.as_json.map do |video|
-			video[:file_url] = Video.find(video['id']).file.url
-			video
-		end
+	def as_json
+		json = super(only: [:id, :title, :url, :created_at])
+		json[:file_url] = Video.find(json['id'].to_i).file.url
+		json
 	end
 end

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  #api
+  namespace 'api' do
+    resources :video, except: [:new, :edit]
+  end
+
   root 'home#index'
 
   devise_for :users, 
