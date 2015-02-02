@@ -12,7 +12,6 @@ class Api::VideoController < ApplicationController
 
 	def create
 		@video = Video.new(params_create)
-		# byebug
 		if @video.save
 			render nothing: true, status: :ok
 		else

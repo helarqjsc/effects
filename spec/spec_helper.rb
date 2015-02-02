@@ -21,12 +21,12 @@ require 'database_cleaner'
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
-  config.before(:suite) do
+  config.before(:context) do
     # open transaction
     DatabaseCleaner.start
   end
 
-  config.after(:suite) do
+  config.after(:context) do
     DatabaseCleaner.clean
   end
 

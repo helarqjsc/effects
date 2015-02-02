@@ -25,6 +25,7 @@ RSpec.describe Api::VideoController, :type => :controller do
       post(:create, FactoryGirl.attributes_for(:video))
       expect(response).to be_success
       expect(response).to have_http_status(200)
+      expect(Video.count).to eq(6)
     end
 
     it "doesn't add a record to DB without params" do
@@ -73,13 +74,17 @@ RSpec.describe Api::VideoController, :type => :controller do
 
   describe 'DELETE #destroy' do
     it 'successfully removes a row' do
-      video = Video.first
+      video_old = Video.first
       delete(:destroy, {id: 1})
       expect(response).to have_http_status(200)
-      expect(video).to_not eq(Video.first)
+      expect(video_old).to_not eq(Video.first)
+      expect(Video.count).to eq(4)
     end
 
-    #todo: error on non-existent id
+    it 'returns HTTP 404 on non-existent id' do
+      delete(:destroy, {id: 1488})
+      expect(response).to have_http_status(404)
+      expect(Video.count).to eq(5)
+    end
   end
-
 end
