@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   #api
   namespace 'api' do
-    resources :video, except: [:new, :edit]
+    params = {except: [:new, :edit]}
+    resources :video, params
+    resources :taxonomy, params
   end
 
   root 'home#index'

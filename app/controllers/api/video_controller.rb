@@ -1,9 +1,5 @@
-class Api::VideoController < ApplicationController
+class Api::VideoController < ApiController
 	before_action :find_video, only: [:show, :update, :destroy]
-
-	rescue_from ActiveRecord::RecordNotFound do
-		render nothing: true, status: :not_found
-	end
 
 	def index
 		@videos = Video.all
@@ -23,7 +19,7 @@ class Api::VideoController < ApplicationController
 		render json: @video.as_json
 	end
 
-	def update
+	 def update
 		@video.update_attributes(params_update)
 		if @video.save
 			render nothing: true, status: :ok

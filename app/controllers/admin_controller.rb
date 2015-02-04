@@ -6,8 +6,6 @@ class AdminController < ApplicationController
 		@pages = Page.all_json
 		@videos = Video.all_json
 		@contributed_links = ContributedUrl.all
-
-		#Rails.logger.warn @videos.inspect
 	end
 
 	def save_pages

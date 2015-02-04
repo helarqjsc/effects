@@ -8,7 +8,7 @@ RSpec.describe Api::VideoController, :type => :controller do
   describe 'GET #index' do
     before :each do
       get :index
-    end    
+    end
 
     it 'responds successfully with an HTTP 200 status code' do
       expect(response).to be_success
@@ -37,7 +37,7 @@ RSpec.describe Api::VideoController, :type => :controller do
   describe 'GET #show' do
     before :each do
       get(:show, {id: 1})
-    end    
+    end
 
     it 'responds successfully with an HTTP 200 status code' do
       expect(response).to be_success

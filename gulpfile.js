@@ -65,6 +65,21 @@ gulp.task("css", function() {
   .pipe(gulp.dest(css_out));
 });
 
+gulp.task('rspec', function(){
+  return gulp
+  .src('')
+  .pipe($.shell([
+    'clear',
+    'time spring rake spec'
+    ]));
+});
+
+gulp.task('rspec-watch', function() {
+  return gulp.watch([
+    'spec/**/*'
+    ], ['rspec']);
+});
+
 
 gulp.task('watch', function() {
   gulp.watch([
