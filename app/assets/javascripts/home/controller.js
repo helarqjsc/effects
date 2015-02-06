@@ -2,15 +2,26 @@
 
 var app = angular.module('effects.home.controllers', ['effects.home.services']);
 
-app.controller('HomeCtrl', function($scope, $preload) {
-  $scope.pages = $preload.pages;
+app.controller('HomeCtrl', function($scope, $preload, Video) {
+  $scope.taxonomies = $preload.taxonomies;
   $scope.videos = $preload.videos;
+  $scope.categories = $scope.taxonomies.filter(function(tax){
+    return tax.taxonomy_type === 'category';
+  });
+  $scope.tags = $scope.taxonomies.filter(function(tax){
+    return tax.taxonomy_type === 'tag';
+  });
+
+  // $scope.videos = Video.query(function(){
+  //   console.log($scope.videos);  
+  // });
+  
 
   $scope.form = {
     display: false,
     url: ''
   };
-  $scope.currentPage = {
+  $scope.currentCategory = {
     id: 0,
     clicked_id: 0
   };
@@ -32,8 +43,8 @@ app.controller('HomeCtrl', function($scope, $preload) {
 
 app.controller('FormCtrl', function($scope, $http, showNotification) {
   $scope.sendForm = function() {
-    console.log($scope);
-    console.log($scope.URLForm);
+    // console.log($scope);
+    // console.log($scope.URLForm);
     if($scope.validateForm()) {
       var data = {
         url: $scope.form.url

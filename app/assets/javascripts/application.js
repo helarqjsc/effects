@@ -12,8 +12,10 @@ var app = angular.module('effects', [
 	'angularFileUpload',
   'templates',
   'effects.preload',
-	'effects.home.controllers',
-	'effects.admin.controllers',
+  'effects.home.controllers',
+	'effects.home.services',
+  'effects.admin.controllers',
+	'effects.admin.services',
 ]);
 
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $preloadProvider) {
@@ -24,26 +26,29 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $pre
 
   $stateProvider
   .state('home', { 
-    url: '/',
-    views:{
-      main:{
+    url: '',
+    views: {
+      main: {
         templateUrl: 'home.html'    
       }
     }
   })
   .state('home.category', { 
     url: '/:category',
-    template: '', 
-    controller: function($scope, $stateParams){
-      var page = $preloadProvider.$get().pages.filter(function(page){
-        return page.slug === $stateParams.category;
-      })[0];
-      $scope.$parent.currentPage.clicked_id = page.id;
-      $('.block').stop(true).animate({opacity: 0}, 300, function(){
-        $scope.$parent.currentPage.id = page.id;
-        $scope.$parent.$apply();
-        $(this).animate({opacity: 1}, 300);
-      });
+    views: {
+      home: {
+        template: '', 
+        controller: function($scope, $stateParams, Category){
+          Category.findBySlug($stateParams.category).then(function(cat){
+            $scope.$parent.currentCategory.clicked_id = cat.id;
+            $('.block').stop(true).animate({opacity: 0}, 300, function(){
+              $scope.$parent.currentCategory.id = cat.id;
+              $scope.$parent.$apply();
+              $(this).animate({opacity: 1}, 300);
+            });
+          });
+        }    
+      }     
     }
   })
   .state('admin', {

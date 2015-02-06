@@ -1,4 +1,5 @@
-<article class="site" id="content">
+<article ng-controller="HomeCtrl" class="site" id="content">
+<div ui-view='home'></div>
 
   <!-- menu -->
   <div class="menu-container">
@@ -19,7 +20,7 @@
         <!-- tags -->
         <div class="tags-container">          
             <label class="tags-title">Tags: </label>
-            <div class="tag" ng-repeat="tag in tags" ng-class="{ 'checked': tag.check }" > 
+            <div class="tag" ng-repeat="tag in tags" ng-class="{checked: tag.check}" > 
               <label>
                 <input type="checkbox" ng-model="tag.check" value="true" />
                 <span class="icon"></span>
@@ -32,10 +33,10 @@
       <nav>
         <label>Category:</label>          
         <ul>
-          <li ng-repeat="page in pages" ng-class="{ 'active': page.id === currentPage.clicked_id }">
-            <a ui-sref="home({category: page.slug})" ng-click="menuMobileVisible = false">
-              <span>{{ page.title }}</span>
-              {{ page.title }}
+          <li ng-repeat="cat in categories" ng-class="{active: cat.id === currentCategory.clicked_id}">
+            <a ui-sref="home.category({category: cat.slug})" ng-click="menuMobileVisible = false">
+              <span>{{ cat.name }}</span>
+              {{ cat.name }}
             </a>            
           </li>
         </ul>
@@ -63,7 +64,6 @@
   </div>
 
   <main class="list" role="main">
-      <div ui-view></div>
       <div class="bg"></div>    
 
       <div class="container">
@@ -73,7 +73,7 @@
               <div class="row">
 
                 <!-- videos -->
-                <div ng-repeat="video in videos | onlyPage:currentPage | filterTags:tags" class="col-item">
+                <div ng-repeat="video in videos | onlyCategory:currentCategory" class="col-item">
                   <a href="{{ video.url }}" target=_blank>
                     <div class="content">
                       <figure data-effeckt-type="quarter-fall-in" class="effeckt-caption">
@@ -86,7 +86,7 @@
                   </a>
                 </div>
                 
-                <div ng-show="(videos | onlyPage:currentPage).length <= 0">
+                <div ng-show="(videos | onlyCategory:currentCategory).length <= 0">
                   <p>No content here yet.</p>
                 </div>
                 

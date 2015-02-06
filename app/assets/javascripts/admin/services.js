@@ -48,11 +48,11 @@ app.factory('data', function($preload){
   };
 });
 
-app.filter('onlyPage', function(){
-  return function(input, page){
-    return input.filter(function(val){
-      return (val.page_id === page.id || page.id === 'all');
-    });
-  };
-});
+// app.filter('onlyPage', function(){
+//   return function(input, page){
+//     return input.filter(function(val){
+//       return (val.page_id === page.id || page.id === 'all');
+//     });
+//   };
+// });
 

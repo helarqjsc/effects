@@ -4,7 +4,6 @@ RSpec.describe Api::TaxonomyController, :type => :controller do
 	before :all do
 	  3.times{ create(:category) }
 	  5.times{ create(:tag) }
-	  puts Taxonomy.find_by_taxonomy_type('category').inspect
 	end
 
 	describe 'GET #index' do

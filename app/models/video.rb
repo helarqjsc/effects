@@ -10,7 +10,10 @@ class Video < ActiveRecord::Base
 
 	def as_json
 		json = super(only: [:id, :title, :url, :created_at])
-		json[:file_url] = Video.find(json['id'].to_i).file.url
+		video = Video.find(json['id'].to_i)
+		json[:file_url] = video.file.url
+		json[:categories] = Array.wrap(video.taxonomies.categories.as_json)
+		json[:tags] = Array.wrap(video.taxonomies.tags.as_json)
 		json
 	end
 end
