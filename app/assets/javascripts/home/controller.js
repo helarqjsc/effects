@@ -2,12 +2,23 @@
 
 var app = angular.module('effects.home.controllers', ['effects.home.services']);
 
-app.controller('HomeCtrl', function($scope, $preload, Video) {
+app.controller('HomeCtrl', function($scope, $preload, Taxonomy, Video, Category) {
   $scope.taxonomies = $preload.taxonomies;
   $scope.videos = $preload.videos;
-  $scope.categories = $scope.taxonomies.filter(function(tax){
-    return tax.taxonomy_type === 'category';
+  Category.getAll().then(function(categories){
+    $scope.categories = categories;
   });
+  
+  // var test = new Taxonomy();
+  // test.name = 'lel';
+  // test.taxonomy_type = 'category';
+  // test.$save();
+
+  Taxonomy.findById_(4).then(function(tax){
+    console.log(tax);
+    tax.$remove();
+  });
+
   $scope.tags = $scope.taxonomies.filter(function(tax){
     return tax.taxonomy_type === 'tag';
   });

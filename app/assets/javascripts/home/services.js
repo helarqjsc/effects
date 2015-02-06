@@ -27,18 +27,36 @@ app.factory('Video', function($resource){
 });
 
 app.factory('Taxonomy', function($resource){
-  var Taxonomy = $resource('/api/taxonomy/:id');
-  var taxonomies = Taxonomy.query();
-  
+  var Taxonomy = $resource('/api/taxonomy/:id', {id: '@id'});
+  var getTaxonomies = Taxonomy.query().$promise;
+
   Taxonomy = angular.extend(Taxonomy.prototype, {
     findAllByType: function(taxonomy_type){
-      return taxonomies.$promise.then(function(){
+      return getTaxonomies.then(function(taxonomies){
         return taxonomies.filter(function(tax){
           return (tax.taxonomy_type === taxonomy_type);
         });      
       });
     },
+    // delete: function(id){
+    //   var taxonomies = [];
+    //   return getTaxonomies.then(function(taxs){
+    //     taxonomies = taxs;
+    //     return Taxonomy.findById_(id);
+    //   }).then(function(tax){
+    //     console.log(taxonomies);
+    //     taxonomies.splice(taxonomies.indexOf(tax), 1);
+    //     console.log(taxonomies);
+    //   });
+    // },
     //protected methods 
+    findById_: function(id){
+      return getTaxonomies.then(function(taxonomies){
+        return taxonomies.filter(function(tax){
+          return tax.id === id;
+        })[0];
+      });
+    },
     findBySlug_: function(data, slug){
       return data.then(function(array){
         return array.filter(function(tax){
@@ -47,15 +65,21 @@ app.factory('Taxonomy', function($resource){
       });
     }
   });
+
   return Taxonomy;
 });
 
 app.factory('Category', function(Taxonomy){  
-  var categories = Taxonomy.findAllByType('category');
+  var getCategories = Taxonomy.findAllByType('category');
   var Category = angular.extend(Taxonomy, {
     findBySlug: function(slug){
-      return categories.then(function(){
-        return Taxonomy.findBySlug_(categories, slug);    
+      return getCategories.then(function(){
+        return Taxonomy.findBySlug_(getCategories, slug);    
+      });
+    },
+    getAll: function(){
+      return getCategories.then(function(){
+        return getCategories;
       });
     }
   });
