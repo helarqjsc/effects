@@ -20,11 +20,11 @@
         <!-- tags -->
         <div class="tags-container">          
             <label class="tags-title">Tags: </label>
-            <div class="tag" ng-repeat="tag in tags" ng-class="{checked: tag.check}" > 
+            <div class="tag" ng-repeat="tag in tags" ng-class="{checked: tag.checked}" > 
               <label>
-                <input type="checkbox" ng-model="tag.check" value="true" />
+                <input type="checkbox" ng-model="tag.checked">
                 <span class="icon"></span>
-                <span>{{ tag.id }}</span>                  
+                <span>{{ tag.slug }}</span>                  
               </label>                                
             </div>          
         </div>
@@ -33,7 +33,7 @@
       <nav>
         <label>Category:</label>          
         <ul>
-          <li ng-repeat="cat in categories" ng-class="{active: cat.id === currentCategory.clicked_id}">
+          <li ng-repeat="cat in categories" ng-class="{active: cat.id === selectedCategory.clicked_id}">
             <a ui-sref="home.category({category: cat.slug})" ng-click="menuMobileVisible = false">
               <span>{{ cat.name }}</span>
               {{ cat.name }}
@@ -73,7 +73,7 @@
               <div class="row">
 
                 <!-- videos -->
-                <div ng-repeat="video in videos | onlyCategory:currentCategory" class="col-item">
+                <div ng-repeat="video in videos | taxonomies:selectedCategory:tags" class="col-item">
                   <a href="{{ video.url }}" target=_blank>
                     <div class="content">
                       <figure data-effeckt-type="quarter-fall-in" class="effeckt-caption">
@@ -86,7 +86,7 @@
                   </a>
                 </div>
                 
-                <div ng-show="(videos | onlyCategory:currentCategory).length <= 0">
+                <div ng-show="(videos | taxonomies:selectedCategory:tags).length <= 0">
                   <p>No content here yet.</p>
                 </div>
                 

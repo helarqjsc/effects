@@ -41,13 +41,16 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $pre
         resolve: {
           taxonomies: function(Taxonomy){
             return Taxonomy.resolve();
+          },
+          videos: function(Video){
+            return Video.resolve();
           }
         },
         controller: function($scope, $stateParams, Category, Taxonomy){
             var cat = Category.findBySlug($stateParams.category);
-            $scope.$parent.currentCategory.clicked_id = cat.id;
+            $scope.$parent.selectedCategory.clicked_id = cat.id;
             $('.block').stop(true).animate({opacity: 0}, 300, function(){
-              $scope.$parent.currentCategory.id = cat.id;
+              $scope.$parent.selectedCategory.id = cat.id;
               $scope.$parent.$apply();
               $(this).animate({opacity: 1}, 300);
             });

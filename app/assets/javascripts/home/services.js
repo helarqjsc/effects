@@ -23,7 +23,19 @@ app.directive('videoWebm', function(){
 });
 
 app.factory('Video', function($resource){
-  return $resource('/api/video/:id');
+  var Video = $resource('/api/video/:id', {id: '@id'});
+  var videos = Video.query();
+
+  Video = angular.extend(Video.prototype, {
+    resolve: function(){
+      return videos.$promise;
+    },
+    getAll: function(){
+      return videos;
+    }
+  });
+
+  return Video;
 });
 
 app.factory('Taxonomy', function($resource){
@@ -112,23 +124,36 @@ app.factory('showNotification', function() {
     }  
 });
 
+//videos in taxonomies
+app.filter('taxonomies', function($filter){
+  return function(videos, category, tags){
+    var videos = $filter('category')(videos, category);
+    videos = $filter('tags')(videos, tags);
+    return videos;
+  };
+});
 
-app.filter('onlyCategory', function(){
-  return function(input, currentCategory){
-    return input.filter(function(x){
-      // console.log(currentCategory);
-      // console.log(x.categories);
-
-      return (x.categories.length > 0 && (x.categories[0].id === currentCategory.id || currentCategory.id === 'all'));
+//videos in category
+app.filter('category', function(){
+  return function(videos, category){
+    return videos.filter(function(vid){
+      return (vid.categories.length > 0 && 
+              (vid.categories[0].id === category.id || category.slug === 'all'));
     });
   };
 });
 
-app.filter('filterTags', function(){
-  return function(input, tags){    
-    return input.filter(function(video){
-      return tags.filter(function(tag){
-        return (tag.check && video.tags.indexOf(tag.id));
+//videos with tags
+app.filter('tags', function(){
+  return function(videos, tags){    
+    return videos.filter(function(video){
+      var selected_tags_ids = tags.filter(function(tag){
+        return tag.checked;
+      }).map(function(tag){
+        return tag.id;
+      });
+      return video.tags.filter(function(tag){
+        return (selected_tags_ids.indexOf(tag.id) >= 0);
       }).length;
     });
   };

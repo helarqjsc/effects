@@ -4,45 +4,27 @@ var app = angular.module('effects.home.controllers', ['effects.home.services']);
 
 app.controller('HomeCtrl', function($scope, $preload, Taxonomy, Video, Category, Tag) {
   $scope.taxonomies = $preload.taxonomies;
-  $scope.videos = $preload.videos;
+  // $scope.videos = $preload.videos;
+  $scope.videos = Video.getAll();
   $scope.categories = Category.getAll();
-  $scope.tags = [];//Tag.getAll();
+  $scope.tags = Tag.getAll();
 
-  // var test = new Taxonomy();
-  // test.name = 'lel';
-  // test.taxonomy_type = 'category';
-  // test.$save();
+  angular.forEach($scope.tags, function(tag){
+    tag.checked = true;
+  });
 
-  console.log( Taxonomy._findById(1));
-
-
-  // $scope.videos = Video.query(function(){
-  //   console.log($scope.videos);  
-  // });
-  
+  $scope.selectedCategory = {
+    id: 0,
+    clicked_id: 0
+  };
 
   $scope.form = {
     display: false,
     url: ''
   };
-  $scope.currentCategory = {
-    id: 0,
-    clicked_id: 0
-  };
+
   $scope.loaded = true;
   $scope.menuVisible = true;
-  
-  $scope.tags = [
-    {
-      id: "angular",
-      check: true
-    },
-    {
-      id: "css",
-      check: true
-    }
-  ];
-
 });
 
 app.controller('FormCtrl', function($scope, $http, showNotification) {
