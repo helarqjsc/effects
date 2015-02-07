@@ -138,7 +138,7 @@ app.filter('category', function(){
   return function(videos, category){
     return videos.filter(function(vid){
       return (vid.categories.length > 0 && 
-              (vid.categories[0].id === category.id || category.slug === 'all'));
+              (vid.categories[0].id === category.id || category.id === 'all'));
     });
   };
 });

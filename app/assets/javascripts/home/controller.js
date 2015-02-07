@@ -7,16 +7,16 @@ app.controller('HomeCtrl', function($scope, $preload, Taxonomy, Video, Category,
   // $scope.videos = $preload.videos;
   $scope.videos = Video.getAll();
   $scope.categories = Category.getAll();
-  $scope.tags = Tag.getAll();
-
-  angular.forEach($scope.tags, function(tag){
-    tag.checked = true;
-  });
-
+  $scope.categories.unshift({id:'all', name: 'All', slug: 'all'});
   $scope.selectedCategory = {
     id: 0,
     clicked_id: 0
   };
+
+  $scope.tags = Tag.getAll();
+  angular.forEach($scope.tags, function(tag){
+    tag.checked = true;
+  });
 
   $scope.form = {
     display: false,

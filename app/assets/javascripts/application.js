@@ -54,7 +54,6 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $pre
               $scope.$parent.$apply();
               $(this).animate({opacity: 1}, 300);
             });
-          // });
         }    
       }     
     }
