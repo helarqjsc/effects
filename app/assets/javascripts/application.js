@@ -38,15 +38,20 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $pre
     views: {
       home: {
         template: '', 
-        controller: function($scope, $stateParams, Category){
-          Category.findBySlug($stateParams.category).then(function(cat){
+        resolve: {
+          taxonomies: function(Taxonomy){
+            return Taxonomy.resolve();
+          }
+        },
+        controller: function($scope, $stateParams, Category, Taxonomy){
+            var cat = Category.findBySlug($stateParams.category);
             $scope.$parent.currentCategory.clicked_id = cat.id;
             $('.block').stop(true).animate({opacity: 0}, 300, function(){
               $scope.$parent.currentCategory.id = cat.id;
               $scope.$parent.$apply();
               $(this).animate({opacity: 1}, 300);
             });
-          });
+          // });
         }    
       }     
     }
