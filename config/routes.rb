@@ -1,20 +1,22 @@
 Rails.application.routes.draw do
+  root 'home#index'
+
   #api
   namespace 'api' do
+    mount_devise_token_auth_for 'User', at: '/auth'
+
     params = {except: [:new, :edit]}
     resources :video, params
     resources :taxonomy, params
   end
 
-  root 'home#index'
-
-  devise_for :users, 
-    path: '', 
-    path_names: {
-      sign_in: 'login', 
-      sign_out: 'logout'
-    },
-    sign_out_via: ['get']
+  # devise_for :users, 
+  #   path: '', 
+  #   path_names: {
+  #     sign_in: 'login', 
+  #     sign_out: 'logout'
+  #   },
+  #   sign_out_via: ['get']
 
   get '/*anything' => 'home#index'
   

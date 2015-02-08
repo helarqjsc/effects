@@ -1,0 +1,24 @@
+<div class="admin-login">
+  <h2>Log in</h2>
+
+  <form>
+    <div class="field">
+      <label class="input-label" for="user_username">Username</label>
+      <input autofocus="autofocus" type="text" value="" name="user[username]" id="user_username" />
+    </div>
+
+    <div class="field">
+      <label class="input-label" for="user_password">Password</label>
+      <input autocomplete="off" type="password" name="user[password]" id="user_password" />
+    </div>
+
+      <div class="field remember-me">
+        <input name="user[remember_me]" type="hidden" value="0" /><input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" />
+        <label for="user_remember_me">Remember me</label>
+      </div>
+
+    <div class="actions">
+      <input type="submit" name="commit" value="Log in" />
+    </div>
+  </form>
+</div>

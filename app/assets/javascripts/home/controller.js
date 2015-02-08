@@ -2,21 +2,13 @@
 
 var app = angular.module('effects.home.controllers', ['effects.home.services']);
 
-app.controller('HomeCtrl', function($scope, $preload, Taxonomy, Video, Category, Tag) {
+app.controller('HomeCtrl', function($scope, $preload, Video, TaxonomyService) {
   $scope.taxonomies = $preload.taxonomies;
   // $scope.videos = $preload.videos;
   $scope.videos = Video.getAll();
-  $scope.categories = Category.getAll();
-  $scope.categories.unshift({id:'all', name: 'All', slug: 'all'});
-  $scope.selectedCategory = {
-    id: 0,
-    clicked_id: 0
-  };
-
-  $scope.tags = Tag.getAll();
-  angular.forEach($scope.tags, function(tag){
-    tag.checked = true;
-  });
+  $scope.categories = TaxonomyService.categories;
+  $scope.selectedCategory = TaxonomyService.selectedCategory;
+  $scope.tags = TaxonomyService.tags;
 
   $scope.form = {
     display: false,
@@ -25,6 +17,10 @@ app.controller('HomeCtrl', function($scope, $preload, Taxonomy, Video, Category,
 
   $scope.loaded = true;
   $scope.menuVisible = true;
+});
+
+app.controller('LoginCtrl', function($scope) {
+
 });
 
 app.controller('FormCtrl', function($scope, $http, showNotification) {

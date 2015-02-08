@@ -8,8 +8,9 @@
 /* global angular, $ */
 
 var app = angular.module('effects', [
-	'ui.router', 
-	'angularFileUpload',
+	'ui.router',
+  'angularFileUpload',
+	'ng-token-auth',
   'templates',
   'effects.preload',
   'effects.home.controllers',
@@ -25,19 +26,20 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $pre
   });
 
   $stateProvider
-  .state('home', { 
+  .state('home', {
     url: '',
     views: {
       main: {
-        templateUrl: 'home.html'    
+        templateUrl: 'home.html',
+        controller: 'HomeCtrl',
       }
     }
   })
-  .state('home.category', { 
+  .state('home.category', {
     url: '/:category',
     views: {
       home: {
-        template: '', 
+        template: '',
         resolve: {
           taxonomies: function(Taxonomy){
             return Taxonomy.resolve();
@@ -46,16 +48,30 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $pre
             return Video.resolve();
           }
         },
-        controller: function($scope, $stateParams, Category, Taxonomy){
-            var cat = Category.findBySlug($stateParams.category);
-            $scope.$parent.selectedCategory.clicked_id = cat.id;
-            $('.block').stop(true).animate({opacity: 0}, 300, function(){
-              $scope.$parent.selectedCategory.id = cat.id;
-              $scope.$parent.$apply();
-              $(this).animate({opacity: 1}, 300);
-            });
-        }    
-      }     
+        controller: function($scope, $location, $stateParams, Category){
+          if($stateParams.category === ''){
+            $location.path('/all');
+            return;
+          }
+          var scope = $scope.$parent;
+          var cat = Category.findBySlug($stateParams.category);
+          scope.selectedCategory.clicked_id = cat.id;
+          $('.block').stop(true).animate({opacity: 0}, 300, function(){
+            scope.selectedCategory.id = cat.id;
+            scope.$apply();
+            $(this).animate({opacity: 1}, 300);
+          });
+        }
+      }
+    }
+  })
+  .state('login', {
+    url: '/login',
+    views: {
+      main: {
+        controller: 'LoginCtrl',
+        templateUrl: 'login.html'
+      }
     }
   })
   .state('admin', {
@@ -64,7 +80,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $pre
   })
   .state('admin.pages', {
     url: '/pages',
-    templateUrl: 'pages.html'    
+    templateUrl: 'pages.html'
   })
   .state('admin.videos', {
     url: '/videos',

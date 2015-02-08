@@ -1,4 +1,4 @@
-/* global angular */
+/* global angular, noty */
 
 var app = angular.module('effects.home.services', ['ngResource']);
 
@@ -104,10 +104,27 @@ app.factory('Tag', function(Taxonomy){
   return Tag;
 });
 
+//It is used to set default values and keep the state when switching pages
+app.factory('TaxonomyService', function(Taxonomy, Category, Tag){
+  var service = {};
+  service.categories = Category.getAll();
+  service.categories.unshift({id:'all', name: 'All', slug: 'all'});
+  service.selectedCategory = {
+    id: 0,
+    clicked_id: 0
+  };
+
+  service.tags = Tag.getAll();
+  angular.forEach(service.tags, function(tag){
+    tag.checked = true;
+  });
+
+  return service;
+});
 
 app.factory('showNotification', function() {
   return function(text, type) {          
-      var n = noty({
+      noty({
           layout: 'topLeft',
           theme: 'relax',
           text: text,
@@ -121,13 +138,13 @@ app.factory('showNotification', function() {
                 speed: 500 // unavailable - no need
              }          
       });  
-    }  
+    };  
 });
 
 //videos in taxonomies
 app.filter('taxonomies', function($filter){
   return function(videos, category, tags){
-    var videos = $filter('category')(videos, category);
+    videos = $filter('category')(videos, category);
     videos = $filter('tags')(videos, tags);
     return videos;
   };

@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create(username: 'admin', password: '123')
+User.create(username: 'admin', password: '123', provider: '')
 ContributedUrl.create(url: 'http://google.com', ip_addr: '8.8.8.8')
 
 #categories

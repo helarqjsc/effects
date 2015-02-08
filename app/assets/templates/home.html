@@ -1,4 +1,4 @@
-<article ng-controller="HomeCtrl" class="site" id="content">
+<article class="site" id="content">
 <div ui-view='home'></div>
 
   <!-- menu -->
@@ -13,8 +13,9 @@
       <div class="menu-top">
         <!-- login link -->
         <section class="login-block">
-          <span>Здравствуйте, admin</span>
-          <a href="#">Выйти</a>
+        <a ui-sref="login">Войти</a>
+<!--           <span>Здравствуйте, admin</span>
+          <a href="#">Выйти</a> -->
         </section>   
              
         <!-- tags -->
