@@ -7,12 +7,12 @@ class User < ActiveRecord::Base
 				 :rememberable
 				# :trackable, 
 				# :validatable
+
 	include DeviseTokenAuth::Concerns::User
 
 	before_validation :defaults
 
 	def defaults
-		self.tokens ||= {}
 		self.provider ||= ''
 		self.uid = SecureRandom.uuid
 		# skip_confirmation!

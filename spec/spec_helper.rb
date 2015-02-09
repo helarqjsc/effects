@@ -33,12 +33,13 @@ end
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
-  config.before(:context) do
-    # open transaction
+
+  config.before :context do
+    DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.start
   end
 
-  config.after(:context) do
+  config.after :context do
     DatabaseCleaner.clean
   end
 
