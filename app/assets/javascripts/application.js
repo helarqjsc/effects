@@ -19,13 +19,22 @@ var app = angular.module('effects', [
 	'effects.admin.services',
 ]);
 
-app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $preloadProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode({
     enabled: true,
     requireBase: true
   });
 
   $stateProvider
+  .state('login', {
+    url: '/login',
+    views: {
+      main: {
+        controller: 'LoginCtrl',
+        templateUrl: 'login.html'
+      }
+    }
+  })
   .state('home', {
     url: '',
     views: {
@@ -55,6 +64,8 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $pre
           }
           var scope = $scope.$parent;
           var cat = Category.findBySlug($stateParams.category);
+          console.log(cat);
+
           scope.selectedCategory.clicked_id = cat.id;
           $('.block').stop(true).animate({opacity: 0}, 300, function(){
             scope.selectedCategory.id = cat.id;
@@ -62,15 +73,6 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $pre
             $(this).animate({opacity: 1}, 300);
           });
         }
-      }
-    }
-  })
-  .state('login', {
-    url: '/login',
-    views: {
-      main: {
-        controller: 'LoginCtrl',
-        templateUrl: 'login.html'
       }
     }
   })

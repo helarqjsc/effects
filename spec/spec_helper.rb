@@ -17,6 +17,18 @@
 
 require 'factory_girl_rails'
 require 'database_cleaner'
+# require 'capybara/rails'
+require 'capybara/rspec'
+require 'headless'
+
+Capybara.javascript_driver = :webkit
+
+headless = Headless.new
+headless.start
+
+at_exit do
+ headless.destroy
+end
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods

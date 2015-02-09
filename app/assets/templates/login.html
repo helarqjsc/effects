@@ -1,15 +1,15 @@
 <div class="admin-login">
   <h2>Log in</h2>
 
-  <form>
-    <div class="field">
+  <form ng-submit="submitLogin(loginForm)">
+    <div  class="field">
       <label class="input-label" for="user_username">Username</label>
-      <input autofocus="autofocus" type="text" value="" name="user[username]" id="user_username" />
+      <input ng-model="loginForm.email" type="text" id="user_username" />
     </div>
 
     <div class="field">
       <label class="input-label" for="user_password">Password</label>
-      <input autocomplete="off" type="password" name="user[password]" id="user_password" />
+      <input ng-model="loginForm.password" type="password" id="user_password" />
     </div>
 
       <div class="field remember-me">

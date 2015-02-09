@@ -19,7 +19,7 @@ class Api::TaxonomyController < ApiController
 		render json: @tax.as_json
 	end
 
-	 def update
+	def update
 		@tax.update_attributes(params_update)
 		if @tax.save
 			render nothing: true, status: :ok

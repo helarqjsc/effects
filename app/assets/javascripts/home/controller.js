@@ -15,12 +15,7 @@ app.controller('HomeCtrl', function($scope, $preload, Video, TaxonomyService) {
     url: ''
   };
 
-  $scope.loaded = true;
   $scope.menuVisible = true;
-});
-
-app.controller('LoginCtrl', function($scope) {
-
 });
 
 app.controller('FormCtrl', function($scope, $http, showNotification) {
@@ -40,5 +35,8 @@ app.controller('FormCtrl', function($scope, $http, showNotification) {
   };
 });
 
+app.controller('LoginCtrl', function($scope) {
+  $scope.loginForm = {};
+});
 
 

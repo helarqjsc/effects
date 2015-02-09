@@ -12,6 +12,9 @@ log/*
 node_modules/
 public/assets/javascripts/
 public/assets/stylesheets/
+public/assets/**/*.css
+public/assets/**/*.js
+public/assets/**/*.gz
 public/system/videos/
 puppet/
 tmp/

@@ -1,6 +1,11 @@
 require 'faker'
 
 FactoryGirl.define do
+  factory :admin, class: User do
+    email { Faker::Internet.email }
+    password { Faker::Internet.password }
+  end
+
   factory :video do
     title { Faker::Lorem.sentence }
     url { Faker::Internet.url }
