@@ -1,0 +1,20 @@
+<div ng-controller="ContributedUrlsCtrl">
+	<h1>Contributed URLs</h1>
+
+	<table class="table table-striped">
+		<thead>
+			<td>ID</td>
+			<td>URL</td>
+			<td>Submitted from IP</td>
+			<td>Created At</td>
+		</thead>
+		<tbody>
+			<tr ng-repeat="link in contributedLinks">
+				<td ng-bind="link.id"></td>
+				<td ng-bind="link.url"></td>
+				<td ng-bind="link.ip_addr"></td>
+				<td ng-bind="link.created_at | date:'d MMM yyyy'"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

@@ -20,6 +20,7 @@ require 'database_cleaner'
 # require 'capybara/rails'
 require 'capybara/rspec'
 require 'headless'
+require 'devise'
 
 Capybara.javascript_driver = :webkit
 
@@ -31,8 +32,10 @@ at_exit do
 end
 
 RSpec.configure do |config|
+  config.include Devise::TestHelpers, :type => :controller
   config.include FactoryGirl::Syntax::Methods
-
+  # config.order = 'random'
+  config.fail_fast = true
 
   config.before :context do
     DatabaseCleaner.strategy = :truncation

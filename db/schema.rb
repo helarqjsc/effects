@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 20150209100854) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "name"
+    t.string   "nickname"
+    t.string   "image"
     t.string   "email"
     t.text     "tokens"
     t.datetime "created_at"

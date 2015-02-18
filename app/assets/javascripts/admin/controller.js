@@ -2,35 +2,17 @@
 
 var app = angular.module('effects.admin.controllers', ['effects.admin.services']);
 
-app.controller('AdminCtrl', function($scope, data) {
-  $scope.pages = data.pages;
-  $scope.videos = data.videos;
-  $scope.contributedLinks = data.contributedLinks;
+app.controller('AdminCtrl', function($scope, Video, Category, Tag) {
+  $scope.categories = Category.getAll();
+  $scope.tags = Tag.getAll();
+  $scope.videos = Video.getAll();
+  $scope.taxonomies = $scope.categories.concat($scope.tags);
+  console.log($scope.taxonomies);
+  // $scope.contributedLinks = data.contributedLinks;
 });
 
-app.controller('PagesCtrl', function($scope, $http) {
-  $scope.pagesToDelete = [];
+app.controller('TaxonomiesCtrl', function($scope, $http) {
 
-
-  $scope.add = function(){
-    $scope.pages.push({title: '', slug: ''});
-  };
-
-  $scope.delete = function(index){
-    $scope.pagesToDelete.push($scope.pages[index]);
-    $scope.pages.splice(index, 1);
-  };
-
-  $scope.save = function(){
-    var data = {
-      update: $scope.pages,
-      delete: $scope.pagesToDelete
-    };
-    $http.post('/admin/save_pages', data).then(function(response){
-      $scope.pages = response.data;
-      $scope.pagesToDelete = [];
-    });
-  };
 });
 
 app.controller('VideosSelectPageCtrl', function($scope, $state) {

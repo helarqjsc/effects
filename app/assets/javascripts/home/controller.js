@@ -2,7 +2,11 @@
 
 var app = angular.module('effects.home.controllers', ['effects.home.services']);
 
-app.controller('HomeCtrl', function($scope, $preload, Video, TaxonomyService) {
+app.controller('HomeCtrl', function($scope, $preload, Video, TaxonomyService, $stateParams, $location) {
+  // if(angular.isUndefined($stateParams.category)){
+  //   $location.path('/all');
+  // }
+
   $scope.taxonomies = $preload.taxonomies;
   // $scope.videos = $preload.videos;
   $scope.videos = Video.getAll();
@@ -36,7 +40,10 @@ app.controller('FormCtrl', function($scope, $http, showNotification) {
 });
 
 app.controller('LoginCtrl', function($scope) {
-  $scope.loginForm = {};
+  $scope.loginForm = {
+    email: 'admin@gmail.com',
+    password: '123'
+  };
 });
 
 

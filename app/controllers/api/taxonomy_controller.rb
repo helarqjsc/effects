@@ -1,4 +1,5 @@
 class Api::TaxonomyController < ApiController
+	before_action :authenticate_user!, except: [:index, :show]
 	before_action :find_taxonomy, only: [:show, :update, :destroy]
 
 	def index

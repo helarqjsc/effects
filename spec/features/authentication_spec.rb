@@ -8,8 +8,6 @@ feature 'Authentication', js: true do
 	feature 'open login page' do
 	  scenario 'from home page' do
 	    visit '/'
-	    # puts page.driver.html
-
 	    find(".login-block a", text: "Войти").click
 	    expect(page).to have_content('Log in')
 	  end
@@ -18,18 +16,18 @@ feature 'Authentication', js: true do
   feature 'login' do
     scenario 'with valid inputs' do
       visit '/login'
-      # find(".login-block a", text: "Войти").click
-      # expect(page).to have_content('sdfsdfsdfdsf')
-
       fill_in "Username", with: @user.email
       fill_in "Password", with: @user.password
       find("input[type=submit]").click
+      expect(page).to have_content('Back to site')
+    end
 
-      # puts page.methods.sort
-      # puts page.response_headers
-
-      expect(response).to have_http_status(200)
-      expect(page).to have_content('sdfsdfds')
+    scenario 'with invalid inputs' do
+      visit '/login'
+      fill_in "Username", with: 'sladkaya'
+      fill_in "Password", with: 'vikusya'
+      find("input[type=submit]").click
+      expect(page).to have_content('Log in')
     end
   end
 end

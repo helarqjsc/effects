@@ -1,0 +1,17 @@
+<div class="site" id="content">
+  <div class="menu">
+    <a ui-sref="home">Back to site</a>
+    <ul>
+      <li ui-sref-active="active" ui-sref="admin.taxonomies">Taxonomies</li>
+      <li ui-sref-active="active" ui-sref="admin.videos">Видео</li>
+      <li ui-sref-active="active" ui-sref="admin.contributedLinks">Ссылки</li>
+      <li ui-sref-active="active" ui-sref="admin.options">Настройки</li>
+    </ul>
+  </div>
+  <article class="list">
+    <div class="bg"></div>
+    <div ui-view="main" class="container">
+      <p>some admin shit</p>  
+    </div>
+  </article>
+</div>

@@ -1,0 +1,31 @@
+<div ng-controller="TaxonomiesCtrl">
+	<h1>Taxonomies</h1>
+
+	<table class="table table-striped">
+		<thead>
+			<td>ID</td>
+			<td>Title</td>
+			<td>Slug</td>
+			<td>Created At</td>
+		</thead>
+		<tbody>
+			<tr ng-repeat="tax in taxonomies">
+				<td ng-bind="tax.id"></td>
+				<td><div editable value="tax.name"></div></td>
+				<td><div editable value="tax.slug"></div></td>
+				<td ng-bind="tax.created_at | date:'d MMM yyyy'"></td>
+				<td><input ng-click="delete($index)" type="button" class="btn btn-default" value="Delete"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><input ng-click="add()" type="button" class="btn btn-default" value="Add"></td>
+			</tr>
+
+		</tbody>
+	</table>
+
+	<input ng-click="save()" type="button" class="btn btn-default" value="Save">
+</div>

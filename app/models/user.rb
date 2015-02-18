@@ -15,6 +15,5 @@ class User < ActiveRecord::Base
 	def defaults
 		self.provider ||= ''
 		self.uid = SecureRandom.uuid
-		# skip_confirmation!
 	end
 end

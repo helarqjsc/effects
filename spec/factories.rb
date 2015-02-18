@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :admin, class: User do
     email { Faker::Internet.email }
     password { Faker::Internet.password }
+    provider { 'email' }
   end
 
   factory :video do

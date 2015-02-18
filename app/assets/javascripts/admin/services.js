@@ -31,22 +31,6 @@ app.directive('editable', function($timeout){
   };
 });
 
-app.factory('data', function($preload){
-  var pages = $preload.pages;
-  var videos = $preload.videos;
-  var contributedLinks = $preload.contributedLinks;
-
-  return {
-    pages: pages,
-    videos: videos,
-    contributedLinks: contributedLinks,
-    findPageBySlug: function(slug){
-      return pages.filter(function(val){
-        return val.slug === slug;
-      })[0];
-    }
-  };
-});
 
 // app.filter('onlyPage', function(){
 //   return function(input, page){

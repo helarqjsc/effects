@@ -1,0 +1,18 @@
+<div ng-controller="VideosSelectPageCtrl">
+	<h1>Select Page</h1>
+
+	<table class="table table-striped">
+		<thead>
+			<td>ID</td>
+			<td>Title</td>
+			<td>Slug</td>
+		</thead>
+		<tbody>
+			<tr ng-click="goToPage(page)" ng-repeat="page in pages">
+				<td ng-bind="page.id"></td>
+				<td ng-bind="page.title"></td>
+				<td ng-bind="page.slug"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

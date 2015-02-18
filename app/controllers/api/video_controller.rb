@@ -1,4 +1,5 @@
 class Api::VideoController < ApiController
+	before_action :authenticate_user!, except: [:index, :show]
 	before_action :find_video, only: [:show, :update, :destroy]
 
 	def index

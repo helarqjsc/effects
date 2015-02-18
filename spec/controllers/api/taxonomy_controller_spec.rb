@@ -8,6 +8,9 @@ RSpec.describe Api::TaxonomyController, :type => :controller do
 
 	describe 'GET #index' do
 	  before :each do
+	  	@request.env["devise.mapping"] = Devise.mappings[:user]
+	  	@admin = FactoryGirl.create(:admin)	  
+	  	sign_in @admin
 	    get :index
 	  end
 
